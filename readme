@@ -1,0 +1,31 @@
+
+主要是对现有的新版的云快报的功能自动化：
+包含pc，移动，pc+移动;
+目录结构：
+--config      配置文件
+--log         日志信息，这个模块还在完善中
+--report      测试报告
+--scripts     常用的脚本
+--test_case   测试用例文件目录
+--readme      使用前必读
+
+这个是基于Python3.7.1+selenium 3.141.0实现的。
+没学的自己学习下。不懂的可以问我，我也是百度的。
+
+测试用例写的地方注意了：
+张富恺：
+test_case/mobile/zfk;
+test_case/pc/zfk;
+test_case/pc_mobile/zfk;
+
+吕方方：
+test_case/mobile/lff;
+test_case/pc/lff;
+test_case/pc_mobile/lff;
+
+提交代码的时候记得先拉一下线上的代码，避免冲突
+
+
+
+
+
