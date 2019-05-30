@@ -11,10 +11,10 @@ from common.utils import Utils
 from selenium.common.exceptions import TimeoutException
 
 class BasePage(object):
-
-    def __init__(self, driver=webdriver.Chrome):
+    # 传入driver和日志路径
+    def __init__(self, driver, path=None):
         self.driver = driver
-        self.log = Log()
+        self.log = Log(path)
 
     """
         常用定位方法
@@ -26,7 +26,6 @@ class BasePage(object):
     # WebDriverWait方法可以设置每隔多少秒扫描，以及找不到抛出的异常类型.
     # 这里需要注意，用显示等待找不到元素抛出的是超时的错误，而直接用find去寻找，返回的是元素找不到的错误，这个以后
     # 判断元素是否找到有很大的作用
-
 
     # 元素id定位，唯一标识
     def find_element_by_id_ykb(self, id, timeout=10):
@@ -149,6 +148,7 @@ class BasePage(object):
     """
     def quit(self):
         self.driver.quit()
+        self.log.info('--[ exit browser ]')
 
     # 二次封装click方法
     def click(self, ele):
