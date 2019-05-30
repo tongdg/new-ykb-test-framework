@@ -4,12 +4,15 @@
 '2019-05-30 Created by tongdg'
 
 import logging,time,os
-log_path = 'D:\\django_study\\new-ykb-test-framework\\log'
 class Log:
-    def __init__(self):
+    def __init__(self, path=None):
         # 文件命名
+        if path is None:
+            self.log_path = path
+        elif 'lff' in path or 'tdg' in path or 'zfk' in path:
+            self.log_path = path
+        self.logname = os.path.join(self.log_path, '%s.log'%time.strftime("%Y-%m-%d"))
 
-        self.logname = os.path.join(log_path, '%s.log'%time.strftime("%Y-%m-%d"))
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.DEBUG)
 
