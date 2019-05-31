@@ -6,7 +6,6 @@
 import unittest
 from pages.pc_pages.login_page import LoginPage
 from selenium import webdriver
-from common.logger import Log
 import os
 
 class LoginCase(unittest.TestCase):
@@ -18,7 +17,6 @@ class LoginCase(unittest.TestCase):
     def test_login_case(self):
         self.longin_page.log.info('[-----LoginCase in execution-----]')
         print('11111')
-
 
     def tearDown(self):
         self.longin_page.log.info('[-----LoginCase end of execution-----]')
