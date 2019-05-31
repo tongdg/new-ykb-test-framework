@@ -7,7 +7,6 @@ import unittest
 from pages.pc_pages.login_HouTaipage import Login_HouTaiPage
 from selenium import webdriver
 import os
-
 class LoginCase(unittest.TestCase):
     def setUp(self):
         self.longin_page = Login_HouTaiPage(webdriver.Chrome(),os.getcwd())
@@ -17,7 +16,7 @@ class LoginCase(unittest.TestCase):
     def test_login_case(self):
         pass
     def tearDown(self):
-        self.longin_page.quit()
+        print("登录测成功")
 if __name__=="__main__":
     unittest.main()
 
