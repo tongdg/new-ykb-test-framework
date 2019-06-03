@@ -22,3 +22,6 @@ class LoginCase(unittest.TestCase):
         self.longin_page.log.info('[-----LoginCase end of execution-----]')
         print('22222')
         self.longin_page.quit()
+
+if __name__=='__main__':
+    unittest.main()

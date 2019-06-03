@@ -12,7 +12,7 @@ class Utils:
     # 生成报告的名字格式
     @property
     def generate_time(self):
-        return time.strftime("%Y-%m-%d_%H_%M_%S", time.localtime())
+        return str(time.strftime("%Y-%m-%d_%H_%M_%S", time.localtime()))
 
     # 获取年月日的格式为XXXX(年)-XX(月)-XX(日)
     @property

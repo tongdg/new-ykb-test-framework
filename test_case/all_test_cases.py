@@ -5,9 +5,11 @@
 
 import unittest
 import os
-
+from common.utils import Utils
+from HTMLTestRunner_cn import HTMLTestRunner
+import threading
 base_dir = os.getcwd()
-
+Utils = utils = Utils()
 # 获取平台用例所在的文件夹
 def get_platform_dir():
     platform_case_dir = []
@@ -100,15 +102,43 @@ def create_test_suite(platform=None,author=None):
         casedir.append(os.path.join(platform,author))
         return suite,casedir
 
-def multi_run_case(suite):
-    pass
+def multi_run_case(suite, casedir):
+    now = Utils.generate_time
+    file_name = os.path.abspath(os.path.join(os.getcwd(),"..\\log\\"+ now +".html"))
+    fp = open(file_name, 'wb')
+    threads = []
+    s = 0
+    for i in suite:
+        runner = HTMLTestRunner(
+            title="ykb" + casedir[s] + "测试报告",
+            description="ykb回归测试",
+            stream=fp,
+            verbosity=2, retry=0, save_last_try=True)
+        t = threading.Thread(target=runner.run, args=(i,))
+        threads.append(t)
+        s = s + 1
+    for t in threads:
+        t.start()
+    # 等待所有结束线程
+    for t in threads:
+        t.join()
+
+suite = create_test_suite()[0]
+casedir = create_test_suite()[1]
+multi_run_case(suite,casedir)
 
 
 
-#print(create_test_suite())
-#print(create_test_suite(author='tdg'))
-#print(create_test_suite(author='tdg'))
-#print(create_test_suite(platform='mobile'))
+
+
+
+
+
+
+# print(create_test_suite())
+# print(create_test_suite(platform='pc',author='tdg'))
+# print(create_test_suite(author='tdg'))
+# print(create_test_suite(platform='mobile'))
 
 
 # 注意点：start_dir = 后跟的参数可以变

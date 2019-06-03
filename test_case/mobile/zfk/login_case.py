@@ -17,6 +17,7 @@ class LoginCase(unittest.TestCase):
         pass
     def tearDown(self):
         print("登录测成功")
+
 if __name__=="__main__":
     unittest.main()
 
