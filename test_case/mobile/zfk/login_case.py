@@ -7,9 +7,10 @@ import unittest
 from pages.pc_pages.login_HouTaipage import Login_HouTaiPage
 from selenium import webdriver
 import os
+
 class LoginCase(unittest.TestCase):
     def setUp(self):
-        self.longin_page = Login_HouTaiPage(webdriver.Chrome(),os.getcwd())
+        self.longin_page = Login_HouTaiPage(webdriver.Chrome(),os.path.dirname(__file__))
         self.longin_page.login_person()
         print(os.getcwd())
 

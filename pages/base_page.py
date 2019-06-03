@@ -12,6 +12,7 @@ from selenium.common.exceptions import TimeoutException
 
 class BasePage(object):
     # 传入driver和日志路径
+    # path传相对路径
     def __init__(self, driver, path=None):
         self.driver = driver
         self.log = Log(path)

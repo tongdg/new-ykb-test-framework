@@ -8,7 +8,7 @@ class Log:
     def __init__(self, path=None):
         # 文件命名
         if path is None:
-            self.log_path = path
+            self.log_path = os.path.dirname(__file__)
         elif 'lff' in path or 'tdg' in path or 'zfk' in path:
             self.log_path = path
         self.logname = os.path.join(self.log_path, '%s.log'%time.strftime("%Y-%m-%d"))

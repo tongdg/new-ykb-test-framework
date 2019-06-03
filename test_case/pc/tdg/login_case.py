@@ -10,7 +10,7 @@ import os
 
 class LoginCase(unittest.TestCase):
     def setUp(self):
-        self.longin_page = LoginPage(driver=webdriver.Chrome(), path=os.getcwd())
+        self.longin_page = LoginPage(driver=webdriver.Chrome(),path=os.path.dirname(__file__))
         self.longin_page.log.info('[-----LoginCase begin execution-----]')
         self.longin_page.login_mention_person()
 

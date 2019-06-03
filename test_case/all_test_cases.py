@@ -100,17 +100,18 @@ def create_test_suite(platform=None,author=None):
                     test_unit.addTests(test_case)
         suite.append(test_unit)
         casedir.append(os.path.join(platform,author))
-        return suite,casedir
+        return suite
 
-def multi_run_case(suite, casedir):
+def multi_run_case(suite):
     now = Utils.generate_time
-    file_name = os.path.abspath(os.path.join(os.getcwd(),"..\\log\\"+ now +".html"))
+    file_name = os.path.abspath(os.path.join(os.getcwd(),"..\\report\\"+ now +".html"))
     fp = open(file_name, 'wb')
     threads = []
     s = 0
     for i in suite:
+        # 主要参数说明，retry重试次数，save_last_try最后一次的截图，verbosity=2设为2就ok了
         runner = HTMLTestRunner(
-            title="ykb" + casedir[s] + "测试报告",
+            title="ykb测试报告",
             description="ykb回归测试",
             stream=fp,
             verbosity=2, retry=0, save_last_try=True)
@@ -123,9 +124,17 @@ def multi_run_case(suite, casedir):
     for t in threads:
         t.join()
 
-suite = create_test_suite()[0]
-casedir = create_test_suite()[1]
-multi_run_case(suite,casedir)
+
+if __name__ == '__main__':
+    # 获取所有的测试用例
+    suite = create_test_suite()[0]
+    # # 获取指定的测试用例
+    # suite = create_test_suite(platform=,author=)[0]
+
+    # 执行所有测试用例
+    multi_run_case(suite)
+    # 执行
+
 
 
 
