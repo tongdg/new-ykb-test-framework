@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8fd77630-744a-43d7-8e28-a790d926c154" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/Zfk_useonther.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/zfk_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/pc_pages/login_HouTaipage.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pc_pages/zfk_login_HouTaipage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/pc_pages/login_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/pc_pages/zfk_login_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/mobile/zfk/login_case.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/pc/zfk/zfk_login_case.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_case/pc/tdg/login_case.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_case/pc/tdg/login_case.py" afterDir="false" />
-    </list>
+    <list default="true" id="8fd77630-744a-43d7-8e28-a790d926c154" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,8 +73,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-302" />
-    <option name="y" value="305" />
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
     <option name="width" value="1696" />
     <option name="height" value="1040" />
   </component>
@@ -340,7 +333,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1743941" />
