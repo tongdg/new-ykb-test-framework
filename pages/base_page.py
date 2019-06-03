@@ -8,10 +8,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from common.logger import Log
 from common.utils import Utils
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException,NoSuchElementException
 
 class BasePage(object):
+    # 存放图片的集合
     # 传入driver和日志路径
+    # path传相对路径
+
     def __init__(self, driver, path=None):
         self.driver = driver
         self.log = Log(path)
@@ -153,7 +156,8 @@ class BasePage(object):
     # 二次封装click方法
     def click(self, ele):
         if ele is False:
-            self.quit()
+            raise NoSuchElementException('查找超时，请维护脚本！')
+
         else:
             ele.click()
             self.log.info('--[ click ok ]')
@@ -161,10 +165,12 @@ class BasePage(object):
     # 二次封装send_keys方法
     def send_keys(self,ele,value):
         if ele is False:
-            self.quit()
+            raise NoSuchElementException('查找超时，请维护脚本！')
+
         else:
             ele.send_keys(value)
             self.log.info('--[ send_keys ok ]')
+
 
    # ----------------------------------------------------------------------------------------------
    # 以上方法基本够实际开发
