@@ -37,8 +37,9 @@ def get_author_dir(platform_dir):
 #          4.platform不=None,author不=None 跑指定平台下的你写的测试用例
 
 def create_test_suite(platform=None,author=None):
+    suite = []
+    casedir = []
     platform_case_dir = get_platform_dir()
-    suite=[]
     test_unit = unittest.TestSuite()
     if platform is None and author is None:
         for case_dir in platform_case_dir:
@@ -48,8 +49,11 @@ def create_test_suite(platform=None,author=None):
             for test_suite in discover:
                 for test_case in test_suite:
                     test_unit.addTests(test_case)
-                    suite.append(test_unit)
-        return suite
+                    if test_unit not in suite:
+                        suite.append(test_unit)
+            casedir.append(case_dir)
+        return suite,casedir
+
 
     elif platform is not None and author is None:
         author_case_dir = get_author_dir(platform)
@@ -60,22 +64,28 @@ def create_test_suite(platform=None,author=None):
             for test_suite in discover:
                 for test_case in test_suite:
                     test_unit.addTests(test_case)
-                    suite.append(test_unit)
-        return suite
+                    if test_unit not in suite:
+                        suite.append(test_unit)
+            casedir.append(os.path.join(platform,case_dir))
+        return suite,casedir
+
 
     elif platform is None and author is not None:
         for platform_dir in platform_case_dir:
             author_case_dir = get_author_dir(platform_dir)
-            for author_case in author_case_dir[:-1]:
-                if author_case == author:
+            for author_dir in author_case_dir[:-1]:
+                if author_dir == author:
                     discover = unittest.defaultTestLoader.discover(
                         start_dir=os.path.join(platform_dir,author), pattern='*.py', top_level_dir=base_dir
                     )
                     for test_suite in discover:
                         for test_case in test_suite:
                             test_unit.addTests(test_case)
-                            suite.append(test_unit)
-        return suite
+                            if test_unit not in suite:
+                                suite.append(test_unit)
+                    casedir.append(os.path.join(platform_dir,author))
+        return suite,casedir
+
 
     else:
         discover = unittest.defaultTestLoader.discover(
@@ -84,12 +94,21 @@ def create_test_suite(platform=None,author=None):
 
         for test_suite in discover:
             for test_case in test_suite:
-                test_unit.addTests(test_case)
+                if test_unit not in suite:
+                    test_unit.addTests(test_case)
         suite.append(test_unit)
-        return suite
+        casedir.append(os.path.join(platform,author))
+        return suite,casedir
 
-print(create_test_suite(author='mobile'))
+def multi_run_case(suite):
+    pass
 
+
+
+#print(create_test_suite())
+#print(create_test_suite(author='tdg'))
+#print(create_test_suite(author='tdg'))
+#print(create_test_suite(platform='mobile'))
 
 
 # 注意点：start_dir = 后跟的参数可以变
