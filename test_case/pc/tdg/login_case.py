@@ -4,7 +4,7 @@
 '2019-05-29 Created by tongdg'
 
 import unittest
-from pages.pc_pages.login_page import LoginPage
+from pages.pc_pages.zfk_login_page import LoginPage
 from selenium import webdriver
 import os
 

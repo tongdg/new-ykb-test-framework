@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '2019-05-29 Created by tongdg'
-from config.Zfk_useonther import returnIntegrateUrl
+from config.zfk_config import returnIntegrateUrl
 from pages.base_page import BasePage
 import time
 class Login_HouTaiPage(BasePage):
