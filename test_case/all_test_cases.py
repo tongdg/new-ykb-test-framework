@@ -10,6 +10,7 @@ from HTMLTestRunner_cn import HTMLTestRunner
 import threading
 base_dir = os.getcwd()
 Utils = utils = Utils()
+imgs = []
 # 获取平台用例所在的文件夹
 def get_platform_dir():
     platform_case_dir = []
@@ -107,7 +108,6 @@ def multi_run_case(suite):
     file_name = os.path.abspath(os.path.join(os.getcwd(),"..\\report\\"+ now +".html"))
     fp = open(file_name, 'wb')
     threads = []
-    s = 0
     for i in suite:
         # 主要参数说明，retry重试次数，save_last_try最后一次的截图，verbosity=2设为2就ok了
         runner = HTMLTestRunner(
@@ -117,23 +117,20 @@ def multi_run_case(suite):
             verbosity=2, retry=0, save_last_try=True)
         t = threading.Thread(target=runner.run, args=(i,))
         threads.append(t)
-        s = s + 1
     for t in threads:
         t.start()
+
     # 等待所有结束线程
     for t in threads:
         t.join()
-
 
 if __name__ == '__main__':
     # 获取所有的测试用例
     suite = create_test_suite()[0]
     # # 获取指定的测试用例
     # suite = create_test_suite(platform=,author=)[0]
-
     # 执行所有测试用例
     multi_run_case(suite)
-    # 执行
 
 
 

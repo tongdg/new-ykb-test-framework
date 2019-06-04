@@ -193,16 +193,32 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
+<<<<<<< HEAD
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-8" />
+=======
   <component name="ProjectFrameBounds" extendedState="6">
 <<<<<<< HEAD
     <option name="x" value="1912" />
+<<<<<<< HEAD
+>>>>>>> dev
     <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+=======
+    <option name="y" value="-8" />
+>>>>>>> f10837f4efab55d66b05cf5a41ad5cc7db899fd7
 =======
     <option name="x" value="52" />
     <option name="y" value="176" />
 >>>>>>> 46d3cf866c413132f8841c9d293367ff32254b69
     <option name="width" value="1696" />
+<<<<<<< HEAD
+    <option name="height" value="1066" />
+>>>>>>> tongdg
+=======
     <option name="height" value="1040" />
+>>>>>>> f10837f4efab55d66b05cf5a41ad5cc7db899fd7
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
