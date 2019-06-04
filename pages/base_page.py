@@ -7,7 +7,6 @@ import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from common.logger import Log
-from common.utils import Utils
 from selenium.common.exceptions import TimeoutException,NoSuchElementException
 
 class BasePage(object):
