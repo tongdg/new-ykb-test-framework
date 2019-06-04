@@ -149,7 +149,7 @@ def send_mail(file_new):
     # 发信邮箱
     mail_from = 'tdg1994@126.com'
     # 收信邮箱
-    mail_to = ['1968230653@qq.com','892431872@qq.com','lf1997f@163.com']
+    mail_to = ['1968230653@qq.com','892431872@qq.com','lf1997f@163.com','zhangfk@yuanian.com']
     # 定义正文
     f = open(file_new, 'rb')
     mail_bady = f.read()
