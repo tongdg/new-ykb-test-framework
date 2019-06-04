@@ -17,7 +17,7 @@ class LoginCase(unittest.TestCase):
 
     def test_login_case(self):
         # 代课下单_模块
-        self.Search_page = Valet_orderPage(os.path.dirname(__file__))
+        self.Search_page = Valet_orderPage()
         self.Search_page.Chionce_enterprise()
     def tearDown(self):
         print("登录测成功")
