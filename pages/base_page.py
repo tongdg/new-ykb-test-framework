@@ -7,7 +7,7 @@ import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from common.logger import Log
-from selenium.common.exceptions import TimeoutException,NoSuchElementException
+from selenium.common.exceptions import TimeoutException,NoSuchElementException,StaleElementReferenceException
 
 class BasePage(object):
     # 存放图片的集合
@@ -78,6 +78,16 @@ class BasePage(object):
             self.log.error('--[ ' + classname + ' find timeout]')
             return False
 
+    def find_elements_by_class_name_ykb(self, classname, timeout=10):
+        try:
+            ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_elements_by_class_name(classname))
+            self.log.info('--[ ' + classname + ' list find ok]' )
+            return ele
+        except TimeoutException:
+            # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
+            self.log.error('--[ ' + classname + ' list find timeout]')
+            return False
+
     # 链接的内容定位，也是不唯一的
     def find_element_by_link_text_ykb(self, linktext, timeout=10):
         try:
@@ -87,7 +97,19 @@ class BasePage(object):
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + linktext + ' find timeout]')
+
             return False
+    # 链接的内容定位，也是不唯一的,返回满足条件的list集合
+    def find_elements_by_link_text_ykb(self, linktext, timeout=10):
+        try:
+            list_ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_elements_by_link_text(linktext))
+            self.log.info('--[ ' + linktext + ' list find ok]' )
+            return list_ele
+        except TimeoutException:
+            # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
+            self.log.error('--[ ' + linktext + ' list find timeout]')
+            return False
+
 
     # 部门链接内容定位，不唯一
     def find_element_by_partial_link_text_ykb(self, partiallinktext, timeout=10):
@@ -134,11 +156,11 @@ class BasePage(object):
     def find_element_by_hierarchy(self, method, timeout=10):
         try:
             ele = WebDriverWait(self.driver, timeout).until(method)
-            self.log.info('--[ ' + method + ' find ok]' )
+            self.log.info('--[ ' + 'method' + ' find ok]' )
             return ele
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
-            self.log.error('--[ ' + method + ' find timeout]')
+            self.log.error('--[ ' + 'method' + ' find timeout]')
             return False
 
     """
@@ -169,6 +191,50 @@ class BasePage(object):
         else:
             ele.send_keys(value)
             self.log.info('--[ send_keys ok ]')
+
+    # 等待元素消失  str_ele 定位元素的str   wait_time 每隔多长时间去扫描
+    # 单据数据加载弹窗  'div[class="messager progress-bar2"]'
+    # 等待老单据的提交状态中的按钮  "button[class='eui-btn eui-btn-blue btn-commit-confirm disabled']"
+    def wait_element_disappear_true(self, str_ele, wait_time=0.5):
+        try:
+            print(self.driver.find_element_by_css_selector(
+                    str_ele).is_displayed())
+            while self.driver.find_element_by_css_selector(
+                    str_ele).is_displayed() is True:
+                time.sleep(wait_time)
+                self.log.info('--[ wating '+ str_ele +' ]')
+                print('--[ wating '+ str_ele +' ]')
+        except NoSuchElementException:
+            self.log.info('--[ disappear ' + str_ele + ' ]')
+            print('--[ disappear ' + str_ele + ' ]')
+        except StaleElementReferenceException:
+            self.log.info('--[ disappear2 ' + str_ele + ' ]')
+            print('--[ disappear2 ' + str_ele + ' ]')
+
+    # 元素不变，但是text变化
+    def wait_element_change_by_text(self,str_ele,text_ele,wait_time=0.5):
+        try:
+            while text_ele in self.driver.find_element_by_css_selector(
+                    str_ele).text:
+                time.sleep(wait_time)
+                self.log.info('--[ wating ' + text_ele + ' ]')
+                print('--[ wating ' + text_ele + ' ]')
+        except NoSuchElementException:
+            self.log.info('--[ disappear ' + str_ele + ' ]')
+            print('--[ disappear ' + str_ele + ' ]')
+        except StaleElementReferenceException:
+            self.log.info('--[ disappear2 ' + str_ele + ' ]')
+            print('--[ disappear2 ' + str_ele + ' ]')
+
+
+
+
+
+
+
+
+
+
 
 
    # ----------------------------------------------------------------------------------------------

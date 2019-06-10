@@ -8,7 +8,7 @@ import os
 from common.utils import Utils
 from HTMLTestRunner_cn import HTMLTestRunner
 import threading
-from config.path_config import REPORT_PATH
+from config.tdg_config import REPORT_PATH
 from email.mime.text import MIMEText
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
@@ -16,7 +16,7 @@ import time
 import smtplib
 base_dir = os.getcwd()
 Utils = utils = Utils()
-imgs = []
+
 # 获取平台用例所在的文件夹
 def get_platform_dir():
     platform_case_dir = []
@@ -149,7 +149,8 @@ def send_mail(file_new):
     # 发信邮箱
     mail_from = 'tdg1994@126.com'
     # 收信邮箱
-    mail_to = ['1968230653@qq.com','892431872@qq.com','lf1997f@163.com','zhangfk@yuanian.com']
+    # mail_to = ['1968230653@qq.com','892431872@qq.com','lf1997f@163.com','zhangfk@yuanian.com']
+    mail_to = ['1968230653@qq.com', '892431872@qq.com']
     # 定义正文
     f = open(file_new, 'rb')
     mail_bady = f.read()
@@ -182,19 +183,14 @@ def send_mail(file_new):
 
 
 if __name__ == '__main__':
-    # 获取所有的测试用例
-    suite = create_test_suite()[0]
+    # 获取所有的测试用例,返回的suite是个集合，所以要加上[0]
+    suite = create_test_suite(author='tdg')[0]
     # # 获取指定的测试用例
     # suite = create_test_suite(platform=,author=)[0]
     # 执行所有测试用例
     multi_run_case(suite)
     # 发送最新的测试报告
-    send_mail(new_file(REPORT_PATH))
-
-
-
-
-
+    # send_mail(new_file(REPORT_PATH))
 
 
 

@@ -1,0 +1,6 @@
+[2019-06-04 11:34:42,982] - logger.py[line:36] - fuc:__console- INFO: --[ loginname find ok]
+[2019-06-04 11:34:43,081] - logger.py[line:36] - fuc:__console- INFO: --[ send_keys ok ]
+[2019-06-04 11:34:44,119] - logger.py[line:36] - fuc:__console- INFO: --[ password find ok]
+[2019-06-04 11:34:44,184] - logger.py[line:36] - fuc:__console- INFO: --[ send_keys ok ]
+[2019-06-04 11:34:45,202] - logger.py[line:36] - fuc:__console- INFO: --[ login find ok]
+[2019-06-04 11:34:45,267] - logger.py[line:36] - fuc:__console- INFO: --[ click ok ]
