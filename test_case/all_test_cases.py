@@ -181,21 +181,15 @@ def send_mail(file_new):
     smtp.sendmail(mail_from, mail_to, msg.as_string())
     smtp.quit()
 
-
 if __name__ == '__main__':
     # 获取所有的测试用例,返回的suite是个集合，所以要加上[0]
     suite = create_test_suite(author='tdg')[0]
-    # # 获取指定的测试用例
+    # 获取指定的测试用例
     # suite = create_test_suite(platform=,author=)[0]
     # 执行所有测试用例
     multi_run_case(suite)
     # 发送最新的测试报告
     # send_mail(new_file(REPORT_PATH))
-
-
-
-
-
 
 
 # print(create_test_suite())

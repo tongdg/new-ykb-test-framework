@@ -43,8 +43,6 @@ class BillCase(unittest.TestCase):
         self.cost_result = self.bill_page.enter_fill_cost_bill()
         self.assertTrue(self.cost_result,'进入费用报销单-填写费用报销单-断言失败')
 
-    def tearDown(self):
-        self.bill_page.log.info('--[测试用例结束，截图]')
 
 if __name__ == '__main__':
     unittest.main()

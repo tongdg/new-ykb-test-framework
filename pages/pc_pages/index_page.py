@@ -158,7 +158,7 @@ class IndexPage(LoginPage):
         return self.find_element_by_link_text_ykb('等待审批')
     #审批记录
     @property
-    def apporva_record_link(self):
+    def apporval_record_link(self):
         return self.find_element_by_link_text_ykb('审批记录')
     # 消费记录
     @property

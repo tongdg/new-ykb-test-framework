@@ -17,13 +17,11 @@ class BasePage(object):
     def __init__(self, driver, path=None):
         self.driver = driver
         self.log = Log(path)
-
     """
         常用定位方法
         1.id,name,class定位，id唯一
         2.link text,partial test定位
     """
-
     # 每隔0.5秒去查找这个id所对应的元素，超过timeout,单位(s)，抛出TimeoutException.
     # WebDriverWait方法可以设置每隔多少秒扫描，以及找不到抛出的异常类型.
     # 这里需要注意，用显示等待找不到元素抛出的是超时的错误，而直接用find去寻找，返回的是元素找不到的错误，这个以后
@@ -44,7 +42,6 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + id + ' find timeout]')
             return False
-
     # 元素的name属性定位，不唯一
     def find_element_by_name_ykb(self, name, timeout=10):
         try:
@@ -55,7 +52,6 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + name + ' find timeout]')
             return False
-
     # 元素的标签名字定位，不唯一
     def find_element_by_tag_name_ykb(self, tagname, timeout=10):
         try:
@@ -66,7 +62,6 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + tagname + ' find timeout]')
             return False
-
     # 元素class的名字定位，不唯一
     def find_element_by_class_name_ykb(self, classname, timeout=10):
         try:
@@ -77,7 +72,6 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + classname + ' find timeout]')
             return False
-
     def find_elements_by_class_name_ykb(self, classname, timeout=10):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_elements_by_class_name(classname))
@@ -87,7 +81,6 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + classname + ' list find timeout]')
             return False
-
     # 链接的内容定位，也是不唯一的
     def find_element_by_link_text_ykb(self, linktext, timeout=10):
         try:
@@ -109,8 +102,6 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + linktext + ' list find timeout]')
             return False
-
-
     # 部门链接内容定位，不唯一
     def find_element_by_partial_link_text_ykb(self, partiallinktext, timeout=10):
         try:
@@ -121,7 +112,6 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + partiallinktext + ' find timeout]')
             return False
-
     """
         xpath定位 建议少用  维护成本大  尽量向CSS转
     """
@@ -129,7 +119,6 @@ class BasePage(object):
     """
         css定位
     """
-
     def find_element_by_css_ykb(self, css, timeout=10):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_element_by_css_selector(css))
@@ -149,7 +138,6 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + css + ' list find timeout]')
             return False
-
     """
         层级定位,应用一般是需要定位到下层的一组一样的元素
     """
@@ -162,18 +150,10 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + 'method' + ' find timeout]')
             return False
-
     """
         执行javascript脚本
         这部分的类容等具体的实际应用
     """
-    """
-        退出浏览器
-    """
-    def quit(self):
-        self.driver.quit()
-        self.log.info('--[ exit browser ]')
-
     # 二次封装click方法
     def click(self, ele):
         if ele is False:
@@ -182,7 +162,6 @@ class BasePage(object):
         else:
             ele.click()
             self.log.info('--[ click ok ]')
-
     # 二次封装send_keys方法
     def send_keys(self,ele,value):
         if ele is False:
@@ -191,14 +170,11 @@ class BasePage(object):
         else:
             ele.send_keys(value)
             self.log.info('--[ send_keys ok ]')
-
     # 等待元素消失  str_ele 定位元素的str   wait_time 每隔多长时间去扫描
     # 单据数据加载弹窗  'div[class="messager progress-bar2"]'
     # 等待老单据的提交状态中的按钮  "button[class='eui-btn eui-btn-blue btn-commit-confirm disabled']"
     def wait_element_disappear_true(self, str_ele, wait_time=0.5):
         try:
-            print(self.driver.find_element_by_css_selector(
-                    str_ele).is_displayed())
             while self.driver.find_element_by_css_selector(
                     str_ele).is_displayed() is True:
                 time.sleep(wait_time)
@@ -225,6 +201,25 @@ class BasePage(object):
         except StaleElementReferenceException:
             self.log.info('--[ disappear2 ' + str_ele + ' ]')
             print('--[ disappear2 ' + str_ele + ' ]')
+
+    # 判断
+    # 判断JS生成的弹窗是否存在且可见
+    def judge_js_pop_exist_visible(self, js_ele,wait_time=10):
+        try:
+            if self.find_element_by_css_ykb(js_ele,wait_time) is not False:
+                return True
+            else:
+                return False
+        except NoSuchElementException:
+            self.log.info('--[ disappear ' + js_ele + ' ]')
+            print('--[ disappear ' + js_ele + ' ]')
+            return False
+        except StaleElementReferenceException:
+            self.log.info('--[ disappear2 ' + js_ele + ' ]')
+            print('--[ disappear2 ' + js_ele + ' ]')
+            return False
+
+
 
 
 

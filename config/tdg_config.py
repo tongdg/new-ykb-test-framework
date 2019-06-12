@@ -28,6 +28,28 @@ def get_enterprise_login():
 
 # ZS切换企业测试数据配置
 
+# 测试地址
+# 集成测试地址
+INTEGRATE_ADDRESS = 'http://120.132.23.147:840/logon'
+# 正式测试地址
+FORM_ADDRESS = 'https://www.51ykb.com/Logon'
+# 获取测试地址
+def get_test_address():
+    return INTEGRATE_ADDRESS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

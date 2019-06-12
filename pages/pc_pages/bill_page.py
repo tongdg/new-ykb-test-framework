@@ -7,7 +7,6 @@ from pages.pc_pages.index_page import IndexPage
 import time
 from common.utils import Utils
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.common.exceptions import NoSuchElementException,StaleElementReferenceException,WebDriverException,ElementNotVisibleException
 Utils = utils = Utils()
 import sys
 sys.setrecursionlimit(100000)  # 设置最大递归深度
@@ -30,6 +29,10 @@ class BillPage(IndexPage):
     @property
     def evection_apply_bill(self):
         return self.find_element_by_css_ykb("h4[class='eui-form-title']")
+    # 出差单据号
+    @property
+    def old_bill_number(self):
+        return self.find_element_by_css_ykb("div[e7id='SerialNumber']")
     # 出差日期
     @property
     def evection_date(self):
@@ -119,15 +122,16 @@ class BillPage(IndexPage):
     # 会签输入框
     @property
     def old_countersign_input(self):
-        return self.find_element_by_css_ykb("input[class='approval-selector']")
+        return self.find_element_by_css_ykb('#checkHqBtn > div > input')
     # 勾选审批按钮
     @property
     def old_approval_button(self):
         return self.find_element_by_css_ykb("button[class='eui-btn eui-btn-blue btn-commit']")
-    # 审批输入框
+    # 审批人员  "span[e7id='Superior']"
     @property
     def old_approval_input(self):
-        return self.find_element_by_css_ykb("input[class='approval-selector ldry']")
+        return self.find_element_by_hierarchy(
+            lambda var : self.driver.find_element_by_css_selector("span[e7id='Superior']").find_elements_by_tag_name('span'))
     # 老单据确认按钮,点击确定后变为eui-btn eui-btn-blue btn-commit-confirm disabled
     @property
     def old_cofirm_button(self):
@@ -384,7 +388,7 @@ class BillPage(IndexPage):
     # 单据数据加载弹窗  'div[class="messager progress-bar2"]'
     # 脚本模块
     def wait_element_disappear_data_load(self):
-        self.wait_element_disappear_true('div[class="messager progress-bar2"]')
+        self.wait_element_disappear_true('div[class="messager progress-bar2"]',0.1)
     # 老单据提交状态中按钮,元素改变了
     def wait_element_disappear_old_in_approval_btn(self):
         self.wait_element_disappear_true("button[class='eui-btn eui-btn-blue btn-commit-confirm disabled']")
@@ -406,32 +410,50 @@ class BillPage(IndexPage):
         self.click(self.evection_apply)
 
     # 费用归属设定
-    def __choose_department_projiect(self):
+    def __choose_department_projiect(self, department=None, project=None):
         time.sleep(1)
         # 点击费用归属
         self.click(self.evection_cost_belong)
         time.sleep(1)
         # 选择部门  具体的部门从list集合找
-        self.click(self.evection_choose_department)
-        time.sleep(1)
-        self.click(self.evection_department_list[0])
-        time.sleep(1)
+        # 判断部门是否传入
+        if department is not None:
+            # 点击部门，让元素可见
+            self.click(self.evection_choose_department)
+            time.sleep(1)
+            # 获取所有部门的列表
+            edls = self.evection_department_list
+            # 找出所查找的部门，并点击
+            for edl in edls:
+                if edl.text == department:
+                    self.click(edl)
+                    time.sleep(1)
         # 选择项目  具体的项目从list里面找
-        self.click(self.evection_choose_project)
-        time.sleep(1)
-        self.click(self.evection_project_list[1])
-        time.sleep(1)
+        # 判断项目是否传入
+        if project is not None:
+            # 点击项目,让元素可见
+            self.click(self.evection_choose_project)
+            time.sleep(1)
+            # 获取所有项目的列表
+            epvs = self.evection_project_list
+            # 找出所查找的项目，并点击
+            for epv in epvs:
+                if epv.text == project:
+                    self.click(epv)
+                    time.sleep(1)
         # 确认
         self.click(self.evection_cost_belong_confirm)
         time.sleep(2) # 2S防止点击过快出错
 
     # 填写出差申请单
-    def __fill_evection_bill(self):
+    def __fill_evection_bill(self, department, project):
         if "出差申请单" not in self.evection_apply_bill.text:
             self.log.debug('--[ open evection bill fail]')
             return False
         else:
-            self.log.debug('--[ open evection bill ok]')
+            # 记住单据号 唯一标识
+            self.bill_number = self.old_bill_number.text
+            self.log.debug('--[ '+ self.bill_number +'open evection bill ok]')
             # 选择日期
             self.click(self.evection_date)
             time.sleep(1)
@@ -449,7 +471,7 @@ class BillPage(IndexPage):
             self.click(self.evection_place_control[1])
             time.sleep(1)
             # 费用归属设定
-            self.__choose_department_projiect()
+            self.__choose_department_projiect(department,project)
             # 选择交通工具
             self.click(self.evection_vehicle)
             time.sleep(1)
@@ -470,12 +492,12 @@ class BillPage(IndexPage):
             time.sleep(3) # 3S防止提单的暂时卡住，导致下次填单出错
             return True
 
-    # 进入出差申请单，并且填写单据，提交
-    def enter_fill_evecation_bill(self):
+    # 进入出差申请单，并且填写单据，提交+
+    def enter_fill_evecation_bill(self, department=None, project=None):
         # 进入出差申请单
         self.__enter_evecation_bill_page()
         # 填写出差申请单
-        return self.__fill_evection_bill()
+        return self.__fill_evection_bill(department,project)
 
     # 进入借款申请单
     def __enter_loan_bill(self):
@@ -672,7 +694,8 @@ class BillPage(IndexPage):
         self.__enter_cost_bill()
         return self.__fill_cost_bill()
 
-    # 断言会签逻辑
+
+
 
 
 
