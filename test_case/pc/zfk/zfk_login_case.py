@@ -5,23 +5,22 @@
 
 import unittest
 from pages.pc_pages.zfk_Valet_orderPage import Valet_orderPage
-from pages.pc_pages.zfk_login_HouTaipage import Login_HouTaiPage
 from selenium import webdriver
 import os
 import time
 class LoginCase(unittest.TestCase):
+
     def setUp(self):
-        self.longin_page = Login_HouTaiPage(webdriver.Chrome(),os.path.dirname(__file__))
-        #等录至后台的操作
-        self.longin_page.Login_Person()
+        self.Valet_orderPage = Valet_orderPage(webdriver.Chrome(),os.path.dirname(__file__))
 
-    def test_login_case(self):
-        # 代课下单_模块
-        self.Search_page = Valet_orderPage()
-        self.Search_page.Chionce_enterprise()
+    def test_Login_enterprise (self):
+        self.Valet_orderPage.Login_Person()#登录账号
+        self.Valet_orderPage.Chionce_enterprise()#跳转到代客下单界面，并进入到需要测试的企业
+
+
+
     def tearDown(self):
-        print("登录测成功")
-
+        pass
 
 if __name__=="__main__":
     unittest.main()

@@ -127,6 +127,25 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + css + ' list find timeout]')
             return False
+        # 部门链接内容定位，不唯一
+
+
+#create by zfk need use that
+#-------------
+    def current_window_handle(self):
+        return self.driver.current_window_handle
+
+    def window_handles(self):
+        return self.driver.window_handles
+
+    def switchTo_default_content(self):
+        self.driver.switch_to.default_content()
+
+    def switch_to_window(self):
+        return  self.driver.switch_to.window()
+
+    def switch_title(self):
+       return self.driver.title
 
     """
         层级定位,应用一般是需要定位到下层的一组一样的元素
@@ -169,7 +188,6 @@ class BasePage(object):
         else:
             ele.send_keys(value)
             self.log.info('--[ send_keys ok ]')
-
 
    # ----------------------------------------------------------------------------------------------
    # 以上方法基本够实际开发
