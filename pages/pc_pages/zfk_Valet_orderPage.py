@@ -18,7 +18,7 @@ class Valet_orderPage(Login_HouTaiPage):
         return self.find_element_by_id_ykb("btnSearchUserInfo")#代客下单搜索框查询按钮
     @property
     def Valet_order_Enterprise(self):
-        return self.find_element_by_css_ykb("#dataTableBody > tr:nth-child(2) > td.f-14.td-manage > a:nth-child(2)")#PC端
+        return self.find_element_by_css_ykb("#dataTableBody > tr:nth-child(3) > td.f-14.td-manage > a:nth-child(2)")#PC端
     # -------------------------------------Cut-Off Rule-----------------------------------------------------------
    #这里可以传入手机号及企业名称 后继的审批流程可在这里调用，这里拓展性很强
     def Chionce_enterprise(self):

@@ -1,4 +1,5 @@
 #该接口文件基于企业微信的移动端以及PC端流程自动化开发，这里放一些人员信息以及地址
+import datetime
 #create by ZhangFukai
 #集成后台管理
 def returnIntegrateUrl():
@@ -19,6 +20,10 @@ def Travle_dictionaries():
                     '借款申请单': 'http://test.pc.51ykb.com/Form/FormViewer/LoanForm'
                     }
         return receipts
+def Overall_text():
+        date=datetime.datetime.now()
+        overall_Text={'出差事由':'出差申请单测试“测试提单日期'''+ date+''}
+        return overall_Text
  #界面元素定位太过繁琐浪费时间，可交给ISRPA 操作 Selenium主要进行一些复杂的流程化操作
 
 

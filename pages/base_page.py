@@ -147,6 +147,7 @@ class BasePage(object):
     def switch_title(self):
        return self.driver.title
 
+
     """
         层级定位,应用一般是需要定位到下层的一组一样的元素
     """
