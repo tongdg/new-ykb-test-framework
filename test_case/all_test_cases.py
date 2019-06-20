@@ -8,14 +8,15 @@ import os
 from common.utils import Utils
 from HTMLTestRunner_cn import HTMLTestRunner
 import threading
-from config.tdg_config import REPORT_PATH
 from email.mime.text import MIMEText
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 import time
 import smtplib
+from config.tdg_config import REPORT_PATH
 base_dir = os.getcwd()
 Utils = utils = Utils()
+
 
 # 获取平台用例所在的文件夹
 def get_platform_dir():
@@ -94,7 +95,6 @@ def create_test_suite(platform=None,author=None):
                                 suite.append(test_unit)
                     casedir.append(os.path.join(platform_dir,author))
         return suite,casedir
-
 
     else:
         discover = unittest.defaultTestLoader.discover(
@@ -183,20 +183,18 @@ def send_mail(file_new):
 
 if __name__ == '__main__':
     # 获取所有的测试用例,返回的suite是个集合，所以要加上[0]
-    suite = create_test_suite(author='tdg')[0]
+    suite = create_test_suite(author='tdg',platform='mobile')[0]
     # 获取指定的测试用例
     # suite = create_test_suite(platform=,author=)[0]
     # 执行所有测试用例
     multi_run_case(suite)
     # 发送最新的测试报告
-    # send_mail(new_file(REPORT_PATH))
-
+    send_mail(new_file(REPORT_PATH))
 
 # print(create_test_suite())
 # print(create_test_suite(platform='pc',author='tdg'))
 # print(create_test_suite(author='tdg'))
 # print(create_test_suite(platform='mobile'))
-
 
 # 注意点：start_dir = 后跟的参数可以变
 #        top_level_dir = 后跟的参数不能变动

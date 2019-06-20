@@ -314,9 +314,9 @@ function hide_img(obj){
 <div class='heading'>
 <h1 style="font-family: Microsoft YaHei">ykb测试报告</h1>
 <p class='attribute'><strong>测试人员 : </strong> 最棒QA</p>
-<p class='attribute'><strong>开始时间 : </strong> 2019-06-12 14:17:00</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:24:56.125573</p>
-<p class='attribute'><strong>测试结果 : </strong> 共 13，通过 13，通过率= 100.00%</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-06-20 14:20:21</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:23.565347</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 1，通过 1，通过率= 100.00%</p>
 
 <p class='description'>ykb回归测试</p>
 </div>
@@ -326,8 +326,8 @@ function hide_img(obj){
 <p id='show_detail_line'>
 <a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 100.00% }</a>
 <a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 0 }</a>
-<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 13 }</a>
-<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 13 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 1 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 1 }</a>
 </p>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
@@ -350,127 +350,25 @@ function hide_img(obj){
 </tr>
 
 <tr class='passClass warning'>
-    <td>pc.tdg.approval_case.ApprovalCase</td>
-    <td class="text-center">3</td>
-    <td class="text-center">3</td>
+    <td>tdg.login_case.LoginCase</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
     <td class="text-center">0</td>
     <td class="text-center">0</td>
-    <td class="text-center"><a href="javascript:showClassDetail('c1',3)" class="detail" id='c1'>详细</a></td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',1)" class="detail" id='c1'>详细</a></td>
         <td>&nbsp;</td>
 </tr>
 
 <tr id='pt1_1' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_eve_1business: 出差申请单-业务</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr id='pt1_2' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_eve_1department_countersign_1business: 出差申请单-会签-业务</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr id='pt1_3' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_eve_2countersign_1business: 出差申请单-两个会签-业务</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr class='passClass warning'>
-    <td>pc.tdg.bill_case.BillCase</td>
-    <td class="text-center">4</td>
-    <td class="text-center">4</td>
-    <td class="text-center">0</td>
-    <td class="text-center">0</td>
-    <td class="text-center"><a href="javascript:showClassDetail('c2',4)" class="detail" id='c2'>详细</a></td>
-        <td>&nbsp;</td>
-</tr>
-
-<tr id='pt2_1' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_enter_fill_cost_bill: 进入费用报销单-填写费用报销单-断言</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr id='pt2_2' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_enter_fill_evecation_bill: 进入出差申请单-填写出差申请单-断言</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr id='pt2_3' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_enter_fill_loan_bill: 进入借款申请单-填写借款申请单-断言</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr id='pt2_4' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_enter_fill_travel_reimbursement_bill: 进入差旅报销单-填写差旅报销单-断言</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr class='passClass warning'>
-    <td>pc.tdg.login_case.LoginCase</td>
-    <td class="text-center">1</td>
-    <td class="text-center">1</td>
-    <td class="text-center">0</td>
-    <td class="text-center">0</td>
-    <td class="text-center"><a href="javascript:showClassDetail('c3',1)" class="detail" id='c3'>详细</a></td>
-        <td>&nbsp;</td>
-</tr>
-
-<tr id='pt3_1' class='hiddenRow'>
     <td class='passCase'><div class='testcase'>test_login_case: 登录测试用例</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr class='passClass warning'>
-    <td>pc.tdg.switch_case.SwitchCase</td>
-    <td class="text-center">5</td>
-    <td class="text-center">5</td>
-    <td class="text-center">0</td>
-    <td class="text-center">0</td>
-    <td class="text-center"><a href="javascript:showClassDetail('c4',5)" class="detail" id='c4'>详细</a></td>
-        <td>&nbsp;</td>
-</tr>
-
-<tr id='pt4_1' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_sign_out: 退出测试用例</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr id='pt4_2' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_switching_enterprise: 切换企业测试用例--企业正确--用户名正确</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr id='pt4_3' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_switching_enterprise2: 切换企业测试用例--企业正确--用户名错误</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr id='pt4_4' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_switching_enterprise3: 切换企业测试用例--企业错误--用户名错误</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td>无截图</td>
-</tr>
-
-<tr id='pt4_5' class='hiddenRow'>
-    <td class='passCase'><div class='testcase'>test_switching_enterprise4: 切换企业测试用例--企业错误--用户名正确</div></td>
     <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
     <td>无截图</td>
 </tr>
 
 <tr id='total_row' class="text-center active">
     <td>总计</td>
-    <td>13</td>
-    <td>13</td>
+    <td>1</td>
+    <td>1</td>
     <td>0</td>
     <td>0</td>
     <td>&nbsp;</td>
@@ -480,7 +378,7 @@ function hide_img(obj){
 
 <script>
     showCase(1);
-    drawCircle(13, 0, 0);
+    drawCircle(1, 0, 0);
 </script>
 
 <div id='ending'>&nbsp;</div>

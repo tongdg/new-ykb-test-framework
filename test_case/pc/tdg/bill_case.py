@@ -26,10 +26,10 @@ class BillCase(unittest.TestCase):
         self.assertTrue(self.evecation_result,'进入出差申请单-填写出差申请单-断言失败')
 
     def test_enter_fill_loan_bill(self):
-        u"""进入借款申请单-填写借款申请单-断言"""
         self.bill_page.log.info('--[进入借款申请单-填写借款申请单-断言]')
         self.loan_result = self.bill_page.enter_fill_loan_bill()
         self.assertTrue(self.loan_result,'进入借款申请单-填写借款申请单-断言失败')
+        u"""进入借款申请单-填写借款申请单-断言"""
 
     def test_enter_fill_travel_reimbursement_bill(self):
         u"""进入差旅报销单-填写差旅报销单-断言"""
@@ -43,6 +43,7 @@ class BillCase(unittest.TestCase):
         self.cost_result = self.bill_page.enter_fill_cost_bill()
         self.assertTrue(self.cost_result,'进入费用报销单-填写费用报销单-断言失败')
 
-
+    def tearDown(self):
+        pass
 if __name__ == '__main__':
     unittest.main()

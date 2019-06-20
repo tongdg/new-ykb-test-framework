@@ -89,14 +89,14 @@ class IndexPage(LoginPage):
     @property
     def to_review(self):
         return self.find_element_by_link_text_ykb('复核')
-    # 借款
+    # 报销
     @property
     def to_review_reimbursement(self):
-        return self.find_elements_by_link_text_ykb('报销')[2]
+        return self.find_elements_by_link_text_ykb('报销')
     # 借款
     @property
     def to_review_loan(self):
-        return self.find_elements_by_link_text_ykb('借款')[1]
+        return self.find_elements_by_link_text_ykb('借款')
 
     '''
         出纳 付款 收款
@@ -143,7 +143,6 @@ class IndexPage(LoginPage):
     @property
     def exit(self):
         return self.find_element_by_css_ykb("span[class='btn-exit']")
-
     """
         2.我的审批 我的单据 我的订单 消费记录 代还欠款
           机票    酒店     火车票   采购

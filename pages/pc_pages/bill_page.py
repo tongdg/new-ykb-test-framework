@@ -131,7 +131,7 @@ class BillPage(IndexPage):
     @property
     def old_approval_input(self):
         return self.find_element_by_hierarchy(
-            lambda var : self.driver.find_element_by_css_selector("span[e7id='Superior']").find_elements_by_tag_name('span'))
+            lambda var : self.driver.find_element_by_css_selector("span[e7id='Superior']").find_elements_by_tag_name('span'),3)
     # 老单据确认按钮,点击确定后变为eui-btn eui-btn-blue btn-commit-confirm disabled
     @property
     def old_cofirm_button(self):
@@ -187,10 +187,18 @@ class BillPage(IndexPage):
     @property
     def new_approval_button(self):
         return self.find_element_by_css_ykb("label[class='checkboxs le5']")
-    # 审批领导输入框
+    # 审批领导输入框 #fixedFoot > div:nth-child(2) > form > div.form-group.sp-el > span
     @property
     def new_approval_input(self):
-        return self.find_element_by_css_ykb("input[class='spanLine ckdropd ldry']")
+        return self.find_element_by_css_ykb("#fixedFoot > div:nth-child(2) > form > div.form-group.sp-el > span")
+    # 财务加审按钮
+    @property
+    def new_finance_add_approval_button(self):
+        return self.find_element_by_css_ykb('#fixedFoot > div.cp7.clearfix > button.btn.btn-defaul.t2')
+    # 财务加审领导输入框
+    @property
+    def new_finance_approval_input(self):
+        return self.find_element_by_css_ykb('#fixedFoot > div:nth-child(3) > form > div > span')
     """
         差旅报销单
     """
@@ -279,6 +287,9 @@ class BillPage(IndexPage):
     @property
     def cost_confirm_button(self):
         return self.find_element_by_css_ykb('#fixedFoot > div:nth-child(2) > form > span > button:nth-child(2)')
+    @property
+    def new_bill_agree_button2(self):
+        return self.find_element_by_id_ykb('approvalBtr')
     """
         行列用法：  td        td      td     td      td   
             tr  费用名称    费用说明  日期   报销金额  费用归属
@@ -315,6 +326,10 @@ class BillPage(IndexPage):
     """
        新单据通用
     """
+    # 新单据单据号 #bcTargetNum
+    @property
+    def new_bill_number(self):
+        return self.find_element_by_id_ykb('bcTargetNum')
     # 费用归属
     @property
     def new_cost_belong(self):
@@ -329,12 +344,19 @@ class BillPage(IndexPage):
     # 选择部门,选择项目
     @property
     def new_choose_department_project(self):
-        return self.find_element_by_hierarchy(lambda var: self.driver.find_element_by_css_selector("div[class='panelscoll']").find_elements_by_tag_name('label'))
-    # 费用归属确认
+        return self.find_element_by_hierarchy(lambda var: self.driver.find_element_by_css_selector(
+            "div[class='panelscoll']").find_elements_by_tag_name('label'))
+    # 关闭选择框
+    @property
+    def new_choose_department_project_close(self):
+        return self.find_element_by_css_ykb('#btrShareList > div.bzBox3.noBod > button')
+
+        # 新单据费用归属关闭按钮
     @property
     def new_cost_belong_confirm_button(self):
-        return self.find_element_by_css_ykb('#mainform > div.modal.fade.in > div > div > div.modal-footer > button.btn.btn-primary')
-    # 新单据确认按钮 btn themebgStyle pull-right
+        return self.find_element_by_css_ykb(
+            "#mainform > div.modal.fade.in > div > div > div.modal-footer > button.btn.btn-primary")
+
     @property
     def travel_confirm_button(self):
         return self.find_element_by_css_ykb("button[class='btn themebgStyle pull-right mt18']")
@@ -365,6 +387,10 @@ class BillPage(IndexPage):
     @property
     def submit_reimbursement_button(self):
         return self.find_element_by_css_ykb("button[class='btn themebgStyle']")
+    # 同意按钮  #fixedFoot > div.cp7.clearfix > button:nth-child(7)
+    @property
+    def new_bill_agree_button(self):
+        return self.find_element_by_css_ykb('#fixedFoot > div.cp7.clearfix > button:nth-child(7)')
     # 查看发票按钮
     @property
     def see_invoice_button(self):
@@ -506,6 +532,7 @@ class BillPage(IndexPage):
         time.sleep(1)
         self.click(self.loan_apply)
         time.sleep(1)
+        self.wait_element_disappear_data_load()
 
     # 填写借款申请单
     def __fill_loan_bill(self):
@@ -514,6 +541,8 @@ class BillPage(IndexPage):
             return False
         else:
             self.log.debug('--[ open loan bill ok]')
+        # 记住单据号 唯一标识
+        self.bill_number = self.old_bill_number.text
         # 输入借款金额1
         self.send_keys(self.loan_price,'1')
         time.sleep(1)
@@ -542,6 +571,9 @@ class BillPage(IndexPage):
         # 填写借款申请单
         return self.__fill_loan_bill()
 
+    """
+        新单据 差旅报销单 费用报销单
+    """
     # 进入差旅报销单
     def __enter_travel_reimbursement_bill(self):
         time.sleep(1)
@@ -586,26 +618,38 @@ class BillPage(IndexPage):
         time.sleep(2) # 2S防止过快的点击出错
 
     # 费用归属
-    def __new_choose_cost_belong(self):
+    def __new_choose_cost_belong(self,department, project):
         time.sleep(1)
         # 点击费用归属
         self.click(self.new_cost_belong)
         time.sleep(1)
-        #选择部门
-        self.click(self.new_cost_belong_row_column(0,0))
-        time.sleep(1)
-        self.click(self.new_choose_department_project[0])
-        time.sleep(1)
+        # 选择部门
+        if department is not None:
+            self.click(self.new_cost_belong_row_column(0, 0))
+            time.sleep(1)
+            ncdps = self.new_choose_department_project
+            for ncdp in ncdps:
+                if ncdp.text == department:
+                    self.click(ncdp)
+                    time.sleep(1)
+                    break
         # 选择项目
-        self.click(self.new_cost_belong_row_column(0,1))
-        time.sleep(1)
-        self.click(self.new_choose_department_project[1])
-        time.sleep(1)
+        if project is not None:
+            print(project)
+            self.click(self.new_cost_belong_row_column(0, 1))
+            time.sleep(1)
+            ncdps1 = self.new_choose_department_project
+            for ncdp1 in ncdps1:
+                if ncdp1.text == project:
+                    self.click(ncdp1)
+                    time.sleep(1)
+                    break
+        # 费用归属确认按钮
         self.click(self.new_cost_belong_confirm_button)
         time.sleep(2) # 2S防止过快的点击出错
 
     # 填写差旅报销单
-    def __fill_travel_reimbursement_bill(self):
+    def __fill_travel_reimbursement_bill(self,department, project):
         time.sleep(1)
         if "差旅报销单" not in self.travel_reimbursement_bill.text:
             self.log.debug('--[ open travel reimbursement bill fail]')
@@ -613,29 +657,34 @@ class BillPage(IndexPage):
         else:
             self.log.debug('--[ open travel reimbursement bill ok]')
             self.send_keys(self.travel_abstract,'tongdg差旅报销单测试')
+            # 记住单据号
+            self.bill_number = self.new_bill_number.text
             time.sleep(1)
             # 填写城际交通
             self.__fill_travel_intercity_traffic()
             # 选择费用归属
-            self.__new_choose_cost_belong()
+            self.__new_choose_cost_belong(department, project)
             # 提单
             time.sleep(2) # 2S防止过快的点击出错
             self.click(self.new_submit_approval)
             time.sleep(2) # 2S防止过快的点击出错
             # 确定
             self.click(self.travel_confirm_button)
-            # 等待带锯提交
+            # 等待单据提交
             self.wait_element_disappear_new_approval_btn()
-            self.wait_element_disappear_new_in_approval_btn()
-            time.sleep(3) # 3S防止提单的暂时卡住，导致下次填单出错
-            return True
+            if self.wait_element_disappear_new_in_approval_btn() is False:
+                self.log.info('--[ 单据提交超时]')
+                return False
+            else:
+                time.sleep(3)  # 3S防止提单的暂时卡住，导致下次填单出错
+                return True
 
     # 进入填写差旅报销单，提交。
-    def enter_fill_travel_reimbursement_bill(self):
+    def enter_fill_travel_reimbursement_bill(self,department=None, project=None):
         # 进入差旅报销单
         self.__enter_travel_reimbursement_bill()
         # 填写差旅报销单
-        return self.__fill_travel_reimbursement_bill()
+        return self.__fill_travel_reimbursement_bill(department, project)
 
     # 进入费用报销单
     def __enter_cost_bill(self):
@@ -646,7 +695,7 @@ class BillPage(IndexPage):
         time.sleep(1)
 
     # 填写费用报销单
-    def __fill_cost_bill(self):
+    def __fill_cost_bill(self, department, project):
         time.sleep(1)
         if "费用报销单" not in self.cost_reimbursement_bill.text:
             self.log.debug('--[ open cost reimbursement bill fail]')
@@ -654,6 +703,8 @@ class BillPage(IndexPage):
         else:
             self.log.debug('--[ open cost reimbursement bill ok]')
             time.sleep(1)
+            # 记住单据号
+            self.bill_number = self.new_bill_number.text
             # 填写摘要
             self.send_keys(self.cost_abstract,'tongdg测试费用报销单')
             time.sleep(1)
@@ -678,21 +729,31 @@ class BillPage(IndexPage):
             # 点击费用说明，显示txtOverhide元素
             self.click(self.cost_bill_abstract)
             # 费用归属
-            self.__new_choose_cost_belong()
+            self.__new_choose_cost_belong(department, project)
             self.click(self.new_submit_approval)
             time.sleep(2)  # 2S防止过快的点击出错
             # 确定
             self.click(self.cost_confirm_button)
             # 等待单据提交
             self.wait_element_disappear_new_approval_btn()
-            self.wait_element_disappear_new_in_approval_btn2()
-            time.sleep(3)  # 3S防止提单的暂时卡住，导致下次填单出错
-            return True
+            if self.wait_element_disappear_new_in_approval_btn2() is False:
+                self.log.info('--[ 单据提交超时]')
+                return False
+            else:
+                time.sleep(3)  # 3S防止提单的暂时卡住，导致下次填单出错
+                return True
 
     # 进入并且填写费用报销单
-    def enter_fill_cost_bill(self):
+    def enter_fill_cost_bill(self,department=None, project=None):
         self.__enter_cost_bill()
-        return self.__fill_cost_bill()
+        return self.__fill_cost_bill(department, project)
+
+
+
+
+
+
+
 
 
 

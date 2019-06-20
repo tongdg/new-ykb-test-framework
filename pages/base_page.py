@@ -90,7 +90,6 @@ class BasePage(object):
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + linktext + ' find timeout]')
-
             return False
     # 链接的内容定位，也是不唯一的,返回满足条件的list集合
     def find_elements_by_link_text_ykb(self, linktext, timeout=10):
@@ -115,7 +114,6 @@ class BasePage(object):
     """
         xpath定位 建议少用  维护成本大  尽量向CSS转
     """
-
     """
         css定位
     """
@@ -158,7 +156,6 @@ class BasePage(object):
     def click(self, ele):
         if ele is False:
             raise NoSuchElementException('查找超时，请维护脚本！')
-
         else:
             ele.click()
             self.log.info('--[ click ok ]')
@@ -166,7 +163,6 @@ class BasePage(object):
     def send_keys(self,ele,value):
         if ele is False:
             raise NoSuchElementException('查找超时，请维护脚本！')
-
         else:
             ele.send_keys(value)
             self.log.info('--[ send_keys ok ]')
@@ -189,10 +185,15 @@ class BasePage(object):
 
     # 元素不变，但是text变化
     def wait_element_change_by_text(self,str_ele,text_ele,wait_time=0.5):
+        all_time = 0
         try:
             while text_ele in self.driver.find_element_by_css_selector(
                     str_ele).text:
                 time.sleep(wait_time)
+                all_time = all_time + int(wait_time)
+                if all_time >= 180:
+                    self.log.info('--[ 元素等待超时]')
+                    return False
                 self.log.info('--[ wating ' + text_ele + ' ]')
                 print('--[ wating ' + text_ele + ' ]')
         except NoSuchElementException:
@@ -218,18 +219,6 @@ class BasePage(object):
             self.log.info('--[ disappear2 ' + js_ele + ' ]')
             print('--[ disappear2 ' + js_ele + ' ]')
             return False
-
-
-
-
-
-
-
-
-
-
-
-
 
 
    # ----------------------------------------------------------------------------------------------
