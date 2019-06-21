@@ -64,7 +64,6 @@ def create_test_suite(platform=None,author=None):
             casedir.append(case_dir)
         return suite,casedir
 
-
     elif platform is not None and author is None:
         author_case_dir = get_author_dir(platform)
         for case_dir in author_case_dir[:-1]:
@@ -78,7 +77,6 @@ def create_test_suite(platform=None,author=None):
                         suite.append(test_unit)
             casedir.append(os.path.join(platform,case_dir))
         return suite,casedir
-
 
     elif platform is None and author is not None:
         for platform_dir in platform_case_dir:
@@ -150,7 +148,7 @@ def send_mail(file_new):
     mail_from = 'tdg1994@126.com'
     # 收信邮箱
     # mail_to = ['1968230653@qq.com','892431872@qq.com','lf1997f@163.com','zhangfk@yuanian.com']
-    mail_to = ['1968230653@qq.com', '892431872@qq.com']
+    mail_to = '892431872@qq.com'
     # 定义正文
     f = open(file_new, 'rb')
     mail_bady = f.read()
@@ -183,7 +181,8 @@ def send_mail(file_new):
 
 if __name__ == '__main__':
     # 获取所有的测试用例,返回的suite是个集合，所以要加上[0]
-    suite = create_test_suite(author='tdg',platform='mobile')[0]
+    suite = create_test_suite(author='tdg')[0]
+    print(suite)
     # 获取指定的测试用例
     # suite = create_test_suite(platform=,author=)[0]
     # 执行所有测试用例

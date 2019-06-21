@@ -111,7 +111,6 @@ class ApprovalPage(BillPage):
             lambda var : self.driver.find_element_by_css_selector(
                 "#fixedFoot > div:nth-child(3) > form > div > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > div.panelscoll"
             ).find_elements_by_tag_name('label')
-
         )
     # 新单据财务选择审批人列表，确定按钮
     @property

@@ -276,32 +276,3 @@ class IndexPage(LoginPage):
 
 
 
-
-        pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

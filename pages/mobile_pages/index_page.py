@@ -7,4 +7,5 @@ from pages.mobile_pages.login_page import LoginPage
 import time
 
 class IndexPage(LoginPage):
+
     pass
