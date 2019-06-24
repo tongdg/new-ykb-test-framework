@@ -22,6 +22,7 @@ class LoginCase(unittest.TestCase):
         self.assertTrue(self.login_result)
 
     def tearDown(self):
+        self.longin_page.driver.quit()
         self.longin_page.log.info('[--登录测试用例结束，截图]')
 
 if __name__=='__main__':
