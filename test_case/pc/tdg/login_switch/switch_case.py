@@ -57,7 +57,7 @@ class SwitchCase(unittest.TestCase):
         self.assertTrue(self.sign_out_result,'退出成功断言成功!')
 
     def tearDown(self):
-        self.index_case.driver.quit()
+        # self.index_case.driver.quit()
         self.index_case.log.info('--[测试用例结束，截图]')
 
 if __name__ == '__main__':
