@@ -13,9 +13,6 @@ class LoanCase(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome()
-
-    def test_loan_process1(self):
-        u"""借款申请单-业务-会计-财务经理-出纳"""
         self.appro_page = ApprovalPage(driver=self.driver, path=os.path.dirname(__file__))
         # 普通员工登录
         self.appro_page.log.info('--[普通员工登录]')
@@ -24,6 +21,8 @@ class LoanCase(unittest.TestCase):
         self.appro_page.switching_enterprises(_enterprise='tongdg艺赛旗', _login_name='普通员工')
         self.appro_page.log.info('--[切换企业ok,登录ok]')
 
+    def test_loan_process1(self):
+        u"""借款申请单-业务-会计-财务经理-出纳"""
         self.appro_page.log.info('--[进入借款申请单-填写借款申请单-断言]')
         self.result = self.appro_page.enter_fill_loan_bill()
         self.assertTrue(self.result, '进入借款申请单-填写借款申请单-断言失败')
@@ -102,14 +101,6 @@ class LoanCase(unittest.TestCase):
 
     def test_loan_process2(self):
         u"""借款申请单-业务-会计-加审领导-会计-财务经理-出纳"""
-        self.appro_page = ApprovalPage(driver=self.driver, path=os.path.dirname(__file__))
-        # 普通员工登录
-        self.appro_page.log.info('--[普通员工登录]')
-        self.appro_page.login_ordinary_staff()
-        # 切换企业
-        self.appro_page.switching_enterprises(_enterprise='tongdg艺赛旗', _login_name='普通员工')
-        self.appro_page.log.info('--[切换企业ok,登录ok]')
-
         self.appro_page.log.info('--[进入借款申请单-填写借款申请单-断言]')
         self.result = self.appro_page.enter_fill_loan_bill()
         self.assertTrue(self.result, '进入借款申请单-填写借款申请单-断言失败')
@@ -218,14 +209,6 @@ class LoanCase(unittest.TestCase):
 
     def test_loan_process3(self):
         u"""借款申请单-业务-会计-加审领导-会计-财务经理-财务总监-出纳"""
-        self.appro_page = ApprovalPage(driver=self.driver, path=os.path.dirname(__file__))
-        # 普通员工登录
-        self.appro_page.log.info('--[普通员工登录]')
-        self.appro_page.login_ordinary_staff()
-        # 切换企业
-        self.appro_page.switching_enterprises(_enterprise='tongdg艺赛旗', _login_name='普通员工')
-        self.appro_page.log.info('--[切换企业ok,登录ok]')
-
         self.appro_page.log.info('--[进入借款申请单-填写借款申请单-断言]')
         self.result = self.appro_page.enter_fill_loan_bill()
         self.assertTrue(self.result, '进入借款申请单-填写借款申请单-断言失败')

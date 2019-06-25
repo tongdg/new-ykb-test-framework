@@ -12,9 +12,6 @@ class CostBillCase(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome()
-
-    def test_traval_bill_process1(self):
-        u"""差旅报销单-会签（部门）-业务-财务-复核-出纳"""
         self.appro_page = ApprovalPage(driver=self.driver, path=os.path.dirname(__file__))
         # 普通员工登录
         self.appro_page.log.info('--[普通员工登录]')
@@ -23,6 +20,8 @@ class CostBillCase(unittest.TestCase):
         self.appro_page.switching_enterprises(_enterprise='tongdg艺赛旗', _login_name='普通员工')
         self.appro_page.log.info('--[切换企业ok,登录ok]')
 
+    def test_traval_bill_process1(self):
+        u"""差旅报销单-会签（部门）-业务-财务-复核-出纳"""
         self.appro_page.log.info('--[进入差旅报销单--填写差旅报销单-断言]')
         self.travel_result = self.appro_page.enter_fill_travel_reimbursement_bill(department='ykb-测试小组')
         self.assertTrue(self.travel_result, '进入差旅报销单--填写差旅报销单-断言失败')
@@ -124,14 +123,6 @@ class CostBillCase(unittest.TestCase):
 
     def test_traval_bill_process2(self):
         u"""差旅报销单-会签2人-业务-财务-复核-出纳"""
-        self.appro_page = ApprovalPage(driver=self.driver, path=os.path.dirname(__file__))
-        # 普通员工登录
-        self.appro_page.log.info('--[普通员工登录]')
-        self.appro_page.login_ordinary_staff()
-        # 切换企业
-        self.appro_page.switching_enterprises(_enterprise='tongdg艺赛旗', _login_name='普通员工')
-        self.appro_page.log.info('--[切换企业ok,登录ok]')
-
         self.appro_page.log.info('--[进入差旅报销单--填写差旅报销单-断言]')
         self.travel_result = self.appro_page.enter_fill_travel_reimbursement_bill(project='ykb-测试项目',department='ykb-测试小组')
         self.assertTrue(self.travel_result, '进入差旅报销单--填写差旅报销单-断言失败')
@@ -254,14 +245,6 @@ class CostBillCase(unittest.TestCase):
 
     def test_traval_bill_process3(self):
         u"""差旅报销单-业务-财务-复核加审-财务总监-出纳"""
-        self.appro_page = ApprovalPage(driver=self.driver, path=os.path.dirname(__file__))
-        # 普通员工登录
-        self.appro_page.log.info('--[普通员工登录]')
-        self.appro_page.login_ordinary_staff()
-        # 切换企业
-        self.appro_page.switching_enterprises(_enterprise='tongdg艺赛旗', _login_name='普通员工')
-        self.appro_page.log.info('--[切换企业ok,登录ok]')
-
         self.appro_page.log.info('--[进入差旅报销单--填写差旅报销单-断言]')
         self.travel_result = self.appro_page.enter_fill_travel_reimbursement_bill()
         self.assertTrue(self.travel_result, '进入差旅报销单--填写差旅报销单-断言失败')
@@ -362,14 +345,6 @@ class CostBillCase(unittest.TestCase):
 
     def test_traval_bill_process4(self):
         u"""差旅报销单-业务-财务-加审领导-财务复核-出纳"""
-        self.appro_page = ApprovalPage(driver=self.driver, path=os.path.dirname(__file__))
-        # 普通员工登录
-        self.appro_page.log.info('--[普通员工登录]')
-        self.appro_page.login_ordinary_staff()
-        # 切换企业
-        self.appro_page.switching_enterprises(_enterprise='tongdg艺赛旗', _login_name='普通员工')
-        self.appro_page.log.info('--[切换企业ok,登录ok]')
-
         self.appro_page.log.info('--[进入差旅报销单--填写差旅报销单-断言]')
         self.travel_result = self.appro_page.enter_fill_travel_reimbursement_bill()
         self.assertTrue(self.travel_result, '进入差旅报销单--填写差旅报销单-断言失败')

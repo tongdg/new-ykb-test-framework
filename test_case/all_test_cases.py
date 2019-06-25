@@ -214,7 +214,7 @@ if __name__ == '__main__':
     # suite = create_test_suite(platform=,author=)[0]
     # 执行所有测试用例
     multi_run_case(suite)
-    # # 发送最新的测试报告
+    # 发送最新的测试报告
     send_mail(new_file(REPORT_PATH))
 
 # print(create_test_suite())
