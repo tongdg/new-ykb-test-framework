@@ -22,7 +22,6 @@ class AddInstitutionCase(unittest.TestCase):
         self.organ_page.click(self.organ_page.add_institution1)
 
     def tearDown(self):
-        time.sleep(20)
         pass
 
 if __name__ == '__main__':

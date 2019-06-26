@@ -8,7 +8,7 @@ import unittest
 from selenium import webdriver
 import os
 
-class ApprovalCase(unittest.TestCase):
+class EvectionCase(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome()

@@ -28,7 +28,6 @@ class RootAddInstitutionCase(unittest.TestCase):
         self.organ_page.click(self.organ_page.submit_btn)
 
     def tearDown(self):
-        time.sleep(20)
         pass
 if __name__ == '__main__':
     unittest.main()
