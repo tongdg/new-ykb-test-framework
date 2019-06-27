@@ -146,8 +146,34 @@ class BasePage(object):
 
     def switch_title(self):
        return self.driver.title
+    def page_source(self):
+        return self.driver.page_source
+
+    def find_element_by_xpath(self):
+        return self.find_element_by_xpath()
+
+    def find_elements_by_xpath(self,Businese):
+        return self.driver.find_elements_by_xpath(Businese)
+
+    def find_elements_by_class(self,a):
+        return self.find_elements_by_css_ykb(a)
 
 
+    def current_url(self):
+        return self.driver.current_url
+
+    def get_cookies(self):
+        return self.driver.get_cookies()
+
+    def add_cookie(self):
+        return self.driver.add_cookie()
+
+    def refresh(self):
+        return self.driver.refresh()
+    def back(self):
+        return self.driver.back()
+    def implicitly_wait(self):
+        return self.driver.implicitly_wait()
     """
         层级定位,应用一般是需要定位到下层的一组一样的元素
     """
@@ -176,7 +202,6 @@ class BasePage(object):
     def click(self, ele):
         if ele is False:
             raise NoSuchElementException('查找超时，请维护脚本！')
-
         else:
             ele.click()
             self.log.info('--[ click ok ]')

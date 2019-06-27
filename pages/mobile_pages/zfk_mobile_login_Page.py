@@ -3,7 +3,7 @@ import time
 from pages.pc_pages.zfk_login_HouTaipage import Login_HouTaiPage
 from config import zfk_config
 import sys
-class Valet_orderPage(Login_HouTaiPage):
+class Mobile_login_page(Login_HouTaiPage):
     # 订单管理
     @property
     def Order_Management(self):
@@ -36,7 +36,7 @@ class Valet_orderPage(Login_HouTaiPage):
             Businese_nameIndex=lists.index(get_business)+1
             self.click(
                 self.find_element_by_css_ykb(
-                    "#dataTableBody > tr:nth-child("'' + str(Businese_nameIndex) + ''") > td.f-14.td-manage > a:nth-child(2)")
+                    "#dataTableBody > tr:nth-child("'' + str(Businese_nameIndex) + ''") > td.f-14.td-manage > a:nth-child(1)")
             )
         #取出元素的下标
         else:
@@ -51,10 +51,33 @@ class Valet_orderPage(Login_HouTaiPage):
         self.send_keys(self.Valet_order_SearchText,'15353032451')
         time.sleep(2)
         self.click(self.Valet_order_btnSearchUserInfo)
-        time.sleep(10)
+        time.sleep(5)
         #进入筛选后的企业里
         self.Check_BusinessName()
+        handle = self.current_window_handle()
+        handles = self.window_handles()
+        print("云快报移动端-首页句柄" + handle)
+        print(handles)
+        for handle in handles:
+            if handle != handles:
+               self.driver.switch_to.window(handle)
         time.sleep(10)
+        # self.click(self.find_element_by_css_ykb(""
+        #                                         "#guo > div.main.scroller > div > div.ykb_content > div.ykb_main_content > div.ykb_main > p:nth-child(2)"
+        #                                         )
+        #            )
+        time.sleep(3)
+    #获取手机端的的URL
+    def Get_mobile_url(self):
+         # 获取手机端的 url
+         Mobile_url=self.current_url()
+         Mobile_url1 = "Public/index.html"
+         Mobile_url2 = "Mine/WechatIndex"
+         if Mobile_url1 in Mobile_url:
+           Test=Mobile_url.replace(Mobile_url1,Mobile_url2)
+           print(Test)
+           return Test
+
 
 
 

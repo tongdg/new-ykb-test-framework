@@ -15,7 +15,9 @@ class LoginCase(unittest.TestCase):
 
     def test_Login_enterprise (self):
         self.Valet_orderPage.Login_Person()#登录账号
+
         self.Valet_orderPage.Chionce_enterprise()#跳转到代客下单界面，并进入到需要测试的企业
+
 
 
 

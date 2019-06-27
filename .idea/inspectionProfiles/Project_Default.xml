@@ -9,6 +9,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="test_case.pc.zfk.deleteRoot.get_dirlist" />
+          <option value="test_case.mobile.zfk.zfk_mobile_case.MobieUrl" />
         </list>
       </option>
     </inspection_tool>

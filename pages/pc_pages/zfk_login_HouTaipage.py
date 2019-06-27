@@ -15,7 +15,6 @@ class Login_HouTaiPage(BasePage):
     @property
     def loginButton(self):
         return  self.find_element_by_id_ykb('login')
-
     # -------------------------------------Cut-Off Rule-----------------------------------------------------------
     #登录人  这里后期调整逻辑，暂留一个人
     def Login_Person(self):

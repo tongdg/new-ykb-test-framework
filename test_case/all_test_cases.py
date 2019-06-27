@@ -183,7 +183,7 @@ def send_mail(file_new):
 
 if __name__ == '__main__':
     # 获取所有的测试用例
-    suite = create_test_suite()[0]
+    suite = create_test_suite(author='zfk')[0]
     # # 获取指定的测试用例
     # suite = create_test_suite(platform=,author=)[0]
     # 执行所有测试用例
