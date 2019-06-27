@@ -183,6 +183,20 @@ class BasePage(object):
             self.log.info('--[ disappear2 ' + str_ele + ' ]')
             print('--[ disappear2 ' + str_ele + ' ]')
 
+    def wait_element_disappear_false(self, str_ele, wait_time=0.5):
+        try:
+            while self.driver.find_element_by_css_selector(
+                    str_ele).is_displayed() is False:
+                time.sleep(wait_time)
+                self.log.info('--[ wating '+ str_ele +' ]')
+                print('--[ wating '+ str_ele +' ]')
+        except NoSuchElementException:
+            self.log.info('--[ disappear ' + str_ele + ' ]')
+            print('--[ disappear ' + str_ele + ' ]')
+        except StaleElementReferenceException:
+            self.log.info('--[ disappear2 ' + str_ele + ' ]')
+            print('--[ disappear2 ' + str_ele + ' ]')
+
     # 元素不变，但是text变化
     def wait_element_change_by_text(self,str_ele,text_ele,wait_time=0.5):
         all_time = 0

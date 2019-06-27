@@ -10,7 +10,6 @@ from config.tdg_config import get_enterprise_login
 
 class SwitchCase(unittest.TestCase):
 
-
     def setUp(self):
         self.data = get_enterprise_login()
         self.driver = webdriver.Chrome()
