@@ -12,7 +12,6 @@ class Log:
         elif 'lff' in path or 'tdg' in path or 'zfk' in path:
             self.log_path = path
         self.logname = os.path.join(self.log_path, '%s.log'%time.strftime("%Y-%m-%d"))
-
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.DEBUG)
 

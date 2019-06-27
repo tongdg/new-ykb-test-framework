@@ -8,15 +8,17 @@ import os
 from common.utils import Utils
 from HTMLTestRunner_cn import HTMLTestRunner
 import threading
-from config.path_config import REPORT_PATH
 from email.mime.text import MIMEText
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 import time
 import smtplib
+from config.tdg_config import REPORT_PATH
 base_dir = os.getcwd()
 Utils = utils = Utils()
-imgs = []
+print(base_dir)
+
+
 # 获取平台用例所在的文件夹
 def get_platform_dir():
     platform_case_dir = []
@@ -49,62 +51,67 @@ def create_test_suite(platform=None,author=None):
     suite = []
     casedir = []
     platform_case_dir = get_platform_dir()
-    test_unit = unittest.TestSuite()
+    # 1.platform=None,author=None 跑全部测试用例
     if platform is None and author is None:
-        for case_dir in platform_case_dir:
-            discover = unittest.defaultTestLoader.discover(
-                start_dir=case_dir, pattern='*.py', top_level_dir=base_dir
-            )
-            for test_suite in discover:
-                for test_case in test_suite:
-                    test_unit.addTests(test_case)
-                    if test_unit not in suite:
-                        suite.append(test_unit)
-            casedir.append(case_dir)
+        print(1)
+        for platform_dir in platform_case_dir[:-1]:
+            author_dirs = get_author_dir(platform_dir)
+            for author_dir in author_dirs[:-1]:
+                test_unit = unittest.TestSuite()
+                discover = unittest.defaultTestLoader.discover(
+                    start_dir=os.path.join(platform_dir,author_dir), pattern='*.py', top_level_dir=base_dir
+                )
+                for test_suite in discover:
+                    for test_case in test_suite:
+                        test_unit.addTests(test_case)
+                suite.append(test_unit)
+                casedir.append(os.path.join(platform_dir,author_dir))
         return suite,casedir
-
-
+    # 2.platform=None,author不=None 跑你写的全部测试用例
     elif platform is not None and author is None:
+        print(2)
         author_case_dir = get_author_dir(platform)
+        print(author_case_dir)
         for case_dir in author_case_dir[:-1]:
+            print(case_dir)
+            test_unit = unittest.TestSuite()
             discover = unittest.defaultTestLoader.discover(
                 start_dir=case_dir, pattern='*.py', top_level_dir=os.path.join(base_dir,platform)
             )
             for test_suite in discover:
                 for test_case in test_suite:
                     test_unit.addTests(test_case)
-                    if test_unit not in suite:
-                        suite.append(test_unit)
+            suite.append(test_unit)
             casedir.append(os.path.join(platform,case_dir))
         return suite,casedir
-
-
+    # 3.platform不=None,author=None 跑你想跑的平台的测试用例
     elif platform is None and author is not None:
+        print(3)
         for platform_dir in platform_case_dir:
             author_case_dir = get_author_dir(platform_dir)
             for author_dir in author_case_dir[:-1]:
                 if author_dir == author:
+                    test_unit = unittest.TestSuite()
                     discover = unittest.defaultTestLoader.discover(
                         start_dir=os.path.join(platform_dir,author), pattern='*.py', top_level_dir=base_dir
                     )
                     for test_suite in discover:
                         for test_case in test_suite:
                             test_unit.addTests(test_case)
-                            if test_unit not in suite:
-                                suite.append(test_unit)
+                    suite.append(test_unit)
                     casedir.append(os.path.join(platform_dir,author))
         return suite,casedir
 
-
     else:
+        print(4)
+        test_unit = unittest.TestSuite()
         discover = unittest.defaultTestLoader.discover(
-            start_dir=platform, pattern='*.py', top_level_dir=platform
+            start_dir=os.path.join(platform,author), pattern='*.py', top_level_dir=None
         )
 
         for test_suite in discover:
             for test_case in test_suite:
-                if test_unit not in suite:
-                    test_unit.addTests(test_case)
+                test_unit.addTests(test_case)
         suite.append(test_unit)
         casedir.append(os.path.join(platform,author))
         return suite
@@ -115,6 +122,7 @@ def multi_run_case(suite):
     file_name = os.path.abspath(os.path.join(os.getcwd(),"..\\report\\"+ now +".html"))
     fp = open(file_name, 'wb')
     threads = []
+    s = 0
     for i in suite:
         # 主要参数说明，retry重试次数，save_last_try最后一次的截图，verbosity=2设为2就ok了
         runner = HTMLTestRunner(
@@ -124,12 +132,15 @@ def multi_run_case(suite):
             verbosity=2, retry=0, save_last_try=True)
         t = threading.Thread(target=runner.run, args=(i,))
         threads.append(t)
+        s = s + 1
+        print(s)
     for t in threads:
         t.start()
-
     # 等待所有结束线程
     for t in threads:
         t.join()
+    fp.close()
+
 
 # 获取最新生成报告的路径
 def new_file(test_dir):
@@ -149,7 +160,8 @@ def send_mail(file_new):
     # 发信邮箱
     mail_from = 'tdg1994@126.com'
     # 收信邮箱
-    mail_to = ['1968230653@qq.com','892431872@qq.com','lf1997f@163.com','zhangfk@yuanian.com']
+    mail_to = ['1968230653@qq.com','lf1997f@163.com','zhangfk@yuanian.com']
+    # mail_to = '892431872@qq.com'
     # 定义正文
     f = open(file_new, 'rb')
     mail_bady = f.read()
@@ -180,33 +192,31 @@ def send_mail(file_new):
     smtp.sendmail(mail_from, mail_to, msg.as_string())
     smtp.quit()
 
-
 if __name__ == '__main__':
-    # 获取所有的测试用例
-    suite = create_test_suite(author='zfk')[0]
-    # # 获取指定的测试用例
+    # 获取所有的测试用例,返回的suite是个集合，所以要加上[0]
+    # suite = create_test_suite(platform='mobile',author='tdg')[0]
+    # for s in suite:
+    #     print(s)
+    # suite = create_test_suite(platform='mobile')[0]
+    # for s in suite:
+    #     print(s)
+    # suite = create_test_suite(author='zfk')[0]
+    # for s in suite:
+    #     print(s)
+    suite = create_test_suite()[0]
+    for s in suite:
+        print(s)
+    # 获取指定的测试用例
     # suite = create_test_suite(platform=,author=)[0]
     # 执行所有测试用例
     multi_run_case(suite)
     # 发送最新的测试报告
     send_mail(new_file(REPORT_PATH))
 
-
-
-
-
-
-
-
-
-
-
-
 # print(create_test_suite())
 # print(create_test_suite(platform='pc',author='tdg'))
 # print(create_test_suite(author='tdg'))
 # print(create_test_suite(platform='mobile'))
-
 
 # 注意点：start_dir = 后跟的参数可以变
 #        top_level_dir = 后跟的参数不能变动

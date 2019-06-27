@@ -32,6 +32,15 @@ class Utils:
         local_time = year + '-' + month + '-' + day
         return local_time
 
+    # 获取当前day
+    @property
+    def get_day(self):
+        local_time = time.localtime()
+        day = local_time.tm_mday
+        return day
+
+
+
     # 获取年月日的格式为XX(时)-XX(分)-XX(秒)
     @property
     def get_hour_min_sec(self):
