@@ -13,7 +13,6 @@ from email.header import Header
 from email.mime.multipart import MIMEMultipart
 import time
 import smtplib
-from BeautifulReport import BeautifulReport
 from config.tdg_config import REPORT_PATH
 base_dir = os.getcwd()
 Utils = utils = Utils()
@@ -142,9 +141,6 @@ def multi_run_case(suite):
         t.join()
     fp.close()
 
-def run(test_suit):
-    result = BeautifulReport(test_suit)
-    result.report(description='测试deafult报告', log_path='report')
 
 # 获取最新生成报告的路径
 def new_file(test_dir):
@@ -164,8 +160,8 @@ def send_mail(file_new):
     # 发信邮箱
     mail_from = 'tdg1994@126.com'
     # 收信邮箱
-    # mail_to = ['1968230653@qq.com','892431872@qq.com','lf1997f@163.com','zhangfk@yuanian.com']
-    mail_to = '892431872@qq.com'
+    mail_to = ['1968230653@qq.com','lf1997f@163.com','zhangfk@yuanian.com']
+    # mail_to = '892431872@qq.com'
     # 定义正文
     f = open(file_new, 'rb')
     mail_bady = f.read()
