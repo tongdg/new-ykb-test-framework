@@ -136,6 +136,53 @@ class BasePage(object):
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
             self.log.error('--[ ' + css + ' list find timeout]')
             return False
+        # 部门链接内容定位，不唯一
+
+
+#create by zfk need use that
+#-------------
+    def current_window_handle(self):
+        return self.driver.current_window_handle
+
+    def window_handles(self):
+        return self.driver.window_handles
+
+    def switchTo_default_content(self):
+        self.driver.switch_to.default_content()
+
+    def switch_to_window(self):
+        return  self.driver.switch_to.window()
+
+    def switch_title(self):
+       return self.driver.title
+    def page_source(self):
+        return self.driver.page_source
+
+    def find_element_by_xpath(self):
+        return self.find_element_by_xpath()
+
+    def find_elements_by_xpath(self,Businese):
+        return self.driver.find_elements_by_xpath(Businese)
+
+    def find_elements_by_class(self,a):
+        return self.find_elements_by_css_ykb(a)
+
+
+    def current_url(self):
+        return self.driver.current_url
+
+    def get_cookies(self):
+        return self.driver.get_cookies()
+
+    def add_cookie(self):
+        return self.driver.add_cookie()
+
+    def refresh(self):
+        return self.driver.refresh()
+    def back(self):
+        return self.driver.back()
+    def implicitly_wait(self):
+        return self.driver.implicitly_wait()
     """
         层级定位,应用一般是需要定位到下层的一组一样的元素
     """
