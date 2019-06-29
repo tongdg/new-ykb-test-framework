@@ -1,3 +1,5 @@
+import self as self
+
 from pages.mobile_pages.zfk_mobile_login_Page import Mobile_login_page
 class zfk_Mobile_index_page(Mobile_login_page):
     #首页需定位的元素
@@ -70,7 +72,39 @@ class zfk_Mobile_index_page(Mobile_login_page):
     @property
     def UnReimbursement_back(self):
         return self.click(self.find_element_by_css_ykb("#app > div > div.mui-navbar > div > button > span"))
-    #报销中,代换借款的返回
+    #报销中,代还借款的返回
     @property
     def ReimbursementIng_back(self):
         return self.click(self.find_element_by_id_ykb("spBack"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
