@@ -22,11 +22,12 @@ class zfk_mobile_index_case(unittest.TestCase):
         self.zfk_bills_MyBills= zfk_bills_MyBills(self.driver)
         self.driver.get(MobileUrl)
         time.sleep(3)
-        # 跳转移动端首页
-    def test_Login_mobile_enterprise(self):
+        # 跳转到我的单据
+    def test_My_bills(self):
         self.zfk_bills_MyBills.Entrance_My_bills()
+        self.zfk_bills_MyBills.In_approval_recall()
+        self.zfk_bills_MyBills.cycly_delete()
     def tearDown(self):
-        time.sleep(50)
         pass
 if __name__=="__main__":
     unittest.main()

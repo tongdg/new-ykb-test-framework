@@ -3,7 +3,10 @@
 import unittest
 from selenium import webdriver
 from pages.mobile_pages.zfk_UnReimbursement_page.zfk_create_Unreimbursement import zfk_create_Unreimbursement
+from pages.mobile_pages.zfk_bills_page.zfk_bills_MyBills import zfk_bills_MyBills
 import time
+
+
 class zfk_create_Unreimbursement_case(unittest.TestCase):
     def setUp(self):
         self.zfk_create_Unreimbursement = zfk_create_Unreimbursement(webdriver.Chrome())
@@ -13,15 +16,20 @@ class zfk_create_Unreimbursement_case(unittest.TestCase):
         options = webdriver.ChromeOptions()
         mobileEmulation = {'deviceName': 'iPhone 6 Plus'}
         options.add_experimental_option('mobileEmulation', mobileEmulation)
-        driver=webdriver.Chrome(executable_path='chromedriver.exe', chrome_options=options)
+        self.driver=webdriver.Chrome(executable_path='chromedriver.exe', chrome_options=options)
         MobileUrl=self.zfk_create_Unreimbursement.Get_mobile_url()
-        self.zfk_create_Unreimbursement= zfk_create_Unreimbursement(driver)
-        driver.get(MobileUrl)
+        self.zfk_create_Unreimbursement= zfk_create_Unreimbursement(self.driver)
+        self.driver.get(MobileUrl)
+        self.Test = zfk_bills_MyBills(self.driver)
     def test_Login_mobile_enterprise(self):
          time.sleep(5)
          self.zfk_create_Unreimbursement.UnReimbursement
          self.zfk_create_Unreimbursement.UnReim_Remember_whit_Delete()
          self.zfk_create_Unreimbursement.UnReim_Remember_whit_Submit_Travel()
+         self.zfk_create_Unreimbursement.back()
+         self.zfk_create_Unreimbursement.UnReim_Remember_whit_Submit_Cost()
+         self.Test.Entrance_My_bills()
+
          time.sleep(5000)
     def tearDown(self):
         pass
