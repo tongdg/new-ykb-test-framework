@@ -64,6 +64,7 @@ class zfk_mobile_index_case(unittest.TestCase):
         # time.sleep(50)
         # pass
     def tearDown(self):
+        time.sleep(50)
         pass
 if __name__=="__main__":
     unittest.main()

@@ -80,7 +80,7 @@ class OrganizationInstitution(IndexPage):
     #手机号随机数
     @property
     def random_telnum(self):
-        return str(random.randint(100000000, 999999999))
+        return str(random.randint(10000000, 99999999))
     #员工编号
     @property
     def add_code(self):
@@ -134,4 +134,138 @@ class OrganizationInstitution(IndexPage):
         time.sleep(1)
         self.click(self.organization_institution)
         time.sleep(1)
+
+    # 角色列表
+    @property
+    def role_list(self):
+        return self.find_element_by_hierarchy(lambda var : self.driver.find_element_by_css_selector('#select2-drop > ul').find_elements_by_tag_name('li'))
+
+    # 收起下拉框
+    @property
+    def pop(self):
+        return self.find_element_by_id_ykb('select2-drop-mask')
+    # 用户名称
+    @property
+    def add_user_name(self):
+        return self.find_element_by_class_name_ykb('user-name')
+    # 添加人员
+    def add_person_methond(self):
+        # 姓名
+        self.send_keys(self.add_user_name, '张三' + self.random_num)
+        time.sleep(1)
+        # 性别
+        self.click(self.add_sex)
+        time.sleep(1)
+        # 手机号
+        self.send_keys(self.add_tel, '151' + self.random_telnum)
+        time.sleep(1)
+        # 员工编号
+        self.send_keys(self.add_code, self.random_num)
+        time.sleep(1)
+        # 直属领导
+        # 下拉框
+        self.click(self.direct_leader)
+        time.sleep(1)
+        # 选直属领导
+        self.click(self.sel_direct_leader)
+        time.sleep(1)
+        # 职级
+        self.send_keys(self.rank_text, '员工' + self.random_num)
+        time.sleep(1)
+        # 角色
+        # 下拉框
+        self.click(self.sel_role)
+        time.sleep(1)
+        # 部门领导
+        self.click(self.role_list[2])
+        time.sleep(1)
+        # 会计
+        self.click(self.role_list[4])
+        time.sleep(1)
+        # 出纳
+        self.click(self.role_list[7])
+        time.sleep(1)
+        # 收回角色下拉框
+        self.click(self.pop)
+        time.sleep(1)
+        # 岗位
+        self.send_keys(self.post_text, '测试' + self.random_num)
+        time.sleep(1)
+        # 邮箱
+        # self.send_keys(self.email_text, 'lvff@yuanian.com')
+        time.sleep(1)
+        # 确认按钮
+        self.click(self.submit_btn1)
+
+    # 添加组织机构
+    def add_institution_methond(self):
+        # 根目录
+        self.click(self.edit_btn)
+        time.sleep(1)
+        # 记住需要添加机构的名字
+        self._institution_name = '自动化测试小组'+self.random_num
+        print(self._institution_name + 'ddd')
+        # 添加机构
+        self.click(self.add_institution)
+        time.sleep(1)
+        self.send_keys(self.institution_name, self._institution_name)
+        time.sleep(1)
+        # 机构编码
+        self.send_keys(self.institution_code, self.random_num)
+        time.sleep(1)
+        # 机构负责人
+        # 下拉按钮
+        self.click(self.institution_person)
+        time.sleep(1)
+        # 搜索机构负责人
+        self.send_keys(self.institution_person_text, '童定国')
+        time.sleep(1)
+        # 选机构负责人
+        self.click(self.institution_person_sel)
+        time.sleep(1)
+        # 确定按钮
+        self.click(self.submit_btn)
+
+    # 组织机构列表
+    @property
+    def institution_list(self):
+        return self.find_element_by_hierarchy(
+            lambda var: self.driver.find_element_by_id('treeDim').find_elements_by_tag_name('li')
+        )
+    # 查找需要添加组织结构的名字
+    def find_institution_add_what(self, add_what):
+        ils = self.institution_list
+        for il in ils:
+            il_text = self.find_element_by_hierarchy(
+                lambda var: il.find_element_by_css_selector("span[class='text']")
+            )
+            print(il_text.text)
+            if il_text.text == self._institution_name:
+                self.click(il)
+                if add_what == '添加人员':
+                    il_add_persons = self.find_element_by_hierarchy(
+                        lambda var: il.find_elements_by_css_selector("div[class='actionitem']")
+                    )
+                    for iap in il_add_persons:
+                        if iap.text == '添加人员':
+                            self.click(iap)
+                            print(iap.text)
+                            break
+                print(il_text.text)
+                break
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

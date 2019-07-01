@@ -53,16 +53,16 @@ class AddPersonCase(unittest.TestCase):
         self.organ_page.click(self.organ_page.sel_role)
         time.sleep(1)
         # 部门领导
-        self.organ_page.click(self.organ_page.department_head)
+        self.organ_page.click(self.organ_page.role_list[2])
         time.sleep(1)
         # 会计
-        self.organ_page.click(self.organ_page.sel_accounting)
+        self.organ_page.click(self.organ_page.role_list[4])
         time.sleep(1)
         # 出纳
-        self.organ_page.click(self.organ_page.sel_cashier)
+        self.organ_page.click(self.organ_page.role_list[7])
         time.sleep(1)
         #收回角色下拉框
-        self.organ_page.click(self.organ_page.sel_role)
+        self.organ_page.click(self.organ_page.pop)
         time.sleep(1)
         # 岗位
         self.organ_page.send_keys(self.organ_page.post_text,'测试'+self.organ_page.random_num)
