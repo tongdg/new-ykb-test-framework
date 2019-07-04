@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-'2019-06-25 Created by lff'
+'2019-07-01 Created by lff'
 
 import unittest
 from pages.pc_pages.lff_organization_institution_page import OrganizationInstitution
@@ -20,11 +20,25 @@ class AddInstPersonCase(unittest.TestCase):
         # 进入组织机构
         self.organ_page.enter_organization_institution()
         time.sleep(1)
+        #根目录添加机构
         self.organ_page.add_institution_methond()
         time.sleep(1)
-        self.organ_page.find_institution_add_what('添加人员')
+        # 查找根目录添加的机构点击添加机构
+        self.organ_page.find_institution_add_what('添加机构')
         time.sleep(1)
-        self.organ_page.add_person_methond()
+        # 子目录添加机构
+        self.organ_page.add_institutions_methond()
+        time.sleep(1)
+        # 查找根目录添加的机构点击添加人员
+        self.organ_page.find_institutions_add_what('添加人员')
+        time.sleep(1)
+        #子目录添加人员
+        self.result = self.organ_page.add_person_methond()
+        self.assertTrue(self.result, '【断言】添加人员报错')
+        time.sleep(1)
+        # 查找根目录添加的机构点击添加人员
+        self.organ_page.find_institutions_update_what('修改上级部门')
+        time.sleep(1)
 
     def tearDown(self):
         pass
