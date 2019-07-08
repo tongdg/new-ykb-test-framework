@@ -542,18 +542,24 @@ class ApprovalPage(BillPage):
         time.sleep(2)
         # 切到审批的单据中
         self.wait_element_disappear_data_load()
-        self.driver.switch_to_frame(self.get_new_main_frame)
-        time.sleep(1)
-        if self.new_bill_number is not False:
-            if self.bill_number == self.new_bill_number.text:
-                self.log.debug('--[ 单据查找正确]')
-                return True
+        try:
+            self.driver.switch_to_frame(self.get_new_main_frame)
+            time.sleep(1)
+            if self.new_bill_number is not False:
+                if self.bill_number == self.new_bill_number.text:
+                    self.log.debug('--[ 单据查找正确]')
+                    return True
+                else:
+                    self.log.debug('--[ 单据查找错误]')
+                    return False
             else:
-                self.log.debug('--[ 单据查找错误]')
+                self.log.debug('--[ 单据查找不到]')
                 return False
-        else:
+        except Exception as e:
+            self.log.error('--[错误信息是：'+ e +']')
             self.log.debug('--[ 单据查找不到]')
             return False
+
 
     # 进入我的审批列表，找到单据，判断
     def enter_list_find_new_bill(self):
@@ -586,7 +592,7 @@ class ApprovalPage(BillPage):
         time.sleep(1)
         # 判断下一个审批人是否正确，断言  get_attribute('textContent')
         if self.new_approval_input is not False and self.new_approval_input.text != '':
-            if appro_person in self.new_approval_input.text:
+            if appro_person == self.new_approval_input.text:
                 self.log.debug('--[ 下一个环节审批领导带出正确]')
                 return True
             else:

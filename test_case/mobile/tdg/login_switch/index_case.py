@@ -9,21 +9,21 @@ from selenium import webdriver
 import os
 import time
 
-class IndexCase(unittest.TestCase):
-
-    def setUp(self):
-        mobile_emulation = {"deviceName": "iPhone 6/7/8"}
-        option = webdriver.ChromeOptions()
-        option.add_experimental_option('mobileEmulation', mobile_emulation)
-        self.driver = webdriver.Chrome(chrome_options=option)
-        self.index_page = IndexPage(self.driver, path=os.path.dirname(__file__))
-        self.index_page.login_test_person()
-
-    def test_index(self):
-        self.index_page.multiple_taxi_res()
-
-    def tearDown(self):
-        pass
-
-if __name__ == '__main__':
-    unittest.main()
+# class IndexCase(unittest.TestCase):
+#
+#     def setUp(self):
+#         mobile_emulation = {"deviceName": "iPhone 6/7/8"}
+#         option = webdriver.ChromeOptions()
+#         option.add_experimental_option('mobileEmulation', mobile_emulation)
+#         self.driver = webdriver.Chrome(chrome_options=option)
+#         self.index_page = IndexPage(self.driver, path=os.path.dirname(__file__))
+#         self.index_page.login_test_person()
+#
+#     def test_index(self):
+#         self.index_page.multiple_taxi_res()
+#
+#     def tearDown(self):
+#         pass
+#
+# if __name__ == '__main__':
+#     unittest.main()
