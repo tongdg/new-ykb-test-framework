@@ -20,17 +20,35 @@ class zfk_create_Unreimbursement_case(unittest.TestCase):
         MobileUrl=self.zfk_create_Unreimbursement.Get_mobile_url()
         self.zfk_create_Unreimbursement= zfk_create_Unreimbursement(self.driver)
         self.driver.get(MobileUrl)
-        self.Test = zfk_bills_MyBills(self.driver)
+        self.zfk_bills_MyBills = zfk_bills_MyBills(self.driver)
     def test_Login_mobile_enterprise(self):
          time.sleep(5)
          self.zfk_create_Unreimbursement.UnReimbursement
+         time.sleep(2)
+         #记一笔包含全选删除和单笔删除
          self.zfk_create_Unreimbursement.UnReim_Remember_whit_Delete()
+         # 记一笔包含全选提交和单笔提交
          self.zfk_create_Unreimbursement.UnReim_Remember_whit_Submit_Travel()
-         self.zfk_create_Unreimbursement.back()
+         #全选提交和单笔提交至费用报销单
          self.zfk_create_Unreimbursement.UnReim_Remember_whit_Submit_Cost()
-         self.Test.Entrance_My_bills()
-
-         time.sleep(5000)
+         #页面回退到主页
+         self.zfk_create_Unreimbursement.write_back()
+         #进入我的订单
+         self.zfk_bills_MyBills.Entrance_My_bills()
+         #进入审批中
+         self.zfk_bills_MyBills.In_approval_recall()
+         #撤回报销单-审批中
+         for i in range(1, 5):
+             if i % 2 == 0:
+                 self.zfk_bills_MyBills.In_recall_order()
+             else:
+                 self.zfk_bills_MyBills.recall_order()
+         #进入待提交执行作废
+         time.sleep(2)
+         self.zfk_bills_MyBills.To_submit()
+         time.sleep(2)
+         for j in range(1, 5):
+             self.zfk_bills_MyBills.delete_order()
     def tearDown(self):
         pass
 if __name__=="__main__":

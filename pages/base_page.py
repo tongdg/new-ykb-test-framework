@@ -117,6 +117,10 @@ class BasePage(object):
     """
         css定位
     """
+    def find_element_by_css_selector(self):
+        return self.driver.find_element_by_css_selector()
+
+
     def find_element_by_css_ykb(self, css, timeout=10):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_element_by_css_selector(css))
@@ -159,7 +163,7 @@ class BasePage(object):
         return self.driver.page_source
 
     def find_element_by_xpath(self):
-        return self.find_element_by_xpath()
+        return self.driver.find_element_by_xpath()
 
     def find_elements_by_xpath(self,Businese):
         return self.driver.find_elements_by_xpath(Businese)
@@ -183,6 +187,10 @@ class BasePage(object):
         return self.driver.back()
     def implicitly_wait(self):
         return self.driver.implicitly_wait()
+
+
+    def quit_chrom(self):
+        return self.driver.quit()
     """
         层级定位,应用一般是需要定位到下层的一组一样的元素
     """

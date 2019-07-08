@@ -49,9 +49,8 @@ class Mobile_login_page(Login_HouTaiPage):
         self.driver.get(zfk_config.valet_orderUrl())
         time.sleep(2)
         self.send_keys(self.Valet_order_SearchText,'15353032451')
-        time.sleep(2)
         self.click(self.Valet_order_btnSearchUserInfo)
-        time.sleep(5)
+        time.sleep(2)
         #进入筛选后的企业里
         self.Check_BusinessName()
         handle = self.current_window_handle()
@@ -61,12 +60,12 @@ class Mobile_login_page(Login_HouTaiPage):
         for handle in handles:
             if handle != handles:
                self.driver.switch_to.window(handle)
-        time.sleep(10)
+        time.sleep(3)
         # self.click(self.find_element_by_css_ykb(""
         #                                         "#guo > div.main.scroller > div > div.ykb_content > div.ykb_main_content > div.ykb_main > p:nth-child(2)"
         #                                         )
         #            )
-        time.sleep(3)
+        # time.sleep(3)
     #获取手机端的的URL
     def Get_mobile_url(self):
          # 获取手机端的 url

@@ -9,7 +9,7 @@ import time
 class zfk_mobile_LoginCase(unittest.TestCase):
     def setUp(self):
         self.zfk_mobile_login_Page = Mobile_login_page(webdriver.Chrome())
-        self.zfk_mobile_login_Page.Login_Person()  # 登录账号
+        self.zfk_mobile_login_Page.Login_Person() # 登录账号
         self.zfk_mobile_login_Page.Chionce_enterprise()
         # 跳转到代客下单界面，并进入到需要测试的企业
     def test_Login_mobile_enterprise(self):

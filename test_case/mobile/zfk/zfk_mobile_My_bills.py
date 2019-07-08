@@ -26,7 +26,16 @@ class zfk_mobile_index_case(unittest.TestCase):
     def test_My_bills(self):
         self.zfk_bills_MyBills.Entrance_My_bills()
         self.zfk_bills_MyBills.In_approval_recall()
-        self.zfk_bills_MyBills.cycly_delete()
+        for i in range(1,5):
+            if i%2==0:
+                self.zfk_bills_MyBills.In_recall_order()
+            else:
+                self.zfk_bills_MyBills.recall_order()
+        #待提交作废
+        self.zfk_bills_MyBills.To_submit()
+        time.sleep(2)
+        # for j in range(1,4):
+        #     self.zfk_bills_MyBills.delete_order()
     def tearDown(self):
         pass
 if __name__=="__main__":

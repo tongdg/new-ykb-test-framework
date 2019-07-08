@@ -145,52 +145,59 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
     #公共的出发地
     #点击记一笔,并且选择一个消费类型
     def click_paning(self):
-        time.sleep(2)
+        time.sleep(5)
         self.click(self.find_element_by_css_ykb("#anyRecordList > div > div.paning"))
     #选择消费类型
     def taxiIcon(self):
-        time.sleep(3)
+        time.sleep(1)
         return self.click(self.find_element_by_css_ykb("#taxiIcon"))
     #日期
     def Choince_Date(self):
-        time.sleep(2)
+        time.sleep(3)
         self.click(self.find_element_by_id_ykb("setOutDate"))
         time.sleep(2)
         self.click(self.find_element_by_css_ykb("#calendar > div:nth-child(1) > ul > li.dl.jr.cur"))
         time.sleep(1)
     #起点
     def Begin_address(self):
-        time.sleep(2)
+        time.sleep(1)
         self.send_keys(self.find_element_by_css_ykb("#fromPlace"),'测试起点')
     #终点
     def End_address(self):
-        time.sleep(2)
+        time.sleep(1)
         self.send_keys(self.find_element_by_css_ykb("#toPlace"),'测试终点')
     #打车费
     def By_car_cost(self):
         self.click(self.find_element_by_css_ykb("#calculator > ul.mui-table-view.noTB.anyrecord_g_wrap > li:nth-child(7) > span.span-lab.mui-text-right.clac3.firstShow"))
-        time.sleep(2)
+        time.sleep(1)
         self.click(self.find_element_by_css_ykb("#keybord > span:nth-child(7)"))
+        time.sleep(1)
         self.click(self.find_element_by_css_ykb("#submitNumCal"))
+
     #其他
     def Onther(self):
-        time.sleep(2)
+        time.sleep(1)
         self.click(self.find_element_by_css_ykb("#calculator > ul.mui-table-view.noTB.anyrecord_g_wrap > li:nth-child(10) > table > tbody > tr > td.span-lab.mui-text-right.c3.ft14"))
-        time.sleep(2)
+        time.sleep(1)
         self.click(self.find_element_by_css_ykb("#keybord > span:nth-child(7)"))
         self.click(self.find_element_by_css_ykb("#submitNumCal"))
     #说明
     def explain(self):
-        time.sleep(2)
+        time.sleep(1)
         self.send_keys(self.find_element_by_css_ykb("#remarkMsg"),"测试说明")
+        time.sleep(1)
     #完成
     def click_fulfill(self):
         time.sleep(2)
         self.click(self.find_element_by_css_ykb("#setting > div.mui-bar.mui-bar-tab.ab > button.mui-btn.themebgStyle.themeBtn17ab"))
     #再记一笔按钮
     def click_Again_write_button(self):
+        time.sleep(1)
         return self.click(self.find_element_by_css_ykb("#setting > div.mui-bar.mui-bar-tab.ab > button.mui-btn.themebgStyle.mui-pull-right.themeBtn089a"))
-
+    #记一笔返回按钮
+    def write_back(self):
+        time.sleep(1)
+        self.click(self.find_element_by_css_ykb("#app > div > div.mui-navbar > div > button > span"))
 
 #7. 循环造消费记录
     def circulation_list(self):
@@ -207,13 +214,13 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
         time.sleep(3)
     #再记一笔
     def click_Again_write(self):
-        time.sleep(2)
         self.Choince_Date()
         self.Begin_address()
         self.End_address()
         self.By_car_cost()
         self.Onther()
         self.explain()
+        time.sleep(1)
         self.click_Again_write_button()
         self.Choince_Date()
         self.Begin_address()
@@ -222,6 +229,7 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
         self.Onther()
         self.explain()
         self.click_fulfill()
+        time.sleep(1)
 
 #删除-单笔删除 多笔删除
     def UnReim_Remember_whit_Delete(self):
@@ -230,7 +238,7 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
         # 若找到返回的值肯定是True
         if Record_list is not False:
             #全选删除
-            time.sleep(3)
+            time.sleep(2)
             self.All_delete()
             print("“未报销”“-消费记录列表：全选删除成功")
             #新建消费记录
@@ -265,7 +273,7 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
             self.All_Submit_travel()
             print("“未报销”“-消费记录列表：全选提交至差旅报销单成功")
             self.circulation_list()
-            # 删除新建的单笔消费记录
+            # 提交单笔消费记录
             self.Only_submit_travel()
             print("未报销-消费记录-单笔提单至差旅报销单成功")
 
@@ -275,7 +283,7 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
          Record_list = self.find_element_by_css_ykb("#record_list > div > dd", 3)
          # 若找到返回的值肯定是True
          if Record_list is not False:
-             # 全选提交
+             #全选提交
              time.sleep(2)
              self.All_Submit_cost()
              print("未报销-消费记录列表：全选提交至费用报销单成功")
@@ -283,9 +291,10 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
              self.circulation_list()
              time.sleep(5)
              self.UnReimbursement
-             time.sleep(2)
+             time.sleep(5)
              self.Only_Submit_cost()
              print("未报销-消费记录-单笔提单至费用报销单成功")
+             time.sleep(3)
          else:
              # 全选提交
              time.sleep(3)
@@ -297,6 +306,7 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
              # 删除新建的单笔消费记录
              self.Only_Submit_cost()
              print("未报销-消费记录-单笔提单至费用报销单成功")
+             time.sleep(3)
 
 
 
