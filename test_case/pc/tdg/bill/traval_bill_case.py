@@ -21,7 +21,7 @@ class TravalBillCase(unittest.TestCase):
         self.appro_page.log.info('--[切换企业ok,登录ok]')
 
     def test_traval_bill_process1(self):
-        u"""差旅报销单-会签（部门）-业务-财务-复核-出纳"""
+        u"""差旅报销单-会签（部门）-业务（过滤）-直属领导-财务-复核-出纳"""
         self.appro_page.log.info('--[进入差旅报销单--填写差旅报销单-断言]')
         self.travel_result = self.appro_page.enter_fill_travel_reimbursement_bill(department='ykb-测试小组')
         self.assertTrue(self.travel_result, '进入差旅报销单--填写差旅报销单-断言失败')
@@ -59,12 +59,32 @@ class TravalBillCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导业务审批状态错误')
 
         self.appro_page.log.info('--[ 部门领导同意-断言]')
-        self.result = self.appro_page.approval_new_agree()
+        self.result = self.appro_page.approval_new_agree('公司领导')
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[ 部门领导业务审批确定-断言]')
         self.result = self.appro_page.new_bill_confirm_approval()
         self.assertTrue(self.result, '部门领导业务审批失败')
+
+        self.appro_page.log.info('--[ 公司领导登录]')
+        self.result = self.appro_page.login_company_leader()
+        self.assertTrue(self.result, '公司领导登录失败')
+
+        self.appro_page.log.info('--[ 公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_new_bill()
+        self.assertTrue(self.result, '公司领导查找单据失败')
+
+        self.appro_page.log.info('--[ 公司领导业务审批状态-断言]')
+        self.result = self.appro_page.judge_new_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导业务审批状态错误')
+
+        self.appro_page.log.info('--[ 公司领导同意-断言]')
+        self.result = self.appro_page.approval_new_agree()
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[ 公司领导业务审批确定-断言]')
+        self.result = self.appro_page.new_bill_confirm_approval()
+        self.assertTrue(self.result, '公司领导业务审批失败')
 
         self.appro_page.log.info('--[ 会计登录]')
         self.result = self.appro_page.login_accounting()
@@ -122,7 +142,7 @@ class TravalBillCase(unittest.TestCase):
         self.assertTrue(self.result, '出纳支付断言失败')
 
     def test_traval_bill_process2(self):
-        u"""差旅报销单-会签2人-业务-财务-复核-出纳"""
+        u"""差旅报销单-会签2人-业务（过滤）-直属领导-财务-复核-出纳"""
         self.appro_page.log.info('--[进入差旅报销单--填写差旅报销单-断言]')
         self.travel_result = self.appro_page.enter_fill_travel_reimbursement_bill(project='ykb-测试项目',department='ykb-测试小组')
         self.assertTrue(self.travel_result, '进入差旅报销单--填写差旅报销单-断言失败')
@@ -180,13 +200,32 @@ class TravalBillCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导业务审批状态错误')
 
         self.appro_page.log.info('--[ 部门领导同意-断言]')
-        self.result = self.appro_page.approval_new_agree()
+        self.result = self.appro_page.approval_new_agree('公司领导')
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[ 部门领导业务审批确定-断言]')
         self.result = self.appro_page.new_bill_confirm_approval()
         self.assertTrue(self.result, '部门领导业务审批失败')
-        #
+
+        self.appro_page.log.info('--[ 公司领导登录]')
+        self.result = self.appro_page.login_company_leader()
+        self.assertTrue(self.result, '公司领导登录失败')
+
+        self.appro_page.log.info('--[ 公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_new_bill()
+        self.assertTrue(self.result, '公司领导查找单据失败')
+
+        self.appro_page.log.info('--[ 公司领导业务审批状态-断言]')
+        self.result = self.appro_page.judge_new_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导业务审批状态错误')
+
+        self.appro_page.log.info('--[ 公司领导同意-断言]')
+        self.result = self.appro_page.approval_new_agree()
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[ 公司领导业务审批确定-断言]')
+        self.result = self.appro_page.new_bill_confirm_approval()
+        self.assertTrue(self.result, '公司领导业务审批失败')
 
         self.appro_page.log.info('--[ 会计登录]')
         self.result = self.appro_page.login_accounting()
@@ -244,7 +283,7 @@ class TravalBillCase(unittest.TestCase):
         self.assertTrue(self.result, '出纳支付断言失败')
 
     def test_traval_bill_process3(self):
-        u"""差旅报销单-业务-财务-复核加审-财务总监-出纳"""
+        u"""差旅报销单-业务-直属领导-财务-复核加审-财务总监-出纳"""
         self.appro_page.log.info('--[进入差旅报销单--填写差旅报销单-断言]')
         self.travel_result = self.appro_page.enter_fill_travel_reimbursement_bill()
         self.assertTrue(self.travel_result, '进入差旅报销单--填写差旅报销单-断言失败')
@@ -262,12 +301,32 @@ class TravalBillCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导业务审批状态错误')
 
         self.appro_page.log.info('--[ 部门领导同意-断言]')
-        self.result = self.appro_page.approval_new_agree()
+        self.result = self.appro_page.approval_new_agree('公司领导')
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[ 部门领导业务审批确定-断言]')
         self.result = self.appro_page.new_bill_confirm_approval()
         self.assertTrue(self.result, '部门领导业务审批失败')
+
+        self.appro_page.log.info('--[ 公司领导登录]')
+        self.result = self.appro_page.login_company_leader()
+        self.assertTrue(self.result, '公司领导登录失败')
+
+        self.appro_page.log.info('--[ 公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_new_bill()
+        self.assertTrue(self.result, '公司领导查找单据失败')
+
+        self.appro_page.log.info('--[ 公司领导业务审批状态-断言]')
+        self.result = self.appro_page.judge_new_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导业务审批状态错误')
+
+        self.appro_page.log.info('--[ 公司领导同意-断言]')
+        self.result = self.appro_page.approval_new_agree()
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[ 公司领导业务审批确定-断言]')
+        self.result = self.appro_page.new_bill_confirm_approval()
+        self.assertTrue(self.result, '公司领导业务审批失败')
 
         self.appro_page.log.info('--[ 会计登录]')
         self.result = self.appro_page.login_accounting()
@@ -344,7 +403,7 @@ class TravalBillCase(unittest.TestCase):
         self.assertTrue(self.result, '出纳支付断言失败')
 
     def test_traval_bill_process4(self):
-        u"""差旅报销单-业务-财务-加审领导-财务复核-出纳"""
+        u"""差旅报销单-业务-直属领导-财务-加审领导-财务复核-出纳"""
         self.appro_page.log.info('--[进入差旅报销单--填写差旅报销单-断言]')
         self.travel_result = self.appro_page.enter_fill_travel_reimbursement_bill()
         self.assertTrue(self.travel_result, '进入差旅报销单--填写差旅报销单-断言失败')
@@ -362,12 +421,32 @@ class TravalBillCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导业务审批状态错误')
 
         self.appro_page.log.info('--[ 部门领导同意-断言]')
-        self.result = self.appro_page.approval_new_agree()
+        self.result = self.appro_page.approval_new_agree('公司领导')
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[ 部门领导业务审批确定-断言]')
         self.result = self.appro_page.new_bill_confirm_approval()
         self.assertTrue(self.result, '部门领导业务审批失败')
+
+        self.appro_page.log.info('--[ 公司领导登录]')
+        self.result = self.appro_page.login_company_leader()
+        self.assertTrue(self.result, '公司领导登录失败')
+
+        self.appro_page.log.info('--[ 公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_new_bill()
+        self.assertTrue(self.result, '公司领导查找单据失败')
+
+        self.appro_page.log.info('--[ 公司领导业务审批状态-断言]')
+        self.result = self.appro_page.judge_new_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导业务审批状态错误')
+
+        self.appro_page.log.info('--[ 公司领导同意-断言]')
+        self.result = self.appro_page.approval_new_agree()
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[ 公司领导业务审批确定-断言]')
+        self.result = self.appro_page.new_bill_confirm_approval()
+        self.assertTrue(self.result, '公司领导业务审批失败')
 
         self.appro_page.log.info('--[ 会计登录]')
         self.result = self.appro_page.login_accounting()

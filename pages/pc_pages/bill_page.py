@@ -10,6 +10,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 Utils = utils = Utils()
 import sys
 sys.setrecursionlimit(100000)  # 设置最大递归深度
+from pages.pc_pages.business_travel_page import BusinessTravelPage
+
 
 class BillPage(IndexPage):
 
@@ -85,6 +87,14 @@ class BillPage(IndexPage):
     @property
     def evection_vehicle_list(self):
         return self.find_element_by_hierarchy(lambda var : self.driver.find_element_by_css_selector("#e7ccplugincombobox_AZ > ul > li > div > ul").find_elements_by_tag_name('a'))
+    # 选择航班
+    @property
+    def choose_flight_btn(self):
+        return self.find_element_by_css_ykb("button[class='colSky gotoConsumption']")
+    # 选择酒店
+    @property
+    def choose_hotel_btn(self):
+        return self.find_element_by_css_ykb('#hotel_goto > button')
     # 出差同行人员
     @property
     def evection_colleague_personnel(self):
@@ -471,8 +481,20 @@ class BillPage(IndexPage):
         self.click(self.evection_cost_belong_confirm)
         time.sleep(2) # 2S防止点击过快出错
 
+    # 商旅模块
+    def run_business(self):
+        # 初始化商旅模块
+        btp = BusinessTravelPage(self.driver)
+        # 选择机票
+        self.click(self.choose_flight_btn)
+        btp.choose_flight()
+        # 选择酒店
+        self.click(self.choose_hotel_btn)
+        btp.choose_hotel()
+
+
     # 填写出差申请单
-    def __fill_evection_bill(self, department, project):
+    def __fill_evection_bill(self, department, project, switch):
         if "出差申请单" not in self.evection_apply_bill.text:
             self.log.debug('--[ open evection bill fail]')
             return False
@@ -501,12 +523,15 @@ class BillPage(IndexPage):
             # 选择交通工具
             self.click(self.evection_vehicle)
             time.sleep(1)
-            self.click(self.evection_vehicle_list[2])
+            self.click(self.evection_vehicle_list[0])
             time.sleep(1)
             # 同行人暂不加
             # 填写出差事由
             time.sleep(1)
             self.send_keys(self.evection_cause, Utils.generate_time)
+            # 判断是否调用商旅模块
+            if switch is True:
+                self.run_business()
             time.sleep(2)# 2S防止点击过快出错
             # 选择审批人暂时不加  设置部门负责人和项目负责人
             # 点击确定
@@ -519,11 +544,11 @@ class BillPage(IndexPage):
             return True
 
     # 进入出差申请单，并且填写单据，提交+
-    def enter_fill_evecation_bill(self, department=None, project=None):
+    def enter_fill_evecation_bill(self, department=None, project=None, switch=False):
         # 进入出差申请单
         self.__enter_evecation_bill_page()
         # 填写出差申请单
-        return self.__fill_evection_bill(department,project)
+        return self.__fill_evection_bill(department,project,switch)
 
     # 进入借款申请单
     def __enter_loan_bill(self):

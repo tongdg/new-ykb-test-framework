@@ -284,6 +284,10 @@ class ApprovalPage(BillPage):
     # 等待支付处理中的单子
     def wait_element_disappear_old_in_payment(self):
         return self.wait_element_disappear_true("button[class='eui-btn eui-btn-blue btn-direct-agree disabled']")
+    # 商旅订单下单确定按钮
+    @property
+    def business_travel_confirm_btn(self):
+        return self.find_element_by_css_ykb('#message-check > div > div > div.confirm-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm',3)
     """
         老单据
     """
@@ -361,14 +365,24 @@ class ApprovalPage(BillPage):
     def old_apply_confirm(self):
         time.sleep(1)
         self.click(self.old_approval_confirm)
-        messager_success = self.judge_js_pop_exist_visible("div[class='messager success']")
+        messager_success = self.judge_js_pop_exist_visible("div[class='messager success']",15)
         self.wait_element_disappear_messager_success()
         if messager_success is True:
             self.log.debug('--[ 单据审批成功]')
             return True
         else:
-            self.log.debug('--[ 单据审批失败]')
-            return False
+            if self.business_travel_confirm_btn is not False:
+                self.click(self.business_travel_confirm_btn)
+                messager_success = self.judge_js_pop_exist_visible("div[class='messager success']")
+                if messager_success is True:
+                    self.log.debug('--[ 单据审批成功]')
+                    return True
+                else:
+                    self.log.debug('--[ 单据审批失败]')
+                    return False
+            else:
+                self.log.debug('--[ 单据审批失败]')
+                return False
     # 审批加审单子
     def add_approval_old_agree(self):
         time.sleep(1)
@@ -438,6 +452,7 @@ class ApprovalPage(BillPage):
         # 点击搜索按钮
         self.click(self.list_keyword_search)
         time.sleep(1)
+        self.wait_element_disappear_data_load()
         flag = self.list_find_review_loan_bill_flag
         lab = self.list_to_review_loan_bills
         if flag is not False:
@@ -458,6 +473,7 @@ class ApprovalPage(BillPage):
         ActionChains(self.driver).move_to_element(self.cashier).perform()
         self.click(self.payment)
         time.sleep(1)
+
     # 出纳付款等待付款列表,找到借款单
     def __find_payment(self,bill_type):
         time.sleep(1)
@@ -542,18 +558,24 @@ class ApprovalPage(BillPage):
         time.sleep(2)
         # 切到审批的单据中
         self.wait_element_disappear_data_load()
-        self.driver.switch_to_frame(self.get_new_main_frame)
-        time.sleep(1)
-        if self.new_bill_number is not False:
-            if self.bill_number == self.new_bill_number.text:
-                self.log.debug('--[ 单据查找正确]')
-                return True
+        try:
+            self.driver.switch_to_frame(self.get_new_main_frame)
+            time.sleep(1)
+            if self.new_bill_number is not False:
+                if self.bill_number == self.new_bill_number.text:
+                    self.log.debug('--[ 单据查找正确]')
+                    return True
+                else:
+                    self.log.debug('--[ 单据查找错误]')
+                    return False
             else:
-                self.log.debug('--[ 单据查找错误]')
+                self.log.debug('--[ 单据查找不到]')
                 return False
-        else:
+        except Exception as e:
+            self.log.error('--[错误信息是：'+ e +']')
             self.log.debug('--[ 单据查找不到]')
             return False
+
 
     # 进入我的审批列表，找到单据，判断
     def enter_list_find_new_bill(self):
@@ -586,7 +608,7 @@ class ApprovalPage(BillPage):
         time.sleep(1)
         # 判断下一个审批人是否正确，断言  get_attribute('textContent')
         if self.new_approval_input is not False and self.new_approval_input.text != '':
-            if appro_person in self.new_approval_input.text:
+            if appro_person == self.new_approval_input.text:
                 self.log.debug('--[ 下一个环节审批领导带出正确]')
                 return True
             else:
@@ -667,7 +689,7 @@ class ApprovalPage(BillPage):
         time.sleep(1)
         # 点击搜索按钮
         self.click(self.list_keyword_search)
-        time.sleep(1)
+        self.wait_element_disappear_data_load()
         flag = self.list_find_review_reimbursement_bill_flag
         lab = self.list_to_review_reimbursement_bills
         if flag is not False:

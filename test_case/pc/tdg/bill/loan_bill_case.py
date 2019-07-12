@@ -22,7 +22,7 @@ class LoanCase(unittest.TestCase):
         self.appro_page.log.info('--[切换企业ok,登录ok]')
 
     def test_loan_process1(self):
-        u"""借款申请单-业务-会计-财务经理-出纳"""
+        u"""借款申请单-业务-直属领导-会计-财务经理-出纳"""
         self.appro_page.log.info('--[进入借款申请单-填写借款申请单-断言]')
         self.result = self.appro_page.enter_fill_loan_bill()
         self.assertTrue(self.result, '进入借款申请单-填写借款申请单-断言失败')
@@ -39,12 +39,31 @@ class LoanCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导审批状态断言失败')
 
         self.appro_page.log.info('--[部门领导业务同意-断言]')
-        self.result = self.appro_page.approval_old_agree([''])
+        self.result = self.appro_page.approval_old_agree(['公司领导'])
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[部门领导业务确定-断言]')
         self.result = self.appro_page.old_apply_confirm()
         self.assertTrue(self.result, '部门领导业务审批失败')
+
+        self.appro_page.log.info('--[公司领导登录]')
+        self.appro_page.login_company_leader()
+
+        self.appro_page.log.info('--[公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_old_bill()
+        self.assertTrue(self.result, '公司领导查找单据断言失败')
+
+        self.appro_page.log.info('--[公司领导审批状态-断言]')
+        self.result = self.appro_page.judge_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导审批状态断言失败')
+
+        self.appro_page.log.info('--[公司领导业务同意-断言]')
+        self.result = self.appro_page.approval_old_agree([''])
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[公司领导业务确定-断言]')
+        self.result = self.appro_page.old_apply_confirm()
+        self.assertTrue(self.result, '公司领导业务审批失败')
 
         self.appro_page.log.info('--[会计登录]')
         self.appro_page.login_accounting()
@@ -100,7 +119,7 @@ class LoanCase(unittest.TestCase):
         self.assertTrue(self.result,'出纳支付失败')
 
     def test_loan_process2(self):
-        u"""借款申请单-业务-会计-加审领导-会计-财务经理-出纳"""
+        u"""借款申请单-业务-直属领导-会计-加审领导-会计-财务经理-出纳"""
         self.appro_page.log.info('--[进入借款申请单-填写借款申请单-断言]')
         self.result = self.appro_page.enter_fill_loan_bill()
         self.assertTrue(self.result, '进入借款申请单-填写借款申请单-断言失败')
@@ -117,12 +136,31 @@ class LoanCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导审批状态断言失败')
 
         self.appro_page.log.info('--[部门领导业务同意-断言]')
-        self.result = self.appro_page.approval_old_agree([''])
+        self.result = self.appro_page.approval_old_agree(['公司领导'])
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[部门领导业务确定-断言]')
         self.result = self.appro_page.old_apply_confirm()
         self.assertTrue(self.result, '部门领导业务审批失败')
+
+        self.appro_page.log.info('--[公司领导登录]')
+        self.appro_page.login_company_leader()
+
+        self.appro_page.log.info('--[公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_old_bill()
+        self.assertTrue(self.result, '公司领导查找单据断言失败')
+
+        self.appro_page.log.info('--[公司领导审批状态-断言]')
+        self.result = self.appro_page.judge_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导审批状态断言失败')
+
+        self.appro_page.log.info('--[公司领导业务同意-断言]')
+        self.result = self.appro_page.approval_old_agree([''])
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[公司领导业务确定-断言]')
+        self.result = self.appro_page.old_apply_confirm()
+        self.assertTrue(self.result, '公司领导业务审批失败')
 
         self.appro_page.log.info('--[会计登录]')
         self.appro_page.login_accounting()
@@ -208,7 +246,7 @@ class LoanCase(unittest.TestCase):
         self.assertTrue(self.result, '出纳支付失败')
 
     def test_loan_process3(self):
-        u"""借款申请单-业务-会计-加审领导-会计-财务经理-财务总监-出纳"""
+        u"""借款申请单-业务-直属领导--会计-加审领导-会计-财务经理-财务总监-出纳"""
         self.appro_page.log.info('--[进入借款申请单-填写借款申请单-断言]')
         self.result = self.appro_page.enter_fill_loan_bill()
         self.assertTrue(self.result, '进入借款申请单-填写借款申请单-断言失败')
@@ -225,12 +263,31 @@ class LoanCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导审批状态断言失败')
 
         self.appro_page.log.info('--[部门领导业务同意-断言]')
-        self.result = self.appro_page.approval_old_agree([''])
+        self.result = self.appro_page.approval_old_agree(['公司领导'])
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[部门领导业务确定-断言]')
         self.result = self.appro_page.old_apply_confirm()
         self.assertTrue(self.result, '部门领导业务审批失败')
+
+        self.appro_page.log.info('--[公司领导登录]')
+        self.appro_page.login_company_leader()
+
+        self.appro_page.log.info('--[公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_old_bill()
+        self.assertTrue(self.result, '公司领导查找单据断言失败')
+
+        self.appro_page.log.info('--[公司领导审批状态-断言]')
+        self.result = self.appro_page.judge_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导审批状态断言失败')
+
+        self.appro_page.log.info('--[公司领导业务同意-断言]')
+        self.result = self.appro_page.approval_old_agree([''])
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[公司领导业务确定-断言]')
+        self.result = self.appro_page.old_apply_confirm()
+        self.assertTrue(self.result, '公司领导业务审批失败')
 
         self.appro_page.log.info('--[会计登录]')
         self.appro_page.login_accounting()

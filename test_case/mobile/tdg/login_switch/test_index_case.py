@@ -9,7 +9,7 @@ from selenium import webdriver
 import os
 import time
 
-class IndexCase(unittest.TestCase):
+class TestIndexCase(unittest.TestCase):
 
     def setUp(self):
         mobile_emulation = {"deviceName": "iPhone 6/7/8"}
@@ -20,7 +20,7 @@ class IndexCase(unittest.TestCase):
         self.index_page.login_test_person()
 
     def test_index(self):
-        self.index_page.multiple_taxi_res()
+        self.index_page.create_train_bill()
 
     def tearDown(self):
         pass
