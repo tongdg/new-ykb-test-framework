@@ -21,7 +21,7 @@ class EvectionCase(unittest.TestCase):
         self.appro_page.log.info('--[切换企业ok,登录ok]')
 
     def test_evection_process1(self):
-        u"""出差申请单-两个会签-业务"""
+        u"""出差申请单-两个会签-业务（过滤）-直属领导"""
         self.appro_page.log.info('--[进入出差申请单-填写出差申请单-断言]')
         self.result = self.appro_page.enter_fill_evecation_bill('ykb-测试小组','ykb-测试项目')
         self.assertTrue(self.result, '进入出差申请单-填写出差申请单-断言失败')
@@ -77,15 +77,34 @@ class EvectionCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导审批状态断言失败')
 
         self.appro_page.log.info('--[部门领导业务同意-断言]')
-        self.result = self.appro_page.approval_old_agree([''])
+        self.result = self.appro_page.approval_old_agree(['公司领导'])
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[部门领导业务确定-断言]')
         self.result = self.appro_page.old_apply_confirm()
         self.assertTrue(self.result, '部门领导业务审批失败')
 
+        self.appro_page.log.info('--[公司领导登录]')
+        self.appro_page.login_company_leader()
+
+        self.appro_page.log.info('--[公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_old_bill()
+        self.assertTrue(self.result, '公司领导查找单据断言失败')
+
+        self.appro_page.log.info('--[公司领导审批状态-断言]')
+        self.result = self.appro_page.judge_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导审批状态断言失败')
+
+        self.appro_page.log.info('--[公司领导业务同意-断言]')
+        self.result = self.appro_page.approval_old_agree([''])
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[公司领导业务确定-断言]')
+        self.result = self.appro_page.old_apply_confirm()
+        self.assertTrue(self.result, '公司领导业务审批失败')
+
     def test_evection_process2(self):
-        u"""出差申请单-业务"""
+        u"""出差申请单-业务-直属领导"""
         self.appro_page.log.info('--[进入出差申请单-填写出差申请单-断言]')
         self.result = self.appro_page.enter_fill_evecation_bill()
         self.assertTrue(self.result, '进入出差申请单-填写出差申请单-断言失败')
@@ -102,15 +121,34 @@ class EvectionCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导审批状态断言失败')
 
         self.appro_page.log.info('--[部门领导业务同意-断言]')
-        self.result = self.appro_page.approval_old_agree([''])
+        self.result = self.appro_page.approval_old_agree(['公司领导'])
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[部门领导业务确定-断言]')
         self.result = self.appro_page.old_apply_confirm()
         self.assertTrue(self.result, '部门领导业务审批失败')
 
+        self.appro_page.log.info('--[公司领导登录]')
+        self.appro_page.login_company_leader()
+
+        self.appro_page.log.info('--[公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_old_bill()
+        self.assertTrue(self.result, '公司领导查找单据断言失败')
+
+        self.appro_page.log.info('--[公司领导审批状态-断言]')
+        self.result = self.appro_page.judge_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导审批状态断言失败')
+
+        self.appro_page.log.info('--[公司领导业务同意-断言]')
+        self.result = self.appro_page.approval_old_agree([''])
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[公司领导业务确定-断言]')
+        self.result = self.appro_page.old_apply_confirm()
+        self.assertTrue(self.result, '公司领导业务审批失败')
+
     def test_evection_process3(self):
-        u"""出差申请单-部门带出会签-业务"""
+        u"""出差申请单-部门带出会签-业务（过滤）-直属领导"""
         self.appro_page.log.info('--[进入出差申请单-填写出差申请单-断言]')
         self.result = self.appro_page.enter_fill_evecation_bill(department='ykb-测试小组')
         self.assertTrue(self.result, '进入出差申请单-填写出差申请单-断言失败')
@@ -147,15 +185,34 @@ class EvectionCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导审批状态断言失败')
 
         self.appro_page.log.info('--[部门领导业务同意-断言]')
-        self.result = self.appro_page.approval_old_agree([''])
+        self.result = self.appro_page.approval_old_agree(['公司领导'])
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[部门领导业务确定-断言]')
         self.result = self.appro_page.old_apply_confirm()
         self.assertTrue(self.result, '部门领导业务审批失败')
 
+        self.appro_page.log.info('--[公司领导登录]')
+        self.appro_page.login_company_leader()
+
+        self.appro_page.log.info('--[公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_old_bill()
+        self.assertTrue(self.result, '公司领导查找单据断言失败')
+
+        self.appro_page.log.info('--[公司领导审批状态-断言]')
+        self.result = self.appro_page.judge_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导审批状态断言失败')
+
+        self.appro_page.log.info('--[公司领导业务同意-断言]')
+        self.result = self.appro_page.approval_old_agree([''])
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[公司领导业务确定-断言]')
+        self.result = self.appro_page.old_apply_confirm()
+        self.assertTrue(self.result, '公司领导业务审批失败')
+
     def test_evection_process4(self):
-        u"""出差申请单-项目带出会签-业务"""
+        u"""出差申请单-项目带出会签-业务-直属领导"""
         self.appro_page.log.info('--[进入出差申请单-填写出差申请单-断言]')
         self.evecation_result = self.appro_page.enter_fill_evecation_bill(project='ykb-测试项目')
         self.assertTrue(self.evecation_result, '进入出差申请单-填写出差申请单-断言失败')
@@ -192,12 +249,31 @@ class EvectionCase(unittest.TestCase):
         self.assertTrue(self.result, '部门领导审批状态断言失败')
 
         self.appro_page.log.info('--[部门领导业务同意-断言]')
-        self.result = self.appro_page.approval_old_agree([''])
+        self.result = self.appro_page.approval_old_agree(['公司领导'])
         self.assertTrue(self.result, '下一个环节审批领导断言失败')
 
         self.appro_page.log.info('--[部门领导业务确定-断言]')
         self.result = self.appro_page.old_apply_confirm()
         self.assertTrue(self.result, '部门领导业务审批失败')
+
+        self.appro_page.log.info('--[公司领导登录]')
+        self.appro_page.login_company_leader()
+
+        self.appro_page.log.info('--[公司领导查找单据-断言]')
+        self.result = self.appro_page.enter_list_find_old_bill()
+        self.assertTrue(self.result, '公司领导查找单据断言失败')
+
+        self.appro_page.log.info('--[公司领导审批状态-断言]')
+        self.result = self.appro_page.judge_approval_process('审批中')
+        self.assertTrue(self.result, '公司领导审批状态断言失败')
+
+        self.appro_page.log.info('--[公司领导业务同意-断言]')
+        self.result = self.appro_page.approval_old_agree([''])
+        self.assertTrue(self.result, '下一个环节审批领导断言失败')
+
+        self.appro_page.log.info('--[公司领导业务确定-断言]')
+        self.result = self.appro_page.old_apply_confirm()
+        self.assertTrue(self.result, '公司领导业务审批失败')
 
     def tearDown(self):
         # self.appro_page.driver.quit()
