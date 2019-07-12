@@ -21,24 +21,22 @@ class AddInstPersonCase(unittest.TestCase):
         self.organ_page.enter_organization_institution()
         time.sleep(1)
         #根目录添加机构
-        self.organ_page.add_institution_methond()
+        self.organ_page.add_institution_method()
         time.sleep(1)
         # 查找根目录添加的机构点击添加机构
         self.organ_page.find_institution_add_what('添加机构')
         time.sleep(1)
         # 子目录添加机构
-        self.organ_page.add_institutions_methond()
+        self.organ_page.add_institutions_method()
         time.sleep(1)
         # 查找根目录添加的机构点击添加人员
         self.organ_page.find_institutions_add_what('添加人员')
         time.sleep(1)
         #子目录添加人员
-        self.result = self.organ_page.add_person_methond()
+        self.result = self.organ_page.add_person_method()
         self.assertTrue(self.result, '【断言】添加人员报错')
         time.sleep(1)
-        # 查找根目录添加的机构点击添加人员
-        self.organ_page.find_institutions_update_what('修改上级部门')
-        time.sleep(1)
+
 
     def tearDown(self):
         pass
