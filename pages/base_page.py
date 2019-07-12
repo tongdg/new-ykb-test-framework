@@ -162,8 +162,8 @@ class BasePage(object):
     def page_source(self):
         return self.driver.page_source
 
-    def find_element_by_xpath(self):
-        return self.driver.find_element_by_xpath()
+    def find_element_by_xpath(self,xpath):
+        return self.driver.find_element_by_xpath(xpath)
 
     def find_elements_by_xpath(self,Businese):
         return self.driver.find_elements_by_xpath(Businese)

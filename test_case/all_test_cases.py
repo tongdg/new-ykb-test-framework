@@ -203,7 +203,7 @@ if __name__ == '__main__':
     # suite = create_test_suite(author='zfk')[0]
     # for s in suite:
     #     print(s)
-    suite = create_test_suite()[0]
+    suite = create_test_suite(author='zfk')[0]
     for s in suite:
         print(s)
     # 获取指定的测试用例

@@ -5,7 +5,7 @@ import unittest
 from selenium import webdriver
 import time
 
-from pages.mobile_pages.zfk_bills_page.zfk_bills_MyBills import zfk_bills_MyBills
+from pages.mobile_pages.zfk_bills_MyBills import zfk_bills_MyBills
 from pages.mobile_pages.zfk_mobile_index_page import zfk_Mobile_index_page
 class zfk_mobile_index_case(unittest.TestCase):
     def setUp(self):

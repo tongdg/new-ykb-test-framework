@@ -1,6 +1,4 @@
-import sys
 import time
-import self as self
 from pages.mobile_pages.zfk_mobile_login_Page import Mobile_login_page
 class zfk_Mobile_index_page(Mobile_login_page):
     #首页需定位的元素
@@ -17,7 +15,6 @@ class zfk_Mobile_index_page(Mobile_login_page):
     #订单      Idex_indent
     #更多      Index_more
     #返回      Index_back
-
     #未报销
     def UnReimbursement(self):
         time.sleep(3)
@@ -84,7 +81,6 @@ class zfk_Mobile_index_page(Mobile_login_page):
             time.sleep(2)
             self.log.info("首页-待还欠款-地址错误")
             return False
-
     #记一笔
     def Remember_whit(self):
         time.sleep(3)
@@ -107,7 +103,6 @@ class zfk_Mobile_index_page(Mobile_login_page):
             time.sleep(2)
             self.log.info("首页-记一笔-地址错误")
             return False
-
     #我要制单
     def Make_order(self):
         time.sleep(3)
@@ -122,7 +117,84 @@ class zfk_Mobile_index_page(Mobile_login_page):
         if MakeOrderText.text=="我要制单":
             time.sleep(2)
             self.log.info("首页-我要制单-跳转成功")
-            return True
+            time.sleep(2)
+            self.log.info("首页-我要制单-二级页面跳转开始-费用报销单")
+            time.sleep(2)
+            #费用报销单
+            self.click(self.find_element_by_css_ykb("#guo > div.main.scroller.main1 > div > div:nth-child(2)"))
+            time.sleep(2)
+            cost_url=self.current_url()
+            cost_true_url="static/expenses/ReiFormNew.html"
+            if cost_true_url in cost_url:
+                self.log.info("首页-我要制单-费用报销单跳转成功")
+                time.sleep(3)
+                self.click(self.find_element_by_css_ykb("#app > div > div.mui-navbar > div > button > span"))
+                time.sleep(1)
+            else:
+                err_cost_url=self.current_url()
+                print("首页-我要制单-费用报销单跳转失败-错误地址为"+err_cost_url)
+
+            #差旅报销单
+            self.log.info("首页-我要制单-二级页面跳转开始-差旅报销单")
+            self.click(self.find_element_by_css_ykb("#guo > div.main.scroller.main1 > div > div:nth-child(3)"))
+            time.sleep(2)
+            travel_url = self.current_url()
+            travel_true_url = "static/expenses/TraFormNew.html"
+            if travel_true_url in travel_url:
+                self.log.info("首页-我要制单-差旅报销单跳转成功")
+                time.sleep(3)
+                self.click(self.find_element_by_css_ykb("#app > div > div.mui-navbar > div > button > span"))
+                time.sleep(1)
+            else:
+                err_cost_url = self.current_url()
+                print("首页-我要制单-差旅报销单跳转失败-错误地址为" + err_cost_url)
+
+            #借款申请单
+            self.log.info("首页-我要制单-二级页面跳转开始-借款申请单")
+            self.click(self.find_element_by_css_ykb("#guo > div.main.scroller.main1 > div > div:nth-child(5)"))
+            time.sleep(2)
+            borrow_url = self.current_url()
+            borrow_true_url = "LoanApplication"
+            if borrow_true_url in borrow_url:
+                self.log.info("首页-我要制单-借款申请单跳转成功")
+                time.sleep(3)
+                self.click(self.find_element_by_css_ykb("#spBack > a"))
+                time.sleep(1)
+            else:
+                err_borrow_url = self.current_url()
+                print("首页-我要制单-借款申单跳转失败-错误地址为" + err_borrow_url)
+
+            #出差申请单
+            self.log.info("首页-我要制单-二级页面跳转开始-出差申请单")
+            self.click(self.find_element_by_css_ykb("#guo > div.main.scroller.main1 > div > div:nth-child(6)"))
+            time.sleep(2)
+            evection_url = self.current_url()
+            evection_true_url = "FeeBelong/Apply"
+            if evection_true_url in evection_url:
+                self.log.info("首页-我要制单-出差申请单跳转成功")
+                time.sleep(3)
+                self.click(self.find_element_by_css_ykb("#spBack > span"))
+                time.sleep(1)
+            else:
+                err_borrow_url = self.current_url()
+                print("首页-我要制单-借款申请单单跳转失败-错误地址为" + err_borrow_url)
+
+            #采购申请单
+            self.log.info("首页-我要制单-二级页面跳转开始-采购申请单")
+            self.click(self.find_element_by_css_ykb("#guo > div.main.scroller.main1 > div > div:nth-child(7)"))
+            time.sleep(2)
+            shop_url = self.current_url()
+            shop_true_url = "static/expenses/PurFormNew.html"
+            if shop_true_url in shop_url:
+                self.log.info("首页-我要制单-采购申请单跳转成功")
+                time.sleep(2)
+                self.click(self.find_element_by_css_ykb("#app > div > div.mui-navbar > div > button > span"))
+                time.sleep(2)
+                self.click(self.find_element_by_css_ykb("#vbody > div.mui-popup.mui-popup-in > div.mui-popup-buttons > span.mui-popup-button.mui-popup-button-bold"))
+                time.sleep(1)
+            else:
+                shop_url = self.current_url()
+                print("首页-我要制单-借款申请单单跳转失败-错误地址为" + shop_url)
         else:
             time.sleep(2)
             self.log.info("首页-我要制单-跳转失败")
@@ -147,7 +219,6 @@ class zfk_Mobile_index_page(Mobile_login_page):
             self.log.info("首页-我要制单-跳转失败")
             return False
     #商旅预定
-    #这里包含机酒火的页面跳转
     def Travel_booking(self):
         time.sleep(3)
         # 进入商旅预定
@@ -232,8 +303,6 @@ class zfk_Mobile_index_page(Mobile_login_page):
             time.sleep(2)
             self.log.info("首页“”-商城采购-跳转失败")
             return False
-
-    #功能入口待删除
     #出行用车
     def Travel_car(self):
         time.sleep(3)

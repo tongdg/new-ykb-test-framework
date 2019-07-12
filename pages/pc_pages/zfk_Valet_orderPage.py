@@ -23,7 +23,7 @@ class Valet_orderPage(Login_HouTaiPage):
 
      #取出数组内对应字段的下标替换css样式内的child内的数字即可定位到正确的企业
     def Check_BusinessName(self):
-        get_business="童小郭注册测试企业"
+        get_business="童小郭注册企业"
         get_business_All=self.find_elements_by_xpath('//*[@id="dataTableBody"]/tr/td[4]')
         #获取所有企业名称
         lists=[]

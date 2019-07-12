@@ -21,7 +21,7 @@ class zfk_mobile_LoginCase(unittest.TestCase):
         MobileUrl=self.zfk_mobile_login_Page.Get_mobile_url()
         # 访问云快报移动端首页
         driver.get(MobileUrl)
-        time.sleep(5000)
+        time.sleep(10)
     def tearDown(self):
         pass
 if __name__=="__main__":
