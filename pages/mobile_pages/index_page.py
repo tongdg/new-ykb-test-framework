@@ -7,10 +7,12 @@ from pages.mobile_pages.login_page import LoginPage
 import time
 
 class IndexPage(LoginPage):
+
     # 未报销入口
     @property
     def no_res(self):
         return self.find_elements_by_class_name_ykb('ykb_banner_item')[0]
+
     # 记一笔入口
     @property
     def write_a_pen(self):
@@ -21,41 +23,170 @@ class IndexPage(LoginPage):
     def taxi(self):
         return self.find_element_by_id_ykb('taxiIcon')
 
-    # 进入记一笔
-    def enter_write_a_pen(self):
-        self.click(self.no_res)
-    # 创建打车消费记录
-    def create_taxi_res(self):
-        time.sleep(2)
-        self.click(self.write_a_pen)
-        js = "document.getElementById('taxiIcon').style.display='block';"
-        self.driver.execute_script(js)
-        print(self.taxi.is_displayed())
-        self.wait_element_disappear_false('#taxiIcon')
-        self.click(self.taxi)
-        time.sleep(2)
-        self.click(self.find_element_by_css_ykb("span[class='span-lab cellInfo rzrqsj ca9']"))
-        time.sleep(1)
-        self.click(self.find_element_by_css_ykb("li[class='dl jr cur']"))
-        time.sleep(1)
-        self.send_keys(self.find_element_by_id_ykb('fromPlace'),'111')
-        time.sleep(1)
-        self.send_keys(self.find_element_by_id_ykb('toPlace'),'222')
-        time.sleep(1)
-        self.click(self.find_elements_by_class_name_ykb('c9')[0])
-        time.sleep(1)
-        self.click(self.find_element_by_css_ykb('#keybord > span:nth-child(1)'))
-        time.sleep(1)
-        self.click(self.find_element_by_id_ykb('submitNumCal'))
-        time.sleep(1)
-        self.click(self.find_element_by_css_ykb('#setting > div.mui-bar.mui-bar-tab.ab > button.mui-btn.themebgStyle.themeBtn17ab'))
-        time.sleep(2)
+    # 商旅预定
+    @property
+    def business_travel_reservation(self):
+        return self.find_elements_by_class_name_ykb('ykb_main_item')[3]
 
-    # 创建多笔消费记录
-    def multiple_taxi_res(self):
-        self.enter_write_a_pen()
-        while True:
-            self.create_taxi_res()
+    # 火车
+    @property
+    def train(self):
+        return self.find_element_by_css_ykb("div[class='rows_link rows_nobd icon_on']")
+
+    # 出发地
+    @property
+    def train_from_city(self):
+        return self.find_element_by_class_name_ykb('departure-city',20)
+    # 搜索城市框
+    @property
+    def train_query_city(self):
+        return self.find_element_by_name_ykb('search')
+    # 选择第一个城市
+    @property
+    def train_choose_first_city(self):
+        return self.find_elements_by_class_name_ykb('city-list')[0]
+    # 目的地
+    @property
+    def train_to_city(self):
+        return self.find_element_by_class_name_ykb('arrival-city')
+
+    # 出行日期   #container > div.index-content > button
+    @property
+    def train_time(self):
+        return self.find_element_by_class_name_ykb('gather')
+
+    # 选择出行日期
+    @property
+    def train_choose_time(self):
+        return self.find_element_by_css_ykb("span[class='active single']")
+
+    # 查询按钮
+    @property
+    def train_query_btn(self):
+        return self.find_element_by_css_ykb('#container > div.index-content > button')
+
+    # 等待数据加载loding
+    def wait_train_data_loding(self):
+        return self.wait_element_disappear_true("div[class='mint-indicator-mask']")
+
+    # 选择所有车次
+    @property
+    def train_choose_all_data(self):
+        return self.find_element_by_css_ykb("a[class='mint-tab-item is-selected']")
+
+    # 所有车次数据列表
+    @property
+    def train_all_data_list(self):
+        return self.find_element_by_hierarchy(
+            lambda var : self.driver.find_element_by_css_selector("div[class='train-list-box']").find_elements_by_tag_name('li')
+        )
+
+    # 坐席列表
+    @property
+    def train_seating_list(self):
+        return self.find_element_by_hierarchy(
+            lambda var : self.driver.find_element_by_class_name('seating-list').find_elements_by_class_name('list')
+        )
+
+    # 提交
+    @property
+    def train_submit(self):
+        return self.find_element_by_css_ykb("span[class='booking']")
+
+    # 创建含有火车票的出差申请单，保存
+    def create_train_bill(self):
+        time.sleep(1)
+        self.click(self.business_travel_reservation)
+        time.sleep(1)
+        self.click(self.train)
+        self.click(self.train_from_city)
+        time.sleep(1)
+        self.send_keys(self.train_query_city, '北京')
+        time.sleep(1)
+        self.click(self.train_choose_first_city)
+        time.sleep(1)
+        self.click(self.train_to_city)
+        time.sleep(1)
+        self.train_query_city.clear()
+        self.send_keys(self.train_query_city, '上海')
+        time.sleep(1)
+        self.click(self.train_choose_first_city)
+        time.sleep(1)
+        self.click(self.train_query_btn)
+        self.wait_train_data_loding()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
