@@ -187,7 +187,8 @@ class BasePage(object):
         return self.driver.back()
     def implicitly_wait(self):
         return self.driver.implicitly_wait()
-
+    def close(self):
+        return self.driver.close()
 
     def quit_chrom(self):
         return self.driver.quit()

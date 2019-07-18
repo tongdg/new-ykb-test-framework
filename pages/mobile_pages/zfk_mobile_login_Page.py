@@ -21,8 +21,12 @@ class Mobile_login_page(Login_HouTaiPage):
     def Valet_order_btnSearchUserInfo(self):
         return self.find_element_by_id_ykb("btnSearchUserInfo")
 
+    def a(self):
+        self.send_keys(self.find_element_by_id_ykb("txtKewWords"),'1123123')
+
      #取出数组内对应字段的下标替换css样式内的child内的数字即可定位到正确的企业
     def Check_BusinessName(self):
+        time.sleep(2)
         get_business="童小郭注册测试企业"
         get_business_All=self.find_elements_by_xpath('//*[@id="dataTableBody"]/tr/td[4]')
         #获取所有企业名称
@@ -43,14 +47,15 @@ class Mobile_login_page(Login_HouTaiPage):
            sys.exit(0)
     # -------------------------------------Cut-Off Rule-----------------------------------------------------------
    #这里可以传入手机号及企业名称 后继的审批流程可在这里调用，这里拓展性很强
-    def Chionce_enterprise(self):
+    #上帝视角-131484129351-张穷恺
+    def Chionce_Login_role(self):
         handle=self.current_window_handle()
         print("代客下单句柄:"+str(handle))
         self.driver.get(zfk_config.valet_orderUrl())
         time.sleep(2)
         self.send_keys(self.Valet_order_SearchText,'13148129351')
+        time.sleep(1)
         self.click(self.Valet_order_btnSearchUserInfo)
-        time.sleep(2)
         #进入筛选后的企业里
         self.Check_BusinessName()
         handle = self.current_window_handle()
@@ -61,11 +66,46 @@ class Mobile_login_page(Login_HouTaiPage):
             if handle != handles:
                self.driver.switch_to.window(handle)
         time.sleep(3)
-        # self.click(self.find_element_by_css_ykb(""
-        #                                         "#guo > div.main.scroller > div > div.ykb_content > div.ykb_main_content > div.ykb_main > p:nth-child(2)"
-        #                                         )
-        #            )
-        # time.sleep(3)
+
+    #普通员工
+    def Chionce_Login_staff(self):
+        handle = self.current_window_handle()
+        print("代客下单句柄:" + str(handle))
+        self.driver.get(zfk_config.valet_orderUrl())
+        time.sleep(2)
+        self.send_keys(self.Valet_order_SearchText,'15353032451')
+        time.sleep(1)
+        self.click(self.Valet_order_btnSearchUserInfo)
+        # 进入筛选后的企业里
+        self.Check_BusinessName()
+        handle = self.current_window_handle()
+        handles = self.window_handles()
+        print("云快报移动端-首页句柄" + handle)
+        print(handles)
+        for handle in handles:
+            if handle != handles:
+                self.driver.switch_to.window(handle)
+        time.sleep(3)
+    #项目经理
+    def Chionce_Login_staff1(self):
+        handle = self.current_window_handle()
+        print("代客下单句柄:" + str(handle))
+        self.driver.get(zfk_config.valet_orderUrl())
+        time.sleep(2)
+        self.send_keys(self.Valet_order_SearchText, '13148129351')
+        time.sleep(1)
+        self.click(self.Valet_order_btnSearchUserInfo)
+        # 进入筛选后的企业里
+        self.Check_BusinessName()
+        handle = self.current_window_handle()
+        handles = self.window_handles()
+        print("云快报移动端-首页句柄" + handle)
+        print(handles)
+        for handle in handles:
+            if handle != handles:
+                self.driver.switch_to.window(handle)
+        time.sleep(3)
+
     #获取手机端的的URL
     def Get_mobile_url(self):
          # 获取手机端的 url
@@ -73,9 +113,8 @@ class Mobile_login_page(Login_HouTaiPage):
          Mobile_url1 = "Public/index.html"
          Mobile_url2 = "Mine/WechatIndex"
          if Mobile_url1 in Mobile_url:
-           Test=Mobile_url.replace(Mobile_url1,Mobile_url2)
-           print(Test)
-           return Test
+           mobile_url=Mobile_url.replace(Mobile_url1,Mobile_url2)
+           return mobile_url
 
 
 
