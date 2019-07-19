@@ -20,12 +20,13 @@ class zfk_mobile_makeorder_case(unittest.TestCase):
         self.driver.get(MobileUrl)
         time.sleep(3)
     def test_makeorder_case(self):
+        self.zfk_makeOrder_page.Make_Evection_order_plan()
+
+        self.zfk_makeOrder_page.Make_Evection_order_train()
+
         self.zfk_makeOrder_page.Make_Evection_order_hotel()
     def tearDown(self):
         pass
 if __name__=="__main__":
     unittest.main()
-# //*[@id="ticketList"]/li[1]/div/div[2]/div[4]/div/div[2]
-# #ticketList > li:nth-child(1) > div > div.f8f8 > div:nth-child(4) > div > div.abtn.bookticket
-# //*[@id="ticketList"]/li[2]/div/div[2]/div[1]/div/div[2]
 
