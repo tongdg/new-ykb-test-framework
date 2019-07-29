@@ -271,7 +271,6 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
         self.click(self.find_element_by_css_ykb("#keybord > span:nth-child(7)"))
         time.sleep(1)
         self.click(self.find_element_by_css_ykb("#submitNumCal"))
-
     #其他
     def Onther(self):
         time.sleep(1)
@@ -422,82 +421,63 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
 
 
 
-    def test(self):
-        #细化删除及提单判断,跟据下标判断元素是否被删除掉
-        # a=self.find_elements_by_xpath('//*[@id="record_list"]/div/dd')
-        order_num = self.find_elements_by_xpath('//*[@id="record_list"]/div/dd/div/div[2]/span[2]')
-        print(len(order_num))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#提交-单笔提交，多笔提交（差旅报销单）
-    def UnReim_Remember_whit_Submit_Travel(self):
-        # 判断消费列表是否为空
-        Record_list = self.find_element_by_css_ykb("#record_list > div > dd", 3)
-        # 若找到返回的值肯定是True
-        if Record_list is not False:
-            #全选提交
-            time.sleep(2)
-            self.All_Submit_travel()
-            print("“未报销”“-消费记录列表：全选提交至差旅报销单成功")
-            self.circulation_list()
-            time.sleep(3)
-            self.UnReimbursement()
-            time.sleep(2)
-            self.Only_submit_travel()
-            print("未报销-消费记录-单笔提单至差旅报销单成功")
-        else:
-            self.circulation_list()
-            # 全选提交
-            time.sleep(3)
-            self.All_Submit_travel()
-            print("“未报销”“-消费记录列表：全选提交至差旅报销单成功")
-            self.circulation_list()
-            # 提交单笔消费记录
-            self.Only_submit_travel()
-            print("未报销-消费记录-单笔提单至差旅报销单成功")
-
-# 提交-单笔提交，多笔提交（费用报销单）
-    def UnReim_Remember_whit_Submit_Cost(self):
-         # 判断消费列表是否为空
-         Record_list = self.find_element_by_css_ykb("#record_list > div > dd", 3)
-         # 若找到返回的值肯定是True
-         if Record_list is not False:
-             #全选提交
-             time.sleep(2)
-             self.All_Submit_cost()
-             print("未报销-消费记录列表：全选提交至费用报销单成功")
-             time.sleep(3)
-             self.circulation_list()
-             time.sleep(5)
-             self.UnReimbursement()
-             time.sleep(5)
-             self.Only_Submit_cost()
-             print("未报销-消费记录-单笔提单至费用报销单成功")
-             time.sleep(3)
-         else:
-             # 全选提交
-             time.sleep(3)
-             self.circulation_list()
-             self.All_Submit_cost()
-             print("“未报销”“-消费记录列表：全选提交至费用报销单成功")
-             self.circulation_list()
-             self.UnReimbursement()
-             # 删除新建的单笔消费记录
-             self.Only_Submit_cost()
-             print("未报销-消费记录-单笔提单至费用报销单成功")
-             time.sleep(3)
+# #提交-单笔提交，多笔提交（差旅报销单）
+#     def UnReim_Remember_whit_Submit_Travel(self):
+#         # 判断消费列表是否为空
+#         Record_list = self.find_element_by_css_ykb("#record_list > div > dd", 3)
+#         # 若找到返回的值肯定是True
+#         if Record_list is not False:
+#             #全选提交
+#             time.sleep(2)
+#             self.All_Submit_travel()
+#             print("“未报销”“-消费记录列表：全选提交至差旅报销单成功")
+#             self.circulation_list()
+#             time.sleep(3)
+#             self.UnReimbursement()
+#             time.sleep(2)
+#             self.Only_submit_travel()
+#             print("未报销-消费记录-单笔提单至差旅报销单成功")
+#         else:
+#             self.circulation_list()
+#             # 全选提交
+#             time.sleep(3)
+#             self.All_Submit_travel()
+#             print("“未报销”“-消费记录列表：全选提交至差旅报销单成功")
+#             self.circulation_list()
+#             # 提交单笔消费记录
+#             self.Only_submit_travel()
+#             print("未报销-消费记录-单笔提单至差旅报销单成功")
+#
+# # 提交-单笔提交，多笔提交（费用报销单）
+#     def UnReim_Remember_whit_Submit_Cost(self):
+#          # 判断消费列表是否为空
+#          Record_list = self.find_element_by_css_ykb("#record_list > div > dd", 3)
+#          # 若找到返回的值肯定是True
+#          if Record_list is not False:
+#              #全选提交
+#              time.sleep(2)
+#              self.All_Submit_cost()
+#              print("未报销-消费记录列表：全选提交至费用报销单成功")
+#              time.sleep(3)
+#              self.circulation_list()
+#              time.sleep(5)
+#              self.UnReimbursement()
+#              time.sleep(5)
+#              self.Only_Submit_cost()
+#              print("未报销-消费记录-单笔提单至费用报销单成功")
+#              time.sleep(3)
+#          else:
+#              # 全选提交
+#              time.sleep(3)
+#              self.circulation_list()
+#              self.All_Submit_cost()
+#              print("“未报销”“-消费记录列表：全选提交至费用报销单成功")
+#              self.circulation_list()
+#              self.UnReimbursement()
+#              # 删除新建的单笔消费记录
+#              self.Only_Submit_cost()
+#              print("未报销-消费记录-单笔提单至费用报销单成功")
+#              time.sleep(3)
 
 
 

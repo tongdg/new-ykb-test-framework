@@ -1,7 +1,7 @@
 #该接口文件基于企业微信的移动端以及PC端流程自动化开发，这里放一些人员信息以及地址
 import datetime
-#create by ZhangFukai
-#集成后台管理
+
+
 def returnIntegrateUrl():
         return 'http://120.132.23.147:8016'
 #正式后台管理
@@ -21,22 +21,6 @@ def Travle_dictionaries():
                     }
         return receipts
 def Overall_text():
-        date=datetime.datetime.now()
-        overall_Text={'出差事由':'出差申请单测试“测试提单日期'''+ date+''}
+        date = datetime.datetime.now()
+        overall_Text = {'出差事由': '出差申请单测试“测试提单日期:' + date}
         return overall_Text
- #界面元素定位太过繁琐浪费时间，可交给ISRPA 操作 Selenium主要进行一些复杂的流程化操作
-
-
-#普通员工
-
-#项目经理
-
-#部门领导
-
-#公司领导
-
-#会计
-
-#财务经理
-
-#财务总监

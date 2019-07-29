@@ -83,8 +83,6 @@ class zfk_bills_MyBills(zfk_Mobile_index_page):
         time.sleep(5)
         self.click(self.find_element_by_css_ykb(
             "#guo > div.main.scroller > div > div.ykb_content > div > div.tab-main > div.tab-item.tabs-active > div > div.form_item_search > div.form_status_wrap > p:nth-child(1)"))
-             # guo > div.main.scroller > div > div.ykb_content > div > div.tab-main > div.tab-item.tabs-active > div > div.form_item_search > div.form_status_wrap > p:nth-child(1)
-             # guo > div.main.scroller > div > div.ykb_content > div > div.tab-main > div.tab-item.tabs-active > div > div.form_item_search > div.form_status_wrap > p:nth-child(1)
         time.sleep(3)
 
 #作废单子

@@ -7,7 +7,7 @@ class zfk_create_Unreimbursement_case(unittest.TestCase):
     def setUp(self):
         self.zfk_create_Unreimbursement = zfk_create_Unreimbursement(webdriver.Chrome())
         self.zfk_create_Unreimbursement.Login_Person()  # 登录账号
-        self.zfk_create_Unreimbursement.Chionce_enterprise()
+        self.zfk_create_Unreimbursement.Choince_Login_god()
         #这里切换成移动端模式
         options = webdriver.ChromeOptions()
         mobileEmulation = {'deviceName': 'iPhone 6 Plus'}

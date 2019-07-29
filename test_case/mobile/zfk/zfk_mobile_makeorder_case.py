@@ -8,7 +8,7 @@ class zfk_mobile_makeorder_case(unittest.TestCase):
     def setUp(self):
         self.zfk_makeOrder_page = zfk_Mobile_index_page(webdriver.Chrome())
         self.zfk_makeOrder_page.Login_Person()  # 登录账号
-        self.zfk_makeOrder_page.Chionce_Login_role()#登陆企业
+        self.zfk_makeOrder_page.Choince_Login_god()#登陆企业
         options = webdriver.ChromeOptions()
         #新开浏览器，以Mobile的格式打开
         mobileEmulation = {'deviceName': 'iPhone 6 Plus'}
@@ -19,12 +19,37 @@ class zfk_mobile_makeorder_case(unittest.TestCase):
         self.zfk_makeOrder_page= zfk_makeOrder_page(self.driver)
         self.driver.get(MobileUrl)
         time.sleep(3)
+
     def test_makeorder_case(self):
-        self.zfk_makeOrder_page.Make_Evection_order_plan()
+        self.zfk_makeOrder_page.log.info('[--首页-我要制单-出差申请单-机票预订提单--]')
+        self.Make_Evection_order_plan_result = self.zfk_makeOrder_page.Make_Evection_order_plan()
+        self.assertTrue(self.Make_Evection_order_plan_result)
 
-        self.zfk_makeOrder_page.Make_Evection_order_train()
+        self.zfk_makeOrder_page.log.info('[--首页-我要制单-出差申请单-火车预定-提单--]')
+        self.Make_Evectiosn_order_train_result=self.zfk_makeOrder_page.Make_Evection_order_train()
+        self.assertTrue(self.Make_Evectiosn_order_train_result)
 
-        self.zfk_makeOrder_page.Make_Evection_order_hotel()
+
+        self.zfk_makeOrder_page.log.info('[--首页-我要制单-出差申请单-酒店预订-提单--]')
+        self.Make_Evection_order_hotel_result=self.zfk_makeOrder_page.Make_Evection_order_hotel()
+        self.assertTrue(self.Make_Evection_order_hotel_result)
+
+
+
+
+        self.zfk_makeOrder_page.log.info('[--首页-我要制单-借款申请单-提单]')
+        self.Make_Borrowing_orde_result=self.zfk_makeOrder_page.Borrowing_order()
+        self.assertTrue(self.Make_Borrowing_orde_result)
+
+        self.zfk_makeOrder_page.log.info('[--首页-我要制单-差旅报销单-提单]')
+        self.Make_Travel_orde_result=self.zfk_makeOrder_page.Travel_order()
+        self.assertTrue(self.Make_Travel_orde_result)
+
+        self.zfk_makeOrder_page.log.info('[--首页-我要制单-费用报销单-提单]')
+        self.Make_cost_orde_result=self.zfk_makeOrder_page.cost_order()
+        self.assertTrue(self.Make_cost_orde_result)
+
+
     def tearDown(self):
         pass
 if __name__=="__main__":

@@ -11,7 +11,7 @@ class zfk_mobile_index_case(unittest.TestCase):
     def setUp(self):
         self.zfk_mobile_index_Page = zfk_Mobile_index_page(webdriver.Chrome())
         self.zfk_mobile_index_Page.Login_Person()  # 登录账号
-        self.zfk_mobile_index_Page.Chionce_enterprise()#登陆企业
+        self.zfk_mobile_index_Page.Chionce_Login_role()#登陆企业
         options = webdriver.ChromeOptions()
         #新开浏览器，以Mobile的格式打开
         mobileEmulation = {'deviceName': 'iPhone 6 Plus'}
