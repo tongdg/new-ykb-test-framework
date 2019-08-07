@@ -13,44 +13,44 @@ class OrganizationInstitution(IndexPage):
         组织机构设置页面
     '''
 
-    #组织机构——设置
+    # 组织机构——设置
     @property
     def organization_institution(self):
         return self.find_element_by_class_name_ykb('zzjg_btn')
-    #根目录
+    # 根目录
     @property
     def edit_btn(self):
         return self.find_element_by_class_name_ykb('text')
-    #添加机构
+    # 添加机构
     @property
     def add_institution(self):
         return self.find_element_by_class_name_ykb('actionitem')
-    #机构名称
+    # 机构名称
     @property
     def institution_name(self):
         return self.find_element_by_css_ykb('#depModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(2) > input')
-    #机构编码
+    # 机构编码
     @property
     def institution_code(self):
         return self.find_element_by_css_ykb('#depModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(3) > input')
-    #机构负责人
-    #下拉按钮
+    # 机构负责人
+    # 下拉按钮
     @property
     def institution_person(self):
         return self.find_element_by_css_ykb('#s2id_autogen3 > a > span.select2-arrow > b')
-    #搜索机构负责人
+    # 搜索机构负责人
     @property
     def institution_person_text(self):
         return  self.find_element_by_class_name_ykb('select2-focused')
-    #选机构负责人
+    # 选机构负责人
     @property
     def institution_person_sel(self):
         return self.find_element_by_class_name_ykb('select2-match')
-    #确定按钮
+    # 确定按钮
     @property
     def submit_btn(self):
         return self.find_element_by_css_ykb('#depModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm')
-    #子目录
+    # 子目录
     @property
     def subdirectory_btn(self):
         return self.find_element_by_css_ykb('#treeDim > li > ul > li:nth-child(3) > div > span.text')
@@ -58,69 +58,69 @@ class OrganizationInstitution(IndexPage):
     @property
     def add_institution1(self):
         return self.find_element_by_css_ykb('#treeDim > li > ul > li:nth-child(3) > div > div > div:nth-child(2)')
-    #随机数
+    # 随机数
     @property
     def random_num(self):
         return str(random.randint(1,10000))
-    #姓名
+    # 姓名
     @property
     def add_name(self):
         return self.find_element_by_name_ykb('name')
-    #性别——男
+    # 性别——男
     @property
     def add_sex(self):
         return self.find_element_by_css_ykb('#userModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(3) > span.text-wrap > label:nth-child(1)')
-    #性别——女
+    # 性别——女
     @property
     def add_sex1(self):
         return self.find_element_by_css_ykb('#userModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(3) > span.text-wrap > label:nth-child(2)')
-    #手机号
+    # 手机号
     @property
     def add_tel(self):
         return self.find_element_by_css_ykb('#userModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(4) > input')
-    #手机号随机数
+    # 手机号随机数
     @property
     def random_telnum(self):
         return str(random.randint(100000000, 999999999))
-    #员工编号
+    # 员工编号
     @property
     def add_code(self):
         return self.find_element_by_css_ykb('#userModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(5) > input')
-    #直属领导
-    #下拉框
+    # 直属领导
+    # 下拉框
     @property
     def direct_leader(self):
         return self.find_element_by_css_ykb('#userModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(6) > input')
-    #选直属领导
+    # 选直属领导
     @property
     def sel_direct_leader(self):
         return self.find_element_by_css_ykb('#e7ccplugincombobox_AZ > ul > li > div > ul > li > span > a')
-    #职级
+    # 职级
     @property
     def rank_text(self):
         return self.find_element_by_css_ykb('#userModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(7) > input')
 
-    #部门领导
+    # 部门领导
     @property
     def department_head(self):
         return self.find_element_by_id_ykb('select2-result-label-195')
-    #会计
+    # 会计
     @property
     def sel_accounting(self):
         return self.find_element_by_id_ykb('select2-result-label-197')
-    #出纳
+    # 出纳
     @property
     def sel_cashier(self):
         return self.find_element_by_id_ykb('select2-result-label-200')
-    #岗位
+    # 岗位
     @property
     def post_text(self):
         return self.find_element_by_css_ykb('#userModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(9) > input')
-    #邮箱
+    # 邮箱
     @property
     def email_text(self):
         return self.find_element_by_css_ykb('#userModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(10) > input')
-    #确认按钮
+    # 确认按钮
     @property
     def submit_btn1(self):
         return self.find_element_by_css_ykb('#userModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm')
@@ -141,33 +141,62 @@ class OrganizationInstitution(IndexPage):
     @property
     def add_user_name(self):
         return self.find_element_by_class_name_ykb('user-name')
-    #上级部门
+    # 上级部门
     @property
     def superior_department(self):
         return self.find_element_by_css_ykb('#cpModal > div > div > div.confirmnew-modal-body.modal-body > div > div:nth-child(2) > input')
-    #上级部门——管理团队
+    # 上级部门——管理团队
     @property
     def superior_department1(self):
         return self.find_element_by_css_ykb('#e7ccplugincombobox_AZ > ul > li > div > ul > li:nth-child(2) > span > a')
-    #确定按钮
+    # 确定按钮
     @property
     def submit_btn2(self):
         return self.find_element_by_css_ykb('#cpModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm')
-    #删除——确定
+    # 删除——确定
     @property
     def submit_btn3(self):
         return self.find_element_by_css_ykb('#delModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm')
-    #导入
+    # 导入
     @property
     def import_btn(self):
         return self.find_element_by_id_ykb('ImportBtn')
-     #进入组织机构
+    # 导出
+    @property
+    def export_btn(self):
+        return self.find_element_by_css_ykb('#testApp > div.main > div > div.dim-header > div.btn-content > button.eui-btn.export')
+    # 开票信息——设置
+    @property
+    def invoice_info(self):
+        return self.find_element_by_css_ykb('#alist > li:nth-child(4) > div.setting-btn > a > button')
+    #新增开票信息按钮
+    @property
+    def add_invoice_info_btn(self):
+        return self.find_element_by_css_ykb('#invoiceAdd > p')
+    #发票抬头
+    @property
+    def invoice_payable(self):
+        return self.find_element_by_css_ykb('#invoiceAddContent > div > div > div.modal-body > div.kcDiv > div.hDiv.companyName > div.zyDiv.rDiv > input')
+    #纳税人识别号
+    @property
+    def taxpayer_identification_number(self):
+        return self.find_element_by_css_ykb('#invoiceAddContent > div > div > div.modal-body > div.kcDiv > div:nth-child(3) > div.zyDiv.rDiv > input')
+    #保存按钮
+    @property
+    def submit_btn4(self):
+        return self.find_element_by_css_ykb('#invoiceAddContent > div > div > div.modal-body > div.btnDiv > button.btn_invoice.bcbtn')
+    # 进入组织机构
     def enter_organization_institution(self):
         self.click(self.setting)
         time.sleep(1)
         self.click(self.organization_institution)
         time.sleep(1)
-
+    # 进入开票信息
+    def enter_invoice_information(self):
+        self.click(self.setting)
+        time.sleep(1)
+        self.click(self.invoice_info)
+        time.sleep(1)
     # 根目录添加组织机构
     def add_institution_method(self):
         # 根目录
@@ -179,7 +208,7 @@ class OrganizationInstitution(IndexPage):
         # 记住需要添加机构的名字
         self._institution_name = '自动化测试小组'+self.random_num
         print(self._institution_name + 'aaa')
-        #机构名称
+        # 机构名称
         self.send_keys(self.institution_name, self._institution_name)
         time.sleep(1)
         # 机构编码
@@ -199,7 +228,7 @@ class OrganizationInstitution(IndexPage):
         self.click(self.submit_btn)
         time.sleep(1)
 
-    #子目录添加组织机构
+    # 子目录添加组织机构
     def add_institutions_method(self):
         # 记住需要添加机构的名字
         self._institutions_name = '自动化测试小小组' + self.random_num
@@ -446,13 +475,13 @@ class OrganizationInstitution(IndexPage):
         # 员工编号
         self.send_keys(self.add_code, self.random_num)
         time.sleep(1)
-        #点击直属领导文本框
+        # 点击直属领导文本框
         self.click(self.direct_leader)
         time.sleep(1)
         # 搜索直属领导
         self.send_keys(self.direct_leader,'童定国')
         time.sleep(1)
-        #选择直属领导
+        # 选择直属领导
         self.click(self.sel_direct_leader)
         time.sleep(1)
         # 职级
@@ -494,61 +523,61 @@ class OrganizationInstitution(IndexPage):
         else:
             return True
 
-    #编辑
+    # 编辑
     def edit_ins_method(self):
-        #修改机构名称
+        # 修改机构名称
         self.institution_name.clear()
         time.sleep(1)
         self.send_keys(self.institution_name,'编辑自动化测试小组' + self.random_num)
         time.sleep(1)
-        #修改机构编码
+        # 修改机构编码
         self.institution_code.clear()
         time.sleep(1)
         self.send_keys(self.institution_code,self.random_num)
         time.sleep(1)
-        #修改机构负责人
+        # 修改机构负责人
         self.click(self.find_element_by_css_ykb('span[class="select2-arrow"]'))
         time.sleep(1)
         self.send_keys(self.institution_person_text, '部门领导')
         time.sleep(1)
         self.click(self.institution_person_sel)
         time.sleep(1)
-        #确认按钮
+        # 确认按钮
         self.click(self.submit_btn)
         time.sleep(1)
 
-    #修改上级部门
+    # 修改上级部门
     def update_department_method(self):
-        #点击上级部门下拉框
+        # 点击上级部门下拉框
         self.click(self.superior_department)
         time.sleep(1)
-        #选择上级部门
+        # 选择上级部门
         self.click(self.superior_department1)
         time.sleep(1)
-        #点击确定
+        # 点击确定
         self.click(self.submit_btn2)
         time.sleep(1)
 
-    #删除机构
+    # 删除机构
     def del_ins_method(self):
         self.click(self.submit_btn3)
 
-    #编辑人员
+    # 编辑人员
     def edit_person_method(self):
-        #编辑姓名
+        # 编辑姓名
         self.add_user_name.clear()
         time.sleep(1)
         self.send_keys(self.add_user_name,'1张三'+self.random_num)
         time.sleep(1)
-        #编辑性别
+        # 编辑性别
         self.click(self.add_sex1)
         time.sleep(1)
-        #编辑员工编号
+        # 编辑员工编号
         self.add_code.clear()
         time.sleep(1)
         self.send_keys(self.add_code,self.random_num)
         time.sleep(1)
-        #编辑直属领导
+        # 编辑直属领导
         self.click(self.direct_leader)
         time.sleep(1)
         self.direct_leader.clear()
@@ -557,13 +586,13 @@ class OrganizationInstitution(IndexPage):
         time.sleep(1)
         self.click(self.sel_direct_leader)
         time.sleep(1)
-        #编辑职级
+        # 编辑职级
         self.rank_text.clear()
         time.sleep(1)
         self.send_keys(self.rank_text,'1员工'+self.random_num)
         time.sleep(1)
-        #编辑角色
-        #清空已选的
+        # 编辑角色
+        # 清空已选的
         self.click(self.sel_role)
         time.sleep(1)
         # 部门领导
@@ -586,12 +615,12 @@ class OrganizationInstitution(IndexPage):
         # 收回角色下拉框
         self.click(self.pop)
         time.sleep(1)
-        #编辑岗位
+        # 编辑岗位
         self.post_text.clear()
         time.sleep(1)
         self.send_keys(self.post_text,'1测试'+self.random_num)
         time.sleep(1)
-        #编辑邮箱
+        # 编辑邮箱
         self.email_text.clear()
         time.sleep(1)
         self.send_keys(self.email_text, self.random_num + '@qq.com')
@@ -599,6 +628,133 @@ class OrganizationInstitution(IndexPage):
         # 确认按钮
         self.click(self.submit_btn1)
         time.sleep(1)
+
+    #导出导入
+    def import_export_method(self):
+        #导出
+        self.click(self.export_btn)
+        time.sleep(1)
+        #导入
+        self.click(self.import_btn)
+        time.sleep(1)
+    #新增开票信息
+    def add_invoice_info(self):
+        self.click(self.add_invoice_info_btn)
+        time.sleep(1)
+        self.send_keys(self.invoice_payable,'测试企业'+self.random_num)
+        time.sleep(1)
+        self.send_keys(self.taxpayer_identification_number,self.random_num)
+        time.sleep(1)
+        self.click(self.submit_btn4)
+        time.sleep(1)
+
+
+    # 删除组织机构
+    def find_institution_del_all_institution(self, add_what):
+        ils = self.institution_list
+        for il in ils:
+            il_text = self.find_element_by_hierarchy(
+                lambda var: il.find_element_by_css_selector("span[class='text']")
+            )
+            print(il_text.text)
+            if '自动化测试小组' in il_text.text:
+                self.click(il)
+                if add_what == '删除':
+                    il_add_persons = self.find_element_by_hierarchy(
+                        lambda var: il.find_elements_by_css_selector("div[class='actionitem']")
+                    )
+                    for iap in il_add_persons:
+                        if iap.text == '删除':
+                            self.click(iap)
+                            print(iap)
+                            break
+                print(il_text.text)
+                break
+    #循环删除
+    def loop_del_institution(self):
+        ils = self.institution_list
+        for il in ils:
+            il_text = self.find_element_by_hierarchy(
+                lambda var: il.find_element_by_css_selector("span[class='text']")
+            )
+            print(il_text.text)
+            if "自动化测试小组" in il_text.text:
+                self.find_institution_del_all_institution('删除')
+                time.sleep(1)
+                self.del_ins_method()
+                time.sleep(1)
+
+    #删除所有机构及人员
+    def delete_all(self):
+        ils = self.institution_list
+        for il in ils:
+            il_text = self.find_element_by_hierarchy(
+                lambda var: il.find_element_by_css_selector("span[class='text']")
+            )
+            print(il_text.text)
+            if "自动化测试小组" in il_text.text:
+                # 第一层点击icon
+                try:
+                    icon = il.find_element_by_css_selector("span[class='icon']")
+                    self.click(icon)
+                except Exception as e:
+                    print (e)
+                # 第二层点击icon
+                try:
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > div > span.icon',2))
+                    time.sleep(1)
+                except Exception as e:
+                    print (e)
+
+                # 第二层删除人员
+                try:
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li:nth-child(3) > ul > li > div > span.text',2))
+                    time.sleep(1)
+                    self.click(self.del_person)
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb('#delModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm'))
+                    time.sleep(1)
+                except Exception as e:
+                    print (e)
+
+                # 删除人员
+                try:
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > ul > li > div > span.text',2))
+                    time.sleep(1)
+                    self.click(self.del_person)
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb('#delModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm'))
+                    time.sleep(1)
+                except Exception as e:
+                    print (e)
+
+                # 删除第二层
+                try:
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > div > span.text',2))
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > div > div > div:nth-child(5)'))
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb(
+                        '#delModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm'))
+                    time.sleep(1)
+                except Exception as e:
+                    print(e)
+
+                # 删除第一层
+                try:
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.leaf > div > span.text',3))
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb(
+                        '#treeDim > li > ul > li.leaf > div > div > div:nth-child(5)'))
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb(
+                        '#delModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm'))
+                    time.sleep(1)
+                except Exception as e:
+                    print(e)
+
+
+
 
 
 
