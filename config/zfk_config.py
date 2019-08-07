@@ -3,7 +3,7 @@ import datetime
 #create by ZhangFukai
 #集成后台管理
 def returnIntegrateUrl():
-        return 'http://120.132.23.147:8016 '
+        return 'http://120.132.23.147:8016'
 #正式后台管理
 def returnofficialUrl():
         return 'http://106.75.114.250'

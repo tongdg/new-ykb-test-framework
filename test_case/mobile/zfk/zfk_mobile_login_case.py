@@ -9,7 +9,7 @@ import time
 class zfk_mobile_LoginCase(unittest.TestCase):
     def setUp(self):
         self.zfk_mobile_login_Page = Mobile_login_page(webdriver.Chrome())
-        self.zfk_mobile_login_Page.Login_Person()  # 登录账号
+        self.zfk_mobile_login_Page.Login_Person() # 登录账号
         self.zfk_mobile_login_Page.Chionce_enterprise()
         # 跳转到代客下单界面，并进入到需要测试的企业
     def test_Login_mobile_enterprise(self):
@@ -21,7 +21,7 @@ class zfk_mobile_LoginCase(unittest.TestCase):
         MobileUrl=self.zfk_mobile_login_Page.Get_mobile_url()
         # 访问云快报移动端首页
         driver.get(MobileUrl)
-        time.sleep(5000)
+        time.sleep(10)
     def tearDown(self):
         pass
 if __name__=="__main__":

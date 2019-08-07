@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #create by Zhangfukai date:2019 6/20
+from config.zfk_config import Travle_dictionaries
 from pages.pc_pages.zfk_Travelapplication_page import Travelapplication_Page
 
 import datetime
