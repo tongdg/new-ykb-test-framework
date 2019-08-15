@@ -21,8 +21,12 @@ class AddInstEditCase(unittest.TestCase):
         self.organ_page.enter_organization_institution()
         time.sleep(1)
         # 删除所有机构及人员
-        self.organ_page.delete_all()
+        #self.organ_page.delete_all()
+        #time.sleep(2)
+
+        self.organ_page.loop_del_institution()
         time.sleep(2)
+
 
     def tearDown(self):
         pass

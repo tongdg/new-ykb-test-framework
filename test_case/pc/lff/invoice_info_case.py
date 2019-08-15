@@ -16,13 +16,20 @@ class AddInstEditCase(unittest.TestCase):
         self.organ_page.login_test_person()
         self.organ_page.switching_enterprises(_enterprise='tongdg艺赛旗', _login_name='童定国')
 
-    def test(self):
+    def test_222(self):
         # 进入开票信息
         self.organ_page.enter_invoice_information()
         time.sleep(1)
         # 新增开票信息
         self.organ_page.add_invoice_info()
         time.sleep(1)
+        # 修改开票信息
+        self.organ_page.update_inv_info()
+        time.sleep(1)
+        #删除开票信息
+        self.organ_page.del_inv_info()
+        time.sleep(1)
+
 
     def tearDown(self):
         pass

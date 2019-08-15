@@ -185,6 +185,18 @@ class OrganizationInstitution(IndexPage):
     @property
     def submit_btn4(self):
         return self.find_element_by_css_ykb('#invoiceAddContent > div > div > div.modal-body > div.btnDiv > button.btn_invoice.bcbtn')
+    #修改按钮
+    @property
+    def update_btn(self):
+        return self.find_element_by_css_ykb('#testApp > div.main > div > div.invoice_wrap > div.invoice_content > div:nth-child(1) > div.invoice_btn > span.btnText.modificationbtn')
+    #删除按钮
+    @property
+    def del_btn(self):
+        return self.find_element_by_css_ykb('#testApp > div.main > div > div.invoice_wrap > div.invoice_content > div:nth-child(1) > div.invoice_btn > span.btnText.deleteInfobtn')
+    #确认按钮
+    @property
+    def submit_btn5(self):
+        return self.find_element_by_id_ykb('delete_submit')
     # 进入组织机构
     def enter_organization_institution(self):
         self.click(self.setting)
@@ -641,7 +653,7 @@ class OrganizationInstitution(IndexPage):
     def add_invoice_info(self):
         self.click(self.add_invoice_info_btn)
         time.sleep(1)
-        self.send_keys(self.invoice_payable,'测试企业'+self.random_num)
+        self.send_keys(self.invoice_payable, '测试企业'+self.random_num)
         time.sleep(1)
         self.send_keys(self.taxpayer_identification_number,self.random_num)
         time.sleep(1)
@@ -752,6 +764,30 @@ class OrganizationInstitution(IndexPage):
                     time.sleep(1)
                 except Exception as e:
                     print(e)
+
+    #修改开票信息
+    def update_inv_info(self):
+        self.click(self.update_btn)
+        time.sleep(1)
+        self.invoice_payable.clear()
+        time.sleep(1)
+        self.send_keys(self.invoice_payable,'修改测试企业'+self.random_num)
+        time.sleep(1)
+        self.taxpayer_identification_number.clear()
+        time.sleep(1)
+        self.send_keys(self.taxpayer_identification_number,self.random_num)
+        time.sleep(1)
+        self.click(self.submit_btn4)
+
+    # 删除开票信息
+    def del_inv_info(self):
+        self.click(self.del_btn)
+        time.sleep(1)
+        self.click(self.submit_btn5)
+        time.sleep(1)
+
+
+
 
 
 
