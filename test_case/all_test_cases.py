@@ -18,7 +18,6 @@ base_dir = os.getcwd()
 Utils = utils = Utils()
 print(base_dir)
 
-
 # 获取平台用例所在的文件夹
 def get_platform_dir():
     platform_case_dir = []
@@ -181,10 +180,8 @@ def send_mail(file_new):
     msg['date'] = time.strftime('%a, %d %b %Y %H:%M:%S %z')
     msg['From'] = mail_from
     msg['to'] = ','.join(mail_to)
-
     username = 'tdg1994@126.com'
     password = '11a2s3d4q5ww6e'
-
     # 连接 SMTP 服务器，此处用的126的 SMTP 服务器
     smtp = smtplib.SMTP()
     smtp.connect('smtp.126.com')
@@ -203,11 +200,7 @@ if __name__ == '__main__':
     # suite = create_test_suite(author='zfk')[0]
     # for s in suite:
     #     print(s)
-<<<<<<< HEAD
-    suite = create_test_suite(author='zfk')[0]
-=======
-    suite = create_test_suite(author='tdg')[0]
->>>>>>> 1b6cdc62ded3882efdce1531f817a18574a5b023
+    suite = create_test_suite()[0]
     for s in suite:
         print(s)
     # 获取指定的测试用例
