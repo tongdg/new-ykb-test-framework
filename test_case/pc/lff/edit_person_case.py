@@ -20,21 +20,21 @@ class AddInstPersonCase(unittest.TestCase):
         # 进入组织机构
         self.organ_page.enter_organization_institution()
         time.sleep(1)
-        #根目录添加机构
+        # 根目录添加机构
         self.organ_page.add_institution_method()
         time.sleep(1)
         # 查找根目录添加的机构点击添加人员
         self.organ_page.find_institutions_add_what('添加人员')
         time.sleep(1)
-        #子目录添加人员
+        # 子目录添加人员
         self.organ_page.add_person_method()
         time.sleep(1)
-        #查找组织机构
+        # 查找组织机构
         self.organ_page.find_institutions_click()
         # 查找添加的人员点击编辑
         self.organ_page.find_person_edit_what()
         time.sleep(1)
-        #编辑人员
+        # 编辑人员
         self.organ_page.edit_person_method()
         time.sleep(1)
 
