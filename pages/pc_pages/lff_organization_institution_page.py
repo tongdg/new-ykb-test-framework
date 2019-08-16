@@ -707,31 +707,24 @@ class OrganizationInstitution(IndexPage):
             if "自动化测试小组" in il_text.text:
                 # 第一层点击icon
                 try:
+                    print('第一层点击icon')
                     icon = il.find_element_by_css_selector("span[class='icon']")
                     self.click(icon)
                 except Exception as e:
                     print (e)
                 # 第二层点击icon
                 try:
-                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > div > span.icon',2))
+                    print('第二层点击icon')
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > div > span.icon',1))
                     time.sleep(1)
                 except Exception as e:
                     print (e)
 
-                # 第二层删除人员
-                try:
-                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li:nth-child(3) > ul > li > div > span.text',2))
-                    time.sleep(1)
-                    self.click(self.del_person)
-                    time.sleep(1)
-                    self.click(self.find_element_by_css_ykb('#delModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm'))
-                    time.sleep(1)
-                except Exception as e:
-                    print (e)
 
                 # 删除人员
                 try:
-                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > ul > li > div > span.text',2))
+                    print('删除人员')
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > ul > li > div > span.text',1))
                     time.sleep(1)
                     self.click(self.del_person)
                     time.sleep(1)
@@ -742,7 +735,8 @@ class OrganizationInstitution(IndexPage):
 
                 # 删除第二层
                 try:
-                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > div > span.text',2))
+                    print('删除第二层')
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > div > span.text',1))
                     time.sleep(1)
                     self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > ul > li > div > div > div:nth-child(5)'))
                     time.sleep(1)
@@ -752,9 +746,26 @@ class OrganizationInstitution(IndexPage):
                 except Exception as e:
                     print(e)
 
-                # 删除第一层
+                # 第二层删除人员
                 try:
-                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.leaf > div > span.text',3))
+                    print('第二层删除人员')
+                    self.click(self.find_element_by_css_ykb(
+                        '#treeDim > li > ul > li:nth-child(3) > ul > li > div > span.text', 1))
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb(
+                        '#treeDim > li > ul > li.expanded > ul > li > div > div > div:nth-child(3)'
+                    ))
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb(
+                        '#delModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm'))
+                    time.sleep(1)
+                except Exception as e:
+                    print(e)
+
+                # 删除第一层 第一种情况
+                try:
+                    print('删除第一层 第一种情况')
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.leaf > div > span.text',1))
                     time.sleep(1)
                     self.click(self.find_element_by_css_ykb(
                         '#treeDim > li > ul > li.leaf > div > div > div:nth-child(5)'))
@@ -764,6 +775,20 @@ class OrganizationInstitution(IndexPage):
                     time.sleep(1)
                 except Exception as e:
                     print(e)
+                # 删除第二层 第二种情况
+                try:
+                    print('删除第一层 第二种情况')
+                    self.click(self.find_element_by_css_ykb('#treeDim > li > ul > li.expanded > div > span.text',1))
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb(
+                        '#treeDim > li > ul > li.expanded > div > div > div:nth-child(5)'))
+                    time.sleep(1)
+                    self.click(self.find_element_by_css_ykb(
+                        '#delModal > div > div > div.confirmnew-modal-footer > button.eui-btn.eui-btn-blue.btn-modal-confirm'))
+                    time.sleep(1)
+                except Exception as e:
+                    print(e)
+
 
     #修改开票信息
     def update_inv_info(self):
