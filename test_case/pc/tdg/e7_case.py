@@ -13,13 +13,18 @@ class E7Case(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.e7_page = E7Page(self.driver,os.path.dirname(__file__))
+        self.e7_page.e7_login()
 
     def test_e7(self):
-        self.e7_page.e7_login()
         self.e7_page.enter_time_manage()
         self.e7_page.multiple_execute_task(['SyncAllCOAObjectJob','creditMail','updateU8VoucherNumJob'])
 
+    def test_e7_scroll(self):
+        self.e7_page.e7_login()
+        self.e7_page.operation_scroll()
+
     def tearDown(self):
+        time.sleep(50)
         pass
 
 if __name__ == '__main__':

@@ -181,10 +181,8 @@ def send_mail(file_new):
     msg['date'] = time.strftime('%a, %d %b %Y %H:%M:%S %z')
     msg['From'] = mail_from
     msg['to'] = ','.join(mail_to)
-
     username = 'tdg1994@126.com'
     password = '11a2s3d4q5ww6e'
-
     # 连接 SMTP 服务器，此处用的126的 SMTP 服务器
     smtp = smtplib.SMTP()
     smtp.connect('smtp.126.com')

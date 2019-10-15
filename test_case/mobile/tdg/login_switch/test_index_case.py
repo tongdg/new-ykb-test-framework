@@ -20,7 +20,7 @@ class TestIndexCase(unittest.TestCase):
         self.index_page.login_test_person()
 
     def test_index(self):
-        self.index_page.create_train_bill()
+        self.index_page.enter_train_crea('北京','上海')
 
     def tearDown(self):
         pass

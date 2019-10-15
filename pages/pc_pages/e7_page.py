@@ -5,7 +5,7 @@
 
 from pages.base_page import BasePage
 import time
-from common.utils import Utils
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.action_chains import ActionChains
 
 class E7Page(BasePage):
@@ -88,6 +88,30 @@ class E7Page(BasePage):
         else:
             for name in names:
                 self.find_task_and_click(name)
+
+    # 滚动条操作
+    def operation_scroll(self):
+        time.sleep(1)
+        ActionChains(self.driver).move_to_element(self.find_element_by_id_ykb('fist_2')).perform()
+        self.click(self.find_elements_by_css_ykb("a[title='我的订单']")[1])
+        time.sleep(1)
+        self.driver.switch_to_frame(self.find_element_by_id_ykb('main'))
+        time.sleep(1)
+        self.driver.switch_to_frame(self.find_element_by_id_ykb('myorder'))
+        time.sleep(1)
+        scrollTop = 0
+        # while True:
+        #     js = "document.getElementById('myorder').scrolTop=" + str(scrollTop+10)
+        #     try:
+        #         self.driver.execute_script(js)
+        #     except WebDriverException as we:
+        #         print('获取到异常！')
+        #         time.sleep(5)
+
+
+
+
+
 
 
 
