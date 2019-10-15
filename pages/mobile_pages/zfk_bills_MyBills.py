@@ -21,15 +21,29 @@ class zfk_bills_MyBills(zfk_Mobile_index_page):
 #进入我的审批列表
     def Entrance_My_bills(self):
         time.sleep(3)
-        self.click(self.find_element_by_css_ykb("#guo > div.main.scroller > div > div.ykb_fot > p:nth-child(2)"))
+        self.click(
+            self.find_element_by_css_ykb(
+                "#guo > div.main.scroller > div > div.ykb_fot > p:nth-child(2)"
+            )
+        )
         time.sleep(3)
-        self.click(self.find_element_by_css_ykb("#guo > div.main.scroller > div > div:nth-child(2) > div > div.tab-tit > div:nth-child(4)"))
+        self.click(
+            self.find_element_by_css_ykb(
+                "#guo > div.main.scroller > div > div:nth-child(2) > div > div.tab-tit > div:nth-child(4)"
+            )
+        )
 #进入审批中,执行撤回操作
     def In_approval_recall(self):
         time.sleep(2)
-        self.click(self.find_element_by_css_ykb("#guo > div.main.scroller > div > div.ykb_content > div > div.tab-main > div.tab-item.tabs-active > div > div.form_item_search > div.form_search > span.form_search_txt"))
+        self.click(
+            self.find_element_by_css_ykb(
+                "#guo > div.main.scroller > div > div.ykb_content > div > div.tab-main > div.tab-item.tabs-active > div > div.form_item_search > div.form_search > span.form_search_txt")
+        )
         time.sleep(3)
-        self.click(self.find_element_by_css_ykb("#guo > div.main.scroller > div > div:nth-child(2) > div > div.tab-main > div.tab-item.tabs-active > div > div.form_item_search > div.form_status_wrap > p:nth-child(2)"))
+        self.click(
+            self.find_element_by_css_ykb(
+                "#guo > div.main.scroller > div > div:nth-child(2) > div > div.tab-main > div.tab-item.tabs-active > div > div.form_item_search > div.form_status_wrap > p:nth-child(2)")
+        )
         time.sleep(3)
 #外部撤回差旅报销和费用报销单
     def recall_order(self):
@@ -40,7 +54,10 @@ class zfk_bills_MyBills(zfk_Mobile_index_page):
             CL = self.find_element_by_css_ykb("#guo > div.main.scroller > div > div.ykb_content > div > div.tab-main > div.tab-item.tabs-active > div > div:nth-child(3) > div.guo_scroll_content > div.form_item_ul > div:nth-child(1) > div.form_item_main > span.form_item_icon.form_item_icon_11",3)
             if CL is not False:
                   time.sleep(3)
-                  self.click(self.find_element_by_css_ykb("#guo > div.main.scroller > div > div.ykb_content > div > div.tab-main > div.tab-item.tabs-active > div > div:nth-child(3) > div.guo_scroll_content > div.form_item_ul > div:nth-child(1) > div.form_item_amount > p.form_item_re > span"))
+                  self.click(
+                      self.find_element_by_css_ykb(
+                          "#guo > div.main.scroller > div > div.ykb_content > div > div.tab-main > div.tab-item.tabs-active > div > div:nth-child(3) > div.guo_scroll_content > div.form_item_ul > div:nth-child(1) > div.form_item_amount > p.form_item_re > span")
+                  )
                   time.sleep(4)
                   self.click(self.find_element_by_css_ykb(
                          "body > div.mui-popup.mui-popup-in > div.mui-popup-buttons > span.mui-popup-button.mui-popup-button-bold"))

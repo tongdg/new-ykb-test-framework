@@ -8,7 +8,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from common.logger import Log
 from selenium.common.exceptions import TimeoutException,NoSuchElementException,StaleElementReferenceException
-
 class BasePage(object):
     # 存放图片的集合
     # 传入driver和日志路径
@@ -22,6 +21,18 @@ class BasePage(object):
         1.id,name,class定位，id唯一
         2.link text,partial test定位
     """
+    #元素高亮
+    def highLightElement(self, element):
+        # 封装好的高亮显示页面元素的方法
+        # 使用JavaScript代码将传入的页面元素对象的背景颜色和边框颜色分别
+        # 设置边框为红色
+        self.driver.execute_script(
+            "arguments[0].setAttribute('style', arguments[1]);",element,"border:2px solid red;")
+        time.sleep(2)
+        self.driver.execute_script(
+            "arguments[0].setAttribute('style', arguments[1]);", element, "border:0.1px; solid black")
+
+
     # 每隔0.5秒去查找这个id所对应的元素，超过timeout,单位(s)，抛出TimeoutException.
     # WebDriverWait方法可以设置每隔多少秒扫描，以及找不到抛出的异常类型.
     # 这里需要注意，用显示等待找不到元素抛出的是超时的错误，而直接用find去寻找，返回的是元素找不到的错误，这个以后
@@ -37,6 +48,7 @@ class BasePage(object):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_element_by_id(id))
             self.log.info('--[ ' + id + ' find ok]' )
+            self.highLightElement(ele)
             return ele
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
@@ -47,6 +59,7 @@ class BasePage(object):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_element_by_name(name))
             self.log.info('--[ ' + name + ' find ok]' )
+            self.highLightElement(ele)
             return ele
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
@@ -57,6 +70,7 @@ class BasePage(object):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_element_by_tag_name(tagname))
             self.log.info('--[ ' + tagname + ' find ok]' )
+            self.highLightElement(ele)
             return ele
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
@@ -67,6 +81,7 @@ class BasePage(object):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_element_by_class_name(classname))
             self.log.info('--[ ' + classname + ' find ok]' )
+            self.highLightElement(ele)
             return ele
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
@@ -76,6 +91,7 @@ class BasePage(object):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_elements_by_class_name(classname))
             self.log.info('--[ ' + classname + ' list find ok]' )
+            self.highLightElement(ele)
             return ele
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
@@ -86,6 +102,7 @@ class BasePage(object):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_element_by_link_text(linktext))
             self.log.info('--[ ' + linktext + ' find ok]' )
+            self.highLightElement(ele)
             return ele
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
@@ -125,6 +142,7 @@ class BasePage(object):
         try:
             ele = WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_element_by_css_selector(css))
             self.log.info('--[ ' + css + ' find ok]' )
+            self.highLightElement(ele)
             return ele
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
@@ -135,6 +153,7 @@ class BasePage(object):
         try:
             ele =  WebDriverWait(self.driver, timeout).until(lambda driver=self.driver : driver.find_elements_by_css_selector(css))
             self.log.info('--[ ' + css + ' list find ok]' )
+            self.highLightElement(ele)
             return ele
         except TimeoutException:
             # self.driver.get_screenshot_as_file("/screenshot/" + Utils.generate_time() + ".png")
@@ -144,7 +163,6 @@ class BasePage(object):
 
 
 #create by zfk need use that
-#-------------
     def current_window_handle(self):
         return self.driver.current_window_handle
 
@@ -165,12 +183,14 @@ class BasePage(object):
     def find_element_by_xpath(self,xpath):
         return self.driver.find_element_by_xpath(xpath)
 
+
     def find_elements_by_xpath(self,Businese):
-        return self.driver.find_elements_by_xpath(Businese)
+        businese=self.driver.find_elements_by_xpath(Businese)
+        return businese
+
 
     def find_elements_by_class(self,a):
         return self.find_elements_by_css_ykb(a)
-
 
     def current_url(self):
         return self.driver.current_url
@@ -183,8 +203,10 @@ class BasePage(object):
 
     def refresh(self):
         return self.driver.refresh()
+
     def back(self):
         return self.driver.back()
+
     def implicitly_wait(self):
         return self.driver.implicitly_wait()
     def close(self):
@@ -192,6 +214,9 @@ class BasePage(object):
 
     def quit_chrom(self):
         return self.driver.quit()
+
+    def switch_to_frame(self,b):
+        return self.driver.switch_to.frame(b)
     """
         层级定位,应用一般是需要定位到下层的一组一样的元素
     """

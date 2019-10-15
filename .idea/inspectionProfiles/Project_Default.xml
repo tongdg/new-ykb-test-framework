@@ -10,6 +10,7 @@
         <list>
           <option value="test_case.pc.zfk.deleteRoot.get_dirlist" />
           <option value="test_case.mobile.zfk.zfk_mobile_case.MobieUrl" />
+          <option value="test_case.Zhang_test.platform_dir" />
         </list>
       </option>
     </inspection_tool>

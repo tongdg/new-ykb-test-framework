@@ -17,7 +17,8 @@ def valet_orderUrl():
 #出差申请单、借款申请单、采购申请单
 def Travle_dictionaries():
         receipts = {'出差申请单': 'http://test.pc.51ykb.com/Form/FormViewer/BTAForm',
-                    '借款申请单': 'http://test.pc.51ykb.com/Form/FormViewer/LoanForm'
+                    '借款申请单': 'http://test.pc.51ykb.com/Form/FormViewer/LoanForm',
+                    '出纳付款': 'http://test.pc.51ykb.com/Finance/Finance/Payment'
                     }
         return receipts
 def Overall_text():

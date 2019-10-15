@@ -1,4 +1,0 @@
-from pages.pc_pages.zfk_Valet_orderPage import Valet_orderPage
-Test_business=Valet_orderPage.Check_BusinessName
-print(Test_business)
-

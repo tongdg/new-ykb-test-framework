@@ -226,7 +226,10 @@ class zfk_create_Unreimbursement(zfk_Mobile_index_page):
                 self.log.info("[--未报销-消费记录列表-全选提单至费用报销单跳转失败--]")
                 return False
         else:
+            self.log.info("[--未报销-消费记录列表-当前列表无消费记录-开始执行创建消费用例--]")
             time.sleep(1)
+            self.circulation_list()
+            time.sleep(2)
             self.All_submit_cost()
             time.sleep(2)
             cost_url = self.current_url()

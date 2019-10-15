@@ -3,8 +3,6 @@ import time
 import random
 from pages.mobile_pages.zfk_mobile_index_page import zfk_Mobile_index_page
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementClickInterceptedException
-
-
 class zfk_makeOrder_page(zfk_Mobile_index_page):
 #---------------------------------出差申请单-Evection_order--------------------------
     #开始日期-BeginTime
@@ -177,31 +175,67 @@ class zfk_makeOrder_page(zfk_Mobile_index_page):
             return False
     #选择酒店Choince_hotel
     def Choince_hotel(self):
-        self.click(self.find_element_by_css_ykb("#goToHotel > div > span.apply_type_txt"))
+        #选择酒店icon
+        self.click(
+            self.find_element_by_css_ykb(
+                "#goToHotel > div > span.apply_type_txt"
+            )
+        )
         time.sleep(8)
-
-        self.click(self.find_element_by_css_ykb(
-            "#container > div.index-content > div:nth-child(1) > div.city-select > div.departure-city > div > p"))
+        self.click(
+            self.find_element_by_css_ykb(
+            "#container > div.index-content > div:nth-child(1) > div.city-select > div.departure-city > div > p")
+        )
         time.sleep(2)
-        self.click(self.find_element_by_css_ykb(
-            "#container > div.index-content > div:nth-child(1) > div.ykb-city-picker > div.mint-popup.mint-popup-right > div > div.body > div:nth-child(1) > section.dd > ul > li:nth-child(1)"))
+        #选择入住地点
+        self.click(
+            self.find_element_by_css_ykb(
+            "#container > div.index-content > div:nth-child(1) > div.ykb-city-picker > div.mint-popup.mint-popup-right > div > div.body > div:nth-child(1) > section.dd > ul > li:nth-child(1)")
+        )
         time.sleep(2)
         # 后期判断拓展
         Evection_standard = self.find_element_by_css_ykb(
             "#container > div.index-content > div.travel-standard > div.right > p").text
         print("测试企业的住宿准为" + Evection_standard)
         time.sleep(3)
-        self.click(self.find_element_by_css_ykb("#container > div.index-content > button"))
+        #点击查询按钮
+        self.click(
+            self.find_element_by_css_ykb(
+                "#container > div.index-content > button"
+            )
+        )
         # 酒店查询较慢，时间给足
         time.sleep(20)
-        #随机生成一个随机数
-        hotel_range = random.randrange(1,5)
-        self.click(self.find_element_by_xpath('//*[@id="container"]/div[1]/div[2]/article/ul/li['+str(hotel_range)+']'))
-        time.sleep(8)
+        #为保证可以预订成功不出现个人预付的情况，筛选公司统付类型的酒店
+        self.click(
+            self.find_element_by_css_ykb(
+                '#container > div.ykb-filter-bar > div.mint-tabbar > a:nth-child(3)'
+            )
+        )
+        time.sleep(1)
+        #选择筛选条件类型
+        self.click(
+            self.find_element_by_css_ykb(
+                '#container > div.ykb-filter-bar > div.mint-popup.filter-popup.mint-popup-bottom > ul > li > div'
+            )
+        )
+        time.sleep(12)
         room_num=1
         while room_num<10:
             try:
-                self.click(self.find_element_by_xpath('//*[@id="app"]/div/div/div/div/div[6]/div/div['+str(room_num)+']/section/div[2]/div/p/em'))
+                self.click(self.find_element_by_xpath(
+                    '//*[@id="container"]/div[1]/div[2]/article/ul/li[' + str(room_num) + ']')
+                )
+                time.sleep(5)
+                full=self.find_element_by_css_ykb('body > div.mint-toast.is-placebottom > span')
+                if full is True:
+                    self.click(
+                        self.find_element_by_css_ykb('#app > div > header > div.mint-header-button.is-left > button')
+                    )
+                    self.log.info('当前酒店已暂无房源，回退重选')
+                else:
+                    self.click(self.find_element_by_xpath(
+                        '//*[@id="app"]/div/div/div/div/div[6]/div/div[' + str(room_num) + ']/section/div[2]/div/p/em'))
                 break
             except NoSuchElementException as ne:
                 room_num = room_num + 1
@@ -215,8 +249,11 @@ class zfk_makeOrder_page(zfk_Mobile_index_page):
             except NoSuchElementException as te:
                 room_num_true =  room_num_true + 1
         time.sleep(3)
-        self.click(self.find_element_by_css_ykb("#container > footer > div > div > span.booking > button"))
-        time.sleep(5)
+        self.click(
+            self.find_element_by_css_ykb(
+                "#container > footer > div > div > span.booking > button")
+        )
+        time.sleep(10)
         self.BeginAddress()
         time.sleep(3)
         self.Evection_reason()
@@ -250,7 +287,7 @@ class zfk_makeOrder_page(zfk_Mobile_index_page):
                 '#container > div > div.flight-list-container > div.flight-datepicker-next-previous > div.next-button'
             )
         )
-        time.sleep(10)
+        time.sleep(15)
         #拿到刷出机票列表的机票信息
         plan_num=self.find_elements_by_xpath('//*[@id="container"]/div/div[1]/div[2]/article/div')
         time.sleep(3)
@@ -277,8 +314,12 @@ class zfk_makeOrder_page(zfk_Mobile_index_page):
         )
         time.sleep(4)
         # 点击提交按钮
-        self.click(self.find_element_by_css_ykb("#container > div > div.footer > span.booking > button"))
-        time.sleep(5)
+        self.click(
+            self.find_element_by_css_ykb(
+                "#container > div > div.footer > span.booking > button"
+            )
+        )
+        time.sleep(10)
         #点击提交申请按钮
         self.click(
             self.find_element_by_css_ykb(
@@ -372,14 +413,14 @@ class zfk_makeOrder_page(zfk_Mobile_index_page):
         if evection_true_url in evection_url:
             self.log.info("首页-我要制单-出差申请单跳转成功")
             if self.Choince_hotel() is not  False:
-                self.log.info('首页-我要制单-出差申请单-机票-提单成功')
+                self.log.info('首页-我要制单-出差申请单-酒店-提单成功')
                 return True
             else:
-                self.log.info('首页-我要制单-出差申请单-机票-提单失败')
+                self.log.info('首页-我要制单-出差申请单-酒店-提单失败')
                 return False
         else:
             err_borrow_url = self.current_url()
-            print("首页-我要制单-借款申请单单跳转失败-错误地址为" + err_borrow_url)
+            print("首页-我要制单-酒店跳转失败-错误地址为" + err_borrow_url)
             return  False
 
 #------------------借款申请单---------------------------------------

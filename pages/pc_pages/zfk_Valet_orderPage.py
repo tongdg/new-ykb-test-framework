@@ -36,7 +36,7 @@ class Valet_orderPage(Login_HouTaiPage):
             Businese_nameIndex=lists.index(get_business)+1
             self.click(
                 self.find_element_by_css_ykb(
-                    "#dataTableBody > tr:nth-child("'' + str(Businese_nameIndex) + ''") > td.f-14.td-manage > a:nth-child(2)")
+                    "#dataTableBody > tr:nth-child("'' + str(Businese_nameIndex) + ''") > td.f-14.td-manage > a:nth-child(1)")
             )
         #取出元素的下标
         else:

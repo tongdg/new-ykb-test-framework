@@ -14,11 +14,11 @@ from email.mime.multipart import MIMEMultipart
 import time
 import smtplib
 from config.tdg_config import REPORT_PATH
+#返回当前工作目录
 base_dir = os.getcwd()
+#锁定该目录下untiltest的目录位置
 Utils = utils = Utils()
 print(base_dir)
-
-
 # 获取平台用例所在的文件夹
 def get_platform_dir():
     platform_case_dir = []
@@ -203,11 +203,8 @@ if __name__ == '__main__':
     # suite = create_test_suite(author='zfk')[0]
     # for s in suite:
     #     print(s)
-<<<<<<< HEAD
-    suite = create_test_suite(author='zfk')[0]
-=======
-    suite = create_test_suite(author='tdg')[0]
->>>>>>> 1b6cdc62ded3882efdce1531f817a18574a5b023
+
+    suite = create_test_suite(platform='mobile',author='zfk')
     for s in suite:
         print(s)
     # 获取指定的测试用例
